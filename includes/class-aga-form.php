@@ -1,7 +1,7 @@
 <?php
 
 class AGA_Form {
-	private static $instance ; 
+	private static $instance ;
 	private $form_id ;
 	private $gform_object ;	 
 	private $form_title ;

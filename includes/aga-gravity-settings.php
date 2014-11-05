@@ -3,7 +3,7 @@
 // Option to output label as placeholder
 add_filter( 'gform_form_settings', 'aga_gform_add_label_option' , 1 , 2 ) ;
 function aga_gform_add_label_option( $settings, $form ) {
-	$form_label_placement = isset( $settings[ 'Form Layout' ][ 'form_label_placement' ] ) ? $settings[ 'Form Layout' ][ 'form_label_placement' ] : "";
+	$form_label_placement = isset( $settings[ 'Form Layout' ][ 'form_label_placement' ] ) ? $settings[ 'Form Layout' ][ 'form_label_placement' ] : '';
 	if ( $form_label_placement ) {
 		$settings = aga_add_label_placement_to_settings( $form_label_placement ,	$settings , $form ) ;
 	}	 
