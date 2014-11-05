@@ -98,13 +98,23 @@ function aga_get_content_with_placeholder_and_without_label( $content , $placeho
 
 add_filter( 'gform_field_content' , 'aga_set_class_of_input_tags' , 12 , 5 );
 function aga_set_class_of_input_tags( $content, $field, $value, $lead_id, $form_id ) {
+
+	/**
+	* New class(es) for Gravity Form inputs.
+	*
+	* Add class(es) to input elements of type "text" or "email".
+	*
+	* @param string $class New class(es) of the input, space-separated.
+	* @param int $form_id The id of the Gravity Form.
+	*/
 	$new_class = apply_filters( 'aga_gravity_form_input_class' , 'form-control' , $form_id );
+
 	$new_content = aga_add_class_to_input( $content , esc_attr( $new_class ) );
 	return $new_content;
 }
 
 function aga_add_class_to_input( $content , $new_class ) {
-	$content_with_new_class = preg_replace( "/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/" , "$1$new_class " , $content );
+	$content_with_new_class = preg_replace( "/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/" , "$1" . esc_attr( $new_class ) . "\s" , $content );
 	return $content_with_new_class;
 }
 
@@ -112,15 +122,23 @@ function aga_add_class_to_input( $content , $new_class ) {
 // Add classes to submit button
 add_filter( 'gform_submit_button' , 'aga_submit_button' , 10 , 2 );
 function aga_submit_button( $button_input , $form ) {
+
+	/**
+	* New class(es) for Gravity Form submit buttons.
+	*
+	* @param string $class New class(es) of the input, space-separated.
+	* @param object $form The current form.
+	*/
 	$new_classes = apply_filters( 'aga_submit_button_classes' , 'btn btn-primary btn-med' , $form );
+
 	$class_attribute = "class='";
 	if ( false !== strpos( $button_input , $class_attribute ) ) {
-		$class_attribute_with_new_classes = $class_attribute . $new_classes . ' ';
+		$class_attribute_with_new_classes = $class_attribute . esc_attr( $new_classes ) . "\s";
 		$filtered_button =	str_replace( $class_attribute , $class_attribute_with_new_classes , $button_input );
 		return $filtered_button;
 	} else {
 		$opening_input = '<input';
-		$input_with_new_classes = $opening_input . " class='{$new_classes}'";
+		$input_with_new_classes = $opening_input . ' class="' . esc_attr( $new_classes ) '"';
 		$filtered_button = str_replace( $opening_input , $input_with_new_classes , $button_input );
 		return $filtered_button;
 	}

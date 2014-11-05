@@ -42,7 +42,14 @@ class AGA_Form {
 	}
 
 	private function set_ajax_option() {
-		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post' , 'true' );
+
+		/**
+		* Whether to use ajax in the Gravity Form at the bottom of a single post.
+		*
+		* @param boolean $do_ajax Whether to use ajax, default: true.
+		*/
+		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post' , true );
+		
 		if ( ( true == $do_ajax ) || ( 'true' == $do_ajax ) ) {
 			$this->do_ajax = 'true';
 		} else {
