@@ -138,7 +138,7 @@ function aga_submit_button( $button_input , $form ) {
 		return $filtered_button;
 	} else {
 		$opening_input = '<input';
-		$input_with_new_classes = $opening_input . ' class="' . esc_attr( $new_classes ) '"';
+		$input_with_new_classes = $opening_input . ' class="' . esc_attr( $new_classes ) . '"';
 		$filtered_button = str_replace( $opening_input , $input_with_new_classes , $button_input );
 		return $filtered_button;
 	}

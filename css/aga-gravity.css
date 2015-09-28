@@ -72,21 +72,21 @@
 
 /* When "Label Placement" is set to "In placeholder" */
 .gform_wrapper ::-webkit-input-placeholder {
-  color : 2D2B2B ;
+  color : #2D2B2B ;
   font-size : 1.2em ;
 }
 
 .gform_wrapper :-moz-placeholder {
-  color : 564E4E ;
+  color : #564E4E ;
   font-size : 1.2em ;
 }
 
 .gform_wrapper ::-moz-placeholder {
-  color : 564E4E ;
+  color : #564E4E ;
   font-size : 1.2em ;
 }
 
 .gform_wrapper :-ms-input-placeholder {
-  color : 564E4E ;
+  color : #564E4E ;
   font-size : 1.2em ;
 }

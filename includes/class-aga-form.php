@@ -30,7 +30,7 @@ class AGA_Form {
 	private function set_form_id( $form_id ) {
 		if ( ! isset( $this->form_id ) ) {
 			$this->form_id = $form_id;
-	}
+		}
 	}
 
 	private function set_gform_object() {
@@ -62,8 +62,8 @@ class AGA_Form {
 	}
 
 	public static function append_form_to_content( $content ) {
-	       $form_markup = do_shortcode( self::$instance->shortcode_string );
-	       $content .= $form_markup;
-	       return $content;
+		$form_markup = do_shortcode( self::$instance->shortcode_string );
+		$content .= $form_markup;
+		return $content;
 	}
 }
