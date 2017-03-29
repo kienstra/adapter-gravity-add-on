@@ -74,7 +74,7 @@ class Adapter_Gravity_Add_On_Plugin {
 			'class-aga-form',
 			'class-aga-setting',
 			'class-gravity-settings',
-			'aga-controller',
+			'class-aga-controller',
 			'class-bottom-of-post-setting',
 			'class-horizontal-form-setting',
 		);
@@ -89,6 +89,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	 * @return void.
 	 */
 	public function instantiate_classes() {
+		$this->components['aga-controller'] = new AGA_Controller( $this );
 		$this->components['gravity-settings'] = new Gravity_Settings( $this );
 	}
 
