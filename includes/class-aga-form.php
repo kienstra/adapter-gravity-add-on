@@ -11,7 +11,7 @@ class AGA_Form {
 
 	public static function add_form( $form_id ) {
 		if ( null == self::$instance ) {
-			self::$instance = new self( $form_id);
+			self::$instance = new self( $form_id );
 		}
 	}
 
@@ -38,7 +38,7 @@ class AGA_Form {
 	}
 
 	private function set_form_title() {
-		$this->form_title = isset( $this->gform_object[ 'title' ] ) ? $this->gform_object[ 'title' ] : "";
+		$this->form_title = isset( $this->gform_object['title'] ) ? $this->gform_object['title'] : '';
 	}
 
 	private function set_ajax_option() {
@@ -49,7 +49,7 @@ class AGA_Form {
 		* @param boolean $do_ajax Whether to use ajax, default: true.
 		*/
 		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post' , true );
-		
+
 		if ( ( true == $do_ajax ) || ( 'true' == $do_ajax ) ) {
 			$this->do_ajax = 'true';
 		} else {
