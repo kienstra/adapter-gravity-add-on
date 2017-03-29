@@ -66,8 +66,3 @@ function save_aga_settings( $form ) {
 	return $form;
 }
 
-function aga_get_gform_checked_attribute( $setting_name, $form ) {
-	$is_checked = rgar( $form , $setting_name );
-	$checked_attribute = checked( $is_checked , '1' , false );
-	return $checked_attribute;
-}

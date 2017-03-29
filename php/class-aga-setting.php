@@ -30,7 +30,7 @@ class AGA_Setting {
 	}
 
 	public function settings_with_new_markup() {
-		$checked_attribute = aga_get_gform_checked_attribute( $this->setting_name, $this->form );
+		$checked_attribute = $this->get_gform_checked_attribute( $this->setting_name, $this->form );
 		$markup = '<tr>
 						<th>
 							<label for="' . esc_attr( $this->setting_name ) . '">' . esc_html( $this->setting_description ) . '</label>
@@ -41,6 +41,21 @@ class AGA_Setting {
 				  </tr>';
 		$this->settings['Form Layout'][ $this->setting_name ] = $markup;
 		return $this->settings;
+	}
+
+	/**
+	 * Get the attribute and value for whether the form is checked.
+	 *
+	 * To output in an <input type="checkbox"> element.
+	 *
+	 * @param string $setting_name Name of the setting.
+	 * @param Object $form Gravity Form object.
+	 * @return string $checked_attribute Attribute and value for whether the <input> is checked.
+	 */
+	public function get_gform_checked_attribute( $setting_name, $form ) {
+		$is_checked = rgar( $form, $setting_name );
+		$checked_attribute = checked( $is_checked , '1' , false );
+		return $checked_attribute;
 	}
 
 }
