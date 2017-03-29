@@ -34,12 +34,19 @@ class Adapter_Gravity_Add_On_Plugin {
 	public $do_enqueue_plugin_styling_by_default = true;
 
 	/**
+	 * Plugin components.
+	 *
+	 * @var array
+	 */
+	public $components = array();
+
+	/**
 	 * Construct the class.
 	 */
 	public function __construct() {
-		add_action( 'plugins_loaded' , array( $this, 'conditionally_include_and_instantiate' ) );
-		add_action( 'plugins_loaded' , array( $this, 'plugin_localization' ) );
-		add_action( 'gform_enqueue_scripts' , array( $this, 'conditionally_enqueue_styling' ) );
+		add_action( 'plugins_loaded', array( $this, 'conditionally_include_and_instantiate' ) );
+		add_action( 'plugins_loaded', array( $this, 'plugin_localization' ) );
+		add_action( 'gform_enqueue_scripts', array( $this, 'conditionally_enqueue_styling' ) );
 	}
 
 	/**
@@ -53,6 +60,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	public function conditionally_include_and_instantiate() {
 		if ( class_exists( 'GFAPI' ) ) {
 			$this->include_plugin_files();
+			$this->instantiate_classes();
 		}
 	}
 
@@ -65,7 +73,7 @@ class Adapter_Gravity_Add_On_Plugin {
 		$included_files = array(
 			'class-aga-form',
 			'class-aga-setting',
-			'aga-gravity-settings',
+			'class-gravity-settings',
 			'aga-controller',
 			'class-bottom-of-post-setting',
 			'class-horizontal-form-setting',
@@ -73,6 +81,15 @@ class Adapter_Gravity_Add_On_Plugin {
 		foreach ( $included_files as $file ) {
 			require_once __DIR__ . '/' . $file . '.php';
 		}
+	}
+
+	/**
+	 * Instantiate the plugin classes.
+	 *
+	 * @return void.
+	 */
+	public function instantiate_classes() {
+		$this->components['gravity-settings'] = new Gravity_Settings( $this );
 	}
 
 	/**
