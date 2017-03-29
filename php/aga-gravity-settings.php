@@ -27,8 +27,9 @@ function aga_add_label_placement_to_settings( $form_label_placement, $settings, 
 function aga_get_option_for_in_placeholder( $form ) {
 	$option_name = 'in_placeholder';
 	$selected_attribute = aga_get_placeholder_selected_attribute( $form );
-	$new_option = "<option value='$option_name' '{$selected_attribute}'>" . __( 'In placeholder' , 'adapter-gravity-add-on' ) . '</option>';
-	return $new_option;
+	return '<option value="' . esc_attr( $option_name ) . '" ' . $selected_attribute . '>'
+						. esc_html__( 'In placeholder', 'adapter-gravity-add-on' )
+					. '</option>';
 }
 
 function aga_get_new_form_label_settings( $new_option, $form_label_placement ) {
