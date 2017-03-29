@@ -53,8 +53,8 @@ function aga_get_placeholder_selected_attribute( $form ) {
 // Option to echo form at bottom of post and to display it inline
 add_filter( 'gform_form_settings', 'aga_gform_add_settings', 10, 2 );
 function aga_gform_add_settings( $settings, $form ) {
-	$settings_with_bottom_of_post_option = AGA_Bottom_Of_Post_Setting::get_settings( $settings , $form );
-	$settings_with_inline_and_bottom_of_post_options = AGA_Horizontal_Form_Setting::get_settings( $settings_with_bottom_of_post_option , $form );
+	$settings_with_bottom_of_post_option = Bottom_Of_Post_Setting::get_settings( $settings , $form );
+	$settings_with_inline_and_bottom_of_post_options = Horizontal_Form_Setting::get_settings( $settings_with_bottom_of_post_option , $form );
 	return $settings_with_inline_and_bottom_of_post_options;
 }
 

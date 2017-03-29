@@ -39,29 +39,4 @@ class AGA_Setting {
 		return $this->settings;
 	}
 
-}	/* end class AGA_Setting */
-
-
-class AGA_Bottom_Of_Post_Setting extends AGA_Setting {
-
-	public static function get_settings( $settings, $form ) {
-		parent::instantiate( $settings , $form );
-		parent::set_variables( array(
-			'setting_name' => 'aga_bottom_of_post',
-				'setting_description' => __( 'Display at the bottom of every single-post page' , 'adapter-gravity-add-on' ),
-		));
-		return parent::$instance->settings_with_new_markup();
-	}
-}
-
-class AGA_Horizontal_Form_Setting extends AGA_Setting {
-
-	public static function get_settings( $settings, $form ) {
-		parent::instantiate( $settings , $form );
-		parent::set_variables( array(
-			'setting_name' => 'aga_horizontal_display',
-					'setting_description' => __( 'Display form horizontally' , 'adapter-gravity-add-on' ),
-	 	) );
-		return parent::$instance->settings_with_new_markup();
-	}
 }
