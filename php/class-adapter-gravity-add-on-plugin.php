@@ -58,7 +58,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	 * @return void.
 	 */
 	public function conditionally_include_and_instantiate() {
-		if ( class_exists( 'GFAPI' ) ) {
+		if ( class_exists( 'GFAPI' ) && class_exists( 'RGFormsModel' ) ) {
 			$this->include_plugin_files();
 			$this->instantiate_classes();
 		}
