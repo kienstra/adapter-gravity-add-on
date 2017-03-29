@@ -27,12 +27,19 @@ class Adapter_Gravity_Add_On_Plugin {
 	public $plugin_version = '1.0.1';
 
 	/**
+	 * Whether to enqueue this plugin's styling.
+	 *
+	 * @var boolean
+	 */
+	public $do_enqueue_plugin_styling_by_default = true;
+
+	/**
 	 * Construct the class.
 	 */
 	public function __construct() {
 		add_action( 'plugins_loaded' , array( $this, 'conditionally_include_and_instantiate' ) );
 		add_action( 'plugins_loaded' , array( $this, 'plugin_localization' ) );
-		add_action( 'gform_enqueue_scripts' , array( $this, 'conditionally_enqueue_scripts' ) );
+		add_action( 'gform_enqueue_scripts' , array( $this, 'conditionally_enqueue_styling' ) );
 	}
 
 	/**
@@ -60,7 +67,9 @@ class Adapter_Gravity_Add_On_Plugin {
 			'class-aga-setting',
 			'aga-gravity-settings',
 			'aga-controller',
-		) ;
+			'class-bottom-of-post-setting',
+			'class-horizontal-form-setting',
+		);
 		foreach ( $included_files as $file ) {
 			require_once __DIR__ . '/' . $file . '.php';
 		}
@@ -75,10 +84,22 @@ class Adapter_Gravity_Add_On_Plugin {
 		load_plugin_textdomain( $this->plugin_slug, false, $this->plugin_slug . '/languages' );
 	}
 
-	function conditionally_enqueue_scripts() {
-		$do_enqueue = apply_filters( 'aga_do_enqueue_css' , true );
+	/**
+	 * Enqueue this plugin's styling if the  condition is true.
+	 *
+	 * @return void.
+	 */
+	function conditionally_enqueue_styling() {
+
+		/**
+		 * Filter whether to enqueue this plugin's styling.
+		 *
+		 * @param boolean $do_enqueue Whether to enqueue styling.
+		 */
+		$do_enqueue = apply_filters( 'aga_do_enqueue_css' , $this->do_enqueue_plugin_styling_by_default );
+
 		if ( $do_enqueue ) {
-			wp_enqueue_style( $this->plugin_slug . '-gravity-style' , plugins_url( '/css/aga-gravity.css' , __FILE__ ) , array() , $this->plugin_version );
+			wp_enqueue_style( $this->plugin_slug . '-gravity-style' , plugins_url( $this->plugin_slug . '/css/aga-gravity.css' ), array() , $this->plugin_version );
 		}
 	}
 
