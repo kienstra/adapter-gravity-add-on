@@ -4,7 +4,7 @@ Donate link: http://jdrf.org/get-involved/ways-to-donate/
 Tags: forms, styling, gravity 
 Requires at least: 3.8
 Tested up to: 4.3.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,9 +40,14 @@ Gravity Forms 1.8.
 
 == Changelog ==
 
+= 1.0.1 =
+* Security improvements.
+
 = 1.0.0 =
 * First version
 
 == Upgrade Notice ==
 
-* N/A, first version
+= 1.0.1 =
+Please upgrade for the security improvements.
+

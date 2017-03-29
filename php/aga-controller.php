@@ -53,7 +53,7 @@ function aga_display_form_horizontally( $form_id ) {
 function aga_add_horizontal_display( $form ) {
 	if ( aga_form_does_not_have_any_classes( $form ) ) {
 		$form['cssClass'] = 'gform_inline';
-	} 	elseif ( aga_form_has_classes_but_not_an_inline_class( $form ) ) {
+	} elseif ( aga_form_has_classes_but_not_an_inline_class( $form ) ) {
 		$form['cssClass'] = $form['cssClass'] . ' gform_inline';
 	}
 	return $form;
