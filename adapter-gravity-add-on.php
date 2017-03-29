@@ -19,16 +19,18 @@ function load_aga_textdomain() {
 	load_plugin_textdomain( 'adapter-gravity-add-on' , false , basename( dirname( __FILE__ ) ) . '/languages' );
 }
 
-add_action( 'plugins_loaded' , 'aga_get_included_files' );
-function aga_get_included_files() {
+add_action( 'plugins_loaded' , 'conditionally_include_files' );
+function conditionally_include_files() {
 	$included_files = array(
 		'class-aga-form',
-	'class-aga-setting',
-	'aga-gravity-settings',
-	'aga-controller',
+		'class-aga-setting',
+		'aga-gravity-settings',
+		'aga-controller',
 	) ;
-	foreach ( $included_files as $file ) {
-		include_once( plugin_dir_path( __FILE__ ) . "includes/{$file}.php" ) ;
+	if ( class_exists( 'GFAPI' ) ) {
+		foreach ( $included_files as $file ) {
+			include_once( plugin_dir_path( __FILE__ ) . "includes/{$file}.php" );
+		}
 	}
 }
 
