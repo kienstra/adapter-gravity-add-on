@@ -1,4 +1,11 @@
 <?php
+/**
+ * Controller for Adapter Gravity Add On
+ *
+ * @package AdapterGravityAddOn
+ */
+
+namespace AdapterGravityAddOn;
 
 // Append form to bottom of post
 add_action( 'template_redirect' , 'aga_search_for_form_to_display_at_end_of_post' );

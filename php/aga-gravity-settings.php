@@ -1,4 +1,11 @@
 <?php
+/**
+ * Extra settings for Adapter Gravity Add On
+ *
+ * @package AdapterGravityAddOn
+ */
+
+namespace AdapterGravityAddOn;
 
 // Option to output label as placeholder
 add_filter( 'gform_form_settings', 'aga_gform_add_label_option' , 1 , 2 );

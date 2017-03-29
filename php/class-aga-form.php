@@ -1,4 +1,11 @@
 <?php
+/**
+ * Class file for AGA_Form
+ *
+ * @package AdapterGravityAddOn
+ */
+
+namespace AdapterGravityAddOn;
 
 class AGA_Form {
 

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Class file for AGA_Setting
+ *
+ * @package AdapterGravityAddOn
+ */
+
+namespace AdapterGravityAddOn;
 
 class AGA_Setting {
 
