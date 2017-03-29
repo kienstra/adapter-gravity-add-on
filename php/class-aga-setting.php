@@ -30,12 +30,16 @@ class AGA_Setting {
 	}
 
 	public function settings_with_new_markup() {
-		$checked_attribute = aga_get_gform_checked_attribute( $this->setting_name , $this->form );
-		$this->settings['Form Layout'][ $this->setting_name ] = "
-			<tr>
-		<th><label for='{$this->setting_name}'>" . $this->setting_description . "</label></th>
-		<td><input type='checkbox' value='1' {$checked_attribute} name='{$this->setting_name}'></td>
-			</tr>\n";
+		$checked_attribute = aga_get_gform_checked_attribute( $this->setting_name, $this->form );
+		$markup = '<tr>
+						<th>
+							<label for="' . esc_attr( $this->setting_name ) . '">' . esc_html( $this->setting_description ) . '</label>
+						</th>
+						<td>
+							<input type="checkbox" value="1" ' . $checked_attribute . ' name="' . esc_attr( $this->setting_name ) . '">
+						</td>
+				  </tr>';
+		$this->settings['Form Layout'][ $this->setting_name ] = $markup;
 		return $this->settings;
 	}
 
