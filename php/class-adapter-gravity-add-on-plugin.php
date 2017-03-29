@@ -70,16 +70,16 @@ class Adapter_Gravity_Add_On_Plugin {
 	 * @return void.
 	 */
 	public function include_plugin_files() {
-		$included_files = array(
-			'class-aga-form',
-			'class-aga-setting',
-			'class-gravity-settings',
-			'class-aga-controller',
-			'class-bottom-of-post-setting',
-			'class-horizontal-form-setting',
+		$files_slugs = array(
+			'aga-form',
+			'aga-setting',
+			'gravity-settings',
+			'aga-controller',
+			'bottom-of-post-setting',
+			'horizontal-form-setting',
 		);
-		foreach ( $included_files as $file ) {
-			require_once __DIR__ . '/' . $file . '.php';
+		foreach ( $files_slugs as $file_slug ) {
+			require_once __DIR__ . '/class-' . $file_slug . '.php';
 		}
 	}
 
@@ -103,7 +103,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	}
 
 	/**
-	 * Enqueue this plugin's styling if the  condition is true.
+	 * Enqueue this plugin's styling if the condition is true.
 	 *
 	 * @return void.
 	 */
