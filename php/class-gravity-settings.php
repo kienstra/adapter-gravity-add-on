@@ -55,7 +55,7 @@ class Gravity_Settings {
 	}
 
 	function get_placeholder_selected_attribute( $form ) {
-		$is_selected = ( ( isset( $form['labelPlacement'] ) ) && ( 'in_placeholder' == $form['labelPlacement'] ) );
+		$is_selected = ( ( isset( $form['labelPlacement'] ) ) && ( 'in_placeholder' === $form['labelPlacement'] ) );
 		$selected_attribute = selected( $is_selected , 1 , false );
 		return $selected_attribute;
 	}

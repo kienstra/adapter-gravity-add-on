@@ -62,7 +62,7 @@ class AGA_Form {
 	private $shortcode_string;
 
 	public static function add_form( $form_id ) {
-		if ( null == self::$instance ) {
+		if ( null === self::$instance ) {
 			self::$instance = new self( $form_id );
 		}
 	}
@@ -102,7 +102,7 @@ class AGA_Form {
 		*/
 		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post' , $this->$do_use_ajax_by_default );
 
-		if ( ( true == $do_ajax ) || ( 'true' == $do_ajax ) ) {
+		if ( ( true === $do_ajax ) || ( 'true' === $do_ajax ) ) {
 			$this->do_ajax = 'true';
 		} else {
 			$this->do_ajax = 'false';

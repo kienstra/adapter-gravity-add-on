@@ -44,7 +44,7 @@ class AGA_Controller {
 
 	function aga_do_append_form_to_end_of_post( $form_id ) {
 		$form = \GFAPI::get_form( $form_id );
-		return ( ( isset( $form['aga_bottom_of_post'] ) ) && ( '1' == $form['aga_bottom_of_post'] ) );
+		return ( ( isset( $form['aga_bottom_of_post'] ) ) && ( '1' === $form['aga_bottom_of_post'] ) );
 	}
 
 	function aga_append_form_to_end_of_single_post_page( $form_id ) {
@@ -62,7 +62,7 @@ class AGA_Controller {
 
 	function aga_do_display_horizontally( $form_id ) {
 		$form = \GFAPI::get_form( $form_id );
-		return ( ( isset( $form['aga_horizontal_display'] ) ) && ( '1' == $form['aga_horizontal_display'] ) );
+		return ( ( isset( $form['aga_horizontal_display'] ) ) && ( '1' === $form['aga_horizontal_display'] ) );
 	}
 
 	function aga_display_form_horizontally( $form_id ) {
@@ -81,7 +81,7 @@ class AGA_Controller {
 	}
 
 	function aga_form_does_not_have_any_classes( $form ) {
-		return ( ( isset( $form['cssClass'] ) && ( '' == $form['cssClass'] ) ) );
+		return ( ( isset( $form['cssClass'] ) && ( '' === $form['cssClass'] ) ) );
 	}
 
 	function aga_form_has_classes_but_not_an_inline_class( $form ) {
@@ -104,7 +104,7 @@ class AGA_Controller {
 
 	function is_form_set_to_show_aga_placeholder( $form_id ) {
 		$form = \GFAPI::get_form( $form_id );
-		return ( ( isset( $form['labelPlacement'] ) ) && ( 'in_placeholder' == $form['labelPlacement'] ) );
+		return ( ( isset( $form['labelPlacement'] ) ) && ( 'in_placeholder' === $form['labelPlacement'] ) );
 	}
 
 	function aga_get_content_with_placeholder_and_without_label( $content, $placeholder ) {
