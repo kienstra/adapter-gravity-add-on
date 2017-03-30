@@ -41,7 +41,7 @@ class AGA_Form {
 	}
 
 	private function set_gform_object() {
-		$this->gform_object = GFAPI::get_form( $this->form_id );
+		$this->gform_object = \GFAPI::get_form( $this->form_id );
 	}
 
 	private function set_form_title() {

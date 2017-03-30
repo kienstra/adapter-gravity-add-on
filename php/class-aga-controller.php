@@ -24,7 +24,7 @@ class AGA_Controller {
 
 	// Append form to bottom of post.
 	function aga_search_for_form_to_display_at_end_of_post() {
-		$forms = RGFormsModel::get_forms( null, 'title' );
+		$forms = \RGFormsModel::get_forms( null, 'title' );
 		$this->aga_manage_form_options( $forms );
 	}
 
@@ -43,13 +43,13 @@ class AGA_Controller {
 	}
 
 	function aga_do_append_form_to_end_of_post( $form_id ) {
-		$form = GFAPI::get_form( $form_id );
+		$form = \GFAPI::get_form( $form_id );
 		return ( ( isset( $form['aga_bottom_of_post'] ) ) && ( '1' == $form['aga_bottom_of_post'] ) );
 	}
 
 	function aga_append_form_to_end_of_single_post_page( $form_id ) {
 		if ( $this->aga_is_page_a_single_post() ) {
-			AGA_Form::add_form( $form_id );
+			\AGA_Form::add_form( $form_id );
 			add_filter( 'the_content' , array( 'AGA_Form', 'append_form_to_content' ) , '100' );
 		}
 	}
@@ -61,14 +61,14 @@ class AGA_Controller {
 	}
 
 	function aga_do_display_horizontally( $form_id ) {
-		$form = GFAPI::get_form( $form_id );
+		$form = \GFAPI::get_form( $form_id );
 		return ( ( isset( $form['aga_horizontal_display'] ) ) && ( '1' == $form['aga_horizontal_display'] ) );
 	}
 
 	function aga_display_form_horizontally( $form_id ) {
-		$form = GFAPI::get_form( $form_id );
+		$form = \GFAPI::get_form( $form_id );
 		$form_with_horizontal_display = $this->aga_add_horizontal_display( $form );
-		GFAPI::update_form( $form_with_horizontal_display , $form_id );
+		\GFAPI::update_form( $form_with_horizontal_display , $form_id );
 	}
 
 	function aga_add_horizontal_display( $form ) {
@@ -103,7 +103,7 @@ class AGA_Controller {
 	}
 
 	function is_form_set_to_show_aga_placeholder( $form_id ) {
-		$form = GFAPI::get_form( $form_id );
+		$form = \GFAPI::get_form( $form_id );
 		return ( ( isset( $form['labelPlacement'] ) ) && ( 'in_placeholder' == $form['labelPlacement'] ) );
 	}
 

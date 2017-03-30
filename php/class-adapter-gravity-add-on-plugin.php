@@ -53,7 +53,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	 * Conditionally include plugin files and instantiate the classes.
 	 *
 	 * Only do this if the dependency plugin Gravity Forms is activated.
-	 * Check for the presence of the class GFAPI.
+	 * Check for the presence of classes GFAPI and RGFormsModel.
 	 *
 	 * @return void.
 	 */
@@ -120,5 +120,4 @@ class Adapter_Gravity_Add_On_Plugin {
 			wp_enqueue_style( $this->plugin_slug . '-gravity-style' , plugins_url( $this->plugin_slug . '/css/aga-gravity.css' ), array() , $this->plugin_version );
 		}
 	}
-
 }
