@@ -7,13 +7,58 @@
 
 namespace AdapterGravityAddOn;
 
+/**
+ * Class AGA_Form
+ */
 class AGA_Form {
 
+	/**
+	 * Instance of this class.
+	 *
+	 * @var object
+	 */
 	private static $instance;
+
+	/**
+	 * This form's ID.
+	 *
+	 * @var
+	 */
 	private $form_id;
+
+	/**
+	 * Gravity Form object
+	 *
+	 * @var object
+	 */
 	private $gform_object;
+
+	/**
+	 * Form title
+	 *
+	 * @var string
+	 */
 	private $form_title;
+
+	/**
+	 * Whether to use ajax
+	 *
+	 * @var boolean
+	 */
 	private $do_ajax;
+
+	/**
+	 * Whether to use ajax by default
+	 *
+	 * @var boolean
+	 */
+	private $do_use_ajax_by_default = true;
+
+	/**
+	 * Shortcode string
+	 *
+	 * @var string
+	 */
 	private $shortcode_string;
 
 	public static function add_form( $form_id ) {
@@ -53,9 +98,9 @@ class AGA_Form {
 		/**
 		* Whether to use ajax in the Gravity Form at the bottom of a single post.
 		*
-		* @param boolean $do_ajax Whether to use ajax, default: true.
+		* @param boolean $do_ajax Whether to use ajax.
 		*/
-		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post' , true );
+		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post' , $this->$do_use_ajax_by_default );
 
 		if ( ( true == $do_ajax ) || ( 'true' == $do_ajax ) ) {
 			$this->do_ajax = 'true';
@@ -70,7 +115,6 @@ class AGA_Form {
 
 	public static function append_form_to_content( $content ) {
 		$form_markup = do_shortcode( self::$instance->shortcode_string );
-		$content .= $form_markup;
-		return $content;
+		return $content . $form_markup;
 	}
 }
