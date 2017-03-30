@@ -65,7 +65,7 @@ class AGA_Form {
 	}
 
 	private function set_shortcode_string() {
-		$this->shortcode_string = "[gravityform id='$this->form_id' name='$this->form_title' title='false' description='false' ajax='{$this->do_ajax}']";
+		$this->shortcode_string = '[gravityform id="' . esc_attr( $this->form_id ) . '" name="' . esc_attr( $this->form_title ) . '" title="false" description="false" ajax="' . esc_attr( $this->do_ajax ) . '"]';
 	}
 
 	public static function append_form_to_content( $content ) {
