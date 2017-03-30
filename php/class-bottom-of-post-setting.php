@@ -7,6 +7,9 @@
 
 namespace AdapterGravityAddOn;
 
+/**
+ * Class Bottom_Of_Post_Setting
+ */
 class Bottom_Of_Post_Setting extends AGA_Setting {
 
 	public static function get_settings( $settings, $form ) {

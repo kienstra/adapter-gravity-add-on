@@ -7,6 +7,9 @@
 
 namespace AdapterGravityAddOn;
 
+/**
+ * Class Gravity_Settings
+ */
 class Horizontal_Form_Setting extends AGA_Setting {
 
 	public static function get_settings( $settings, $form ) {
