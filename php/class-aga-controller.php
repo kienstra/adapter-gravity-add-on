@@ -13,6 +13,13 @@ namespace AdapterGravityAddOn;
 class AGA_Controller {
 
 	/**
+	 * Default class of the input tags.
+	 *
+	 * @var string
+	 */
+	private static $default_class_of_input = 'form-control';
+
+	/**
 	 * Construct the class.
 	 */
 	public function __construct() {
@@ -76,8 +83,8 @@ class AGA_Controller {
 	 */
 	public function aga_append_form_to_end_of_single_post_page( $form_id ) {
 		if ( $this->aga_is_page_a_single_post() ) {
-			\AGA_Form::add_form( $form_id );
-			add_filter( 'the_content' , array( 'AGA_Form', 'append_form_to_content' ), '100' );
+			AGA_Form::add_form( $form_id );
+			add_filter( 'the_content' , array( 'AdapterGravityAddOn\AGA_Form', 'append_form_to_content' ), '100' );
 		}
 	}
 
@@ -222,9 +229,9 @@ class AGA_Controller {
 		* @param string $class New class(es) of the input, space-separated.
 		* @param int $form_id The id of the Gravity Form.
 		*/
-		$new_class = apply_filters( 'aga_gravity_form_input_class' , 'form-control' , $form_id );
+		$new_class = apply_filters( 'aga_gravity_form_input_class', $this->$default_class_of_input, $form_id );
 
-		$new_content = $this->aga_add_class_to_input( $content , esc_attr( $new_class ) );
+		$new_content = $this->aga_add_class_to_input( $content, esc_attr( $new_class ) );
 		return $new_content;
 	}
 
@@ -236,7 +243,7 @@ class AGA_Controller {
 	 * @return string $content Now includes the new class.
 	 */
 	public function aga_add_class_to_input( $content, $new_class ) {
-		$content_with_new_class = preg_replace( "/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/" , '$1' . esc_attr( $new_class ) . '\s' , $content );
+		$content_with_new_class = preg_replace( "/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/", '$1' . esc_attr( $new_class ) . '\s', $content );
 		return $content_with_new_class;
 	}
 

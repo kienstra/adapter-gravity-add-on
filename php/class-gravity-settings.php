@@ -81,7 +81,7 @@ class Gravity_Settings {
 	function get_new_form_label_settings( $new_option, $form_label_placement ) {
 		$closing_select_tag = '</select>';
 		$new_option_with_closing_select_tag = $new_option . ' ' . $closing_select_tag;
-		$new_settings = str_replace( $closing_select_tag , $new_option_with_closing_select_tag , $form_label_placement );
+		$new_settings = str_replace( $closing_select_tag, $new_option_with_closing_select_tag, $form_label_placement );
 		return $new_settings;
 	}
 
@@ -105,7 +105,7 @@ class Gravity_Settings {
 	 */
 	function get_placeholder_selected_attribute( $form ) {
 		$is_selected = ( ( isset( $form['labelPlacement'] ) ) && ( 'in_placeholder' === $form['labelPlacement'] ) );
-		$selected_attribute = selected( $is_selected , 1 , false );
+		$selected_attribute = selected( $is_selected, 1, false );
 		return $selected_attribute;
 	}
 
