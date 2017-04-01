@@ -22,7 +22,7 @@ class AGA_Form {
 	/**
 	 * This form's ID.
 	 *
-	 * @var
+	 * @var int
 	 */
 	private $form_id;
 
@@ -67,10 +67,21 @@ class AGA_Form {
 		}
 	}
 
-	private function __construct( $form_id ) {
+	/**
+	 * Instantiate the class.
+	 *
+	 * @param int $form_id Gravity Form ID.
+	 */
+	public function __construct( $form_id ) {
 		$this->set_variables( $form_id );
 	}
 
+	/**
+	 * Set form variables.
+	 *
+	 * @param int $form_id Gravity Form ID.
+	 * @return void.
+	 */
 	private function set_variables( $form_id ) {
 		$this->set_form_id( $form_id );
 		$this->set_gform_object();
@@ -79,20 +90,41 @@ class AGA_Form {
 		$this->set_shortcode_string();
 	}
 
+	/**
+	 * Set form ID as a property.
+	 *
+	 * @param int $form_id Gravity Form ID.
+	 * @return void.
+	 */
 	private function set_form_id( $form_id ) {
 		if ( ! isset( $this->form_id ) ) {
 			$this->form_id = $form_id;
 		}
 	}
 
+	/**
+	 * Set Gravity Form object as a property.
+	 *
+	 * @return void.
+	 */
 	private function set_gform_object() {
 		$this->gform_object = \GFAPI::get_form( $this->form_id );
 	}
 
+	/**
+	 * Set the Gravity Form title.
+	 *
+	 * @return void.
+	 */
 	private function set_form_title() {
 		$this->form_title = isset( $this->gform_object['title'] ) ? $this->gform_object['title'] : '';
 	}
 
+	/**
+	 * Set the option of whether to use ajax in the form.
+	 *
+	 * @return void.
+	 */
 	private function set_ajax_option() {
 
 		/**
@@ -109,10 +141,24 @@ class AGA_Form {
 		}
 	}
 
+	/**
+	 * Set Gravity Form object as a property.
+	 *
+	 * @return void.
+	 */
 	private function set_shortcode_string() {
 		$this->shortcode_string = '[gravityform id="' . esc_attr( $this->form_id ) . '" name="' . esc_attr( $this->form_title ) . '" title="false" description="false" ajax="' . esc_attr( $this->do_ajax ) . '"]';
 	}
 
+	/**
+	 * Append Gravity Form to the end of the post content.
+	 *
+	 * Filter callback for 'the_content.'
+	 * Use the form that this class processed.
+	 *
+	 * @param string $content Post content to filter.
+	 * @return string $content Filtered post content markup.
+	 */
 	public static function append_form_to_content( $content ) {
 		$form_markup = do_shortcode( self::$instance->shortcode_string );
 		return $content . $form_markup;
