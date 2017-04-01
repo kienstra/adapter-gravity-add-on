@@ -61,6 +61,12 @@ class AGA_Form {
 	 */
 	private $shortcode_string;
 
+	/**
+	 * Add a Gravity form and create a new instance with it.
+	 *
+	 * @param int $form_id Gravity Form ID.
+	 * @return void.
+	 */
 	public static function add_form( $form_id ) {
 		if ( null === self::$instance ) {
 			self::$instance = new self( $form_id );

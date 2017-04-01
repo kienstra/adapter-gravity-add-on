@@ -85,11 +85,24 @@ class Gravity_Settings {
 		return $new_settings;
 	}
 
+	/**
+	 * Add an option for a form label to the Gravity Forms settings.
+	 *
+	 * @param array  $settings Associated with forms.
+	 * @param string $new_form_label_settings To allow adding a form label.
+	 * @return array  $settings Now with an option to set a form label.
+	 */
 	function add_new_form_label_settings_to_settings( $settings, $new_form_label_settings ) {
 		$settings['Form Layout']['form_label_placement'] = $new_form_label_settings;
 		return $settings;
 	}
 
+	/**
+	 * Add an option for a form label to the Gravity Forms settings.
+	 *
+	 * @param object $form Gravity Form object.
+	 * @return string $selected_attribute HTML attribute.
+	 */
 	function get_placeholder_selected_attribute( $form ) {
 		$is_selected = ( ( isset( $form['labelPlacement'] ) ) && ( 'in_placeholder' === $form['labelPlacement'] ) );
 		$selected_attribute = selected( $is_selected , 1 , false );
