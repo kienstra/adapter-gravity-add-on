@@ -16,10 +16,10 @@ class AGA_Controller {
 	 * Construct the class.
 	 */
 	public function __construct() {
-		add_action( 'template_redirect' , array( $this, 'aga_search_for_form_to_display_at_end_of_post' ) );
-		add_filter( 'gform_field_content' , array( $this, 'aga_set_class_of_input_tags' ), 12, 5 );
-		add_filter( 'gform_field_content' , array( $this, 'aga_maybe_insert_placeholders_and_remove_labels' ), 11, 5 );
-		add_filter( 'gform_submit_button' , array( $this, 'aga_submit_button' ), 10, 2 );
+		add_action( 'template_redirect', array( $this, 'aga_search_for_form_to_display_at_end_of_post' ) );
+		add_filter( 'gform_field_content', array( $this, 'aga_set_class_of_input_tags' ), 12, 5 );
+		add_filter( 'gform_field_content', array( $this, 'aga_maybe_insert_placeholders_and_remove_labels' ), 11, 5 );
+		add_filter( 'gform_submit_button', array( $this, 'aga_submit_button' ), 10, 2 );
 	}
 
 	/**
@@ -77,7 +77,7 @@ class AGA_Controller {
 	public function aga_append_form_to_end_of_single_post_page( $form_id ) {
 		if ( $this->aga_is_page_a_single_post() ) {
 			\AGA_Form::add_form( $form_id );
-			add_filter( 'the_content' , array( 'AGA_Form', 'append_form_to_content' ) , '100' );
+			add_filter( 'the_content' , array( 'AGA_Form', 'append_form_to_content' ), '100' );
 		}
 	}
 

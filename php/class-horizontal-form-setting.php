@@ -8,7 +8,7 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Gravity_Settings
+ * Class Horizontal_Form_Setting
  */
 class Horizontal_Form_Setting extends AGA_Setting {
 

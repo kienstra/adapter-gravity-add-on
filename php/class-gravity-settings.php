@@ -135,4 +135,3 @@ class Gravity_Settings {
 	}
 
 }
-

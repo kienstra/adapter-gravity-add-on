@@ -59,7 +59,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	 */
 	public function conditionally_include_and_instantiate() {
 		if ( class_exists( 'GFAPI' ) && class_exists( 'RGFormsModel' ) ) {
-			$this->include_plugin_files();
+			$this->load_plugin_files();
 			$this->instantiate_classes();
 		}
 	}
@@ -69,7 +69,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	 *
 	 * @return void.
 	 */
-	public function include_plugin_files() {
+	public function load_plugin_files() {
 		$files_slugs = array(
 			'aga-form',
 			'aga-setting',
@@ -117,7 +117,7 @@ class Adapter_Gravity_Add_On_Plugin {
 		$do_enqueue = apply_filters( 'aga_do_enqueue_css' , $this->do_enqueue_plugin_styling_by_default );
 
 		if ( $do_enqueue ) {
-			wp_enqueue_style( $this->plugin_slug . '-gravity-style' , plugins_url( $this->plugin_slug . '/css/aga-gravity.css' ), array() , $this->plugin_version );
+			wp_enqueue_style( $this->plugin_slug . '-gravity-style' , plugins_url( $this->plugin_slug . '/css/aga-gravity.css' ), array(), $this->plugin_version );
 		}
 	}
 }
