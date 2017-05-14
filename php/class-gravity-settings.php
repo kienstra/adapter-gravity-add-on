@@ -131,6 +131,7 @@ class Gravity_Settings {
 	function save_aga_settings( $form ) {
 		$form['aga_bottom_of_post'] = rgpost( 'aga_bottom_of_post' );
 		$form['aga_horizontal_display'] = rgpost( 'aga_horizontal_display' );
+		$form['labelPlacement'] = rgpost( 'form_label_placement' );
 		return $form;
 	}
 
