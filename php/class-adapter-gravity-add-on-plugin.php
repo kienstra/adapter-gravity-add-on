@@ -65,7 +65,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	}
 
 	/**
-	 * Load the textdomain for the plugin, enabling translation.
+	 * Load the files for the plugin.
 	 *
 	 * @return void.
 	 */
