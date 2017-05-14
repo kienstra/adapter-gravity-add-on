@@ -13,7 +13,7 @@ namespace AdapterGravityAddOn;
 class Gravity_Settings {
 
 	/**
-	 * Construct the class.
+	 * Add the filters for the class.
 	 */
 	public function __construct() {
 		add_filter( 'gform_form_settings', array( $this, 'gform_add_label_option' ), 1, 2 );
@@ -53,8 +53,7 @@ class Gravity_Settings {
 	function add_label_placement_to_settings( $form_label_placement, $settings, $form ) {
 		$new_option = $this->get_option_for_in_placeholder( $form );
 		$new_form_label_settings = $this->get_new_form_label_settings( $new_option , $form_label_placement );
-		$settings = $this->add_new_form_label_settings_to_settings( $settings , $new_form_label_settings );
-		return $settings;
+		return $this->add_new_form_label_settings_to_settings( $settings , $new_form_label_settings );
 	}
 
 	/**
@@ -67,8 +66,8 @@ class Gravity_Settings {
 		$option_name = 'in_placeholder';
 		$selected_attribute = $this->get_placeholder_selected_attribute( $form );
 		return '<option value="' . esc_attr( $option_name ) . '" ' . $selected_attribute . '>'
-							. esc_html__( 'In placeholder', 'adapter-gravity-add-on' )
-						. '</option>';
+					. esc_html__( 'In placeholder', 'adapter-gravity-add-on' )
+				. '</option>';
 	}
 
 	/**
@@ -81,8 +80,7 @@ class Gravity_Settings {
 	function get_new_form_label_settings( $new_option, $form_label_placement ) {
 		$closing_select_tag = '</select>';
 		$new_option_with_closing_select_tag = $new_option . ' ' . $closing_select_tag;
-		$new_settings = str_replace( $closing_select_tag, $new_option_with_closing_select_tag, $form_label_placement );
-		return $new_settings;
+		return str_replace( $closing_select_tag, $new_option_with_closing_select_tag, $form_label_placement );
 	}
 
 	/**
@@ -105,8 +103,7 @@ class Gravity_Settings {
 	 */
 	function get_placeholder_selected_attribute( $form ) {
 		$is_selected = ( ( isset( $form['labelPlacement'] ) ) && ( 'in_placeholder' === $form['labelPlacement'] ) );
-		$selected_attribute = selected( $is_selected, 1, false );
-		return $selected_attribute;
+		return selected( $is_selected, 1, false );
 	}
 
 	/**
@@ -118,8 +115,7 @@ class Gravity_Settings {
 	 */
 	function gform_add_settings( $settings, $form ) {
 		$settings_with_bottom_of_post_option = Bottom_Of_Post_Setting::get_settings( $settings, $form );
-		$settings_with_inline_and_bottom_of_post_options = Horizontal_Form_Setting::get_settings( $settings_with_bottom_of_post_option , $form );
-		return $settings_with_inline_and_bottom_of_post_options;
+		return Horizontal_Form_Setting::get_settings( $settings_with_bottom_of_post_option , $form );
 	}
 
 	/**
