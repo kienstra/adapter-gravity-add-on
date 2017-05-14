@@ -17,7 +17,7 @@ class AGA_Controller {
 	 *
 	 * @var string
 	 */
-	private static $default_class_of_input = 'form-control';
+	public $default_class_of_input = 'form-control';
 
 	/**
 	 * Construct the class.
@@ -229,7 +229,7 @@ class AGA_Controller {
 		* @param string $class New class(es) of the input, space-separated.
 		* @param int $form_id The id of the Gravity Form.
 		*/
-		$new_class = apply_filters( 'aga_gravity_form_input_class', $this->$default_class_of_input, $form_id );
+		$new_class = apply_filters( 'aga_gravity_form_input_class', $this->default_class_of_input, $form_id );
 
 		$new_content = $this->aga_add_class_to_input( $content, esc_attr( $new_class ) );
 		return $new_content;

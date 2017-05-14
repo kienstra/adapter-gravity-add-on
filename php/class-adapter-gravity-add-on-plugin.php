@@ -70,17 +70,12 @@ class Adapter_Gravity_Add_On_Plugin {
 	 * @return void.
 	 */
 	public function load_plugin_files() {
-		$files_slugs = array(
-			'aga-form',
-			'aga-setting',
-			'gravity-settings',
-			'aga-controller',
-			'bottom-of-post-setting',
-			'horizontal-form-setting',
-		);
-		foreach ( $files_slugs as $file_slug ) {
-			require_once __DIR__ . '/class-' . $file_slug . '.php';
-		}
+		require_once __DIR__ . '/class-aga-form.php';
+		require_once __DIR__ . '/class-aga-setting.php';
+		require_once __DIR__ . '/class-gravity-settings.php';
+		require_once __DIR__ . '/class-aga-controller.php';
+		require_once __DIR__ . '/class-bottom-of-post-setting.php';
+		require_once __DIR__ . '/class-horizontal-form-setting.php';
 	}
 
 	/**
@@ -89,8 +84,8 @@ class Adapter_Gravity_Add_On_Plugin {
 	 * @return void.
 	 */
 	public function instantiate_classes() {
-		$this->components['aga-controller'] = new AGA_Controller( $this );
-		$this->components['gravity-settings'] = new Gravity_Settings( $this );
+		$this->components['gravity_settings'] = new Gravity_Settings();
+		$this->components['aga_controller'] = new AGA_Controller();
 	}
 
 	/**
