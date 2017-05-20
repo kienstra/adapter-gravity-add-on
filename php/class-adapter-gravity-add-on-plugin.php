@@ -74,8 +74,6 @@ class Adapter_Gravity_Add_On_Plugin {
 		require_once __DIR__ . '/class-aga-setting.php';
 		require_once __DIR__ . '/class-gravity-settings.php';
 		require_once __DIR__ . '/class-aga-controller.php';
-		require_once __DIR__ . '/class-bottom-of-post-setting.php';
-		require_once __DIR__ . '/class-horizontal-form-setting.php';
 	}
 
 	/**

@@ -16,8 +16,25 @@ class Gravity_Settings {
 	 * Add the filters for the class.
 	 */
 	public function __construct() {
-		add_filter( 'gform_form_settings', array( $this, 'gform_add_settings' ), 10, 2 );
-		add_filter( 'gform_pre_form_settings_save', array( $this, 'save_aga_settings' ) );
+		add_filter( 'gform_form_settings', array( $this, 'add_bottom_of_post_setting' ), 10, 2 );
+		add_filter( 'gform_form_settings', array( $this, 'add_horizontal_setting' ), 10, 2 );
+		add_filter( 'gform_pre_form_settings_save', array( $this, 'save_settings' ) );
+	}
+
+	/**
+	 * Add a setting to display the form at the bottom of posts.
+	 *
+	 * @param array  $settings Associated with forms.
+	 * @param object $form The form object that is shown.
+	 * @return array  $settings Now with options to place the label inline and at the bottom.
+	 */
+	function add_bottom_of_post_setting( $settings, $form ) {
+		$bottom_of_post_setting = new AGA_Setting( $settings, $form );
+		$bottom_of_post_setting->set_values( array(
+			'setting_name'        => 'aga_bottom_of_post',
+			'setting_description' => __( 'Display at the bottom of every single-post page' , 'adapter-gravity-add-on' ),
+		) );
+		return $bottom_of_post_setting->get_settings();
 	}
 
 	/**
@@ -27,9 +44,13 @@ class Gravity_Settings {
 	 * @param object $form The form object that is shown.
 	 * @return array  $settings Now with options to place the label inline and at the bottom.
 	 */
-	function gform_add_settings( $settings, $form ) {
-		$settings_with_bottom_of_post_option = Bottom_Of_Post_Setting::get_settings( $settings, $form );
-		return Horizontal_Form_Setting::get_settings( $settings_with_bottom_of_post_option, $form );
+	function add_horizontal_setting( $settings, $form ) {
+		$horizontal_form_setting = new AGA_Setting( $settings, $form );
+		$horizontal_form_setting->set_values( array(
+			'setting_name'        => 'aga_horizontal_display',
+			'setting_description' => __( 'Display form horizontally' , 'adapter-gravity-add-on' ),
+		) );
+		return $horizontal_form_setting->get_settings();
 	}
 
 	/**
@@ -38,7 +59,7 @@ class Gravity_Settings {
 	 * @param object $form The form object that is shown.
 	 * @return object $form With additional settings.
 	 */
-	function save_aga_settings( $form ) {
+	function save_settings( $form ) {
 		$form['aga_bottom_of_post'] = rgpost( 'aga_bottom_of_post' );
 		$form['aga_horizontal_display'] = rgpost( 'aga_horizontal_display' );
 		return $form;
