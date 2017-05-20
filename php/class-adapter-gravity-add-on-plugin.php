@@ -44,7 +44,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	 * Construct the class.
 	 */
 	public function __construct() {
-		add_action( 'plugins_loaded', array( $this, 'conditionally_include_and_instantiate' ) );
+		add_action( 'gform_loaded', array( $this, 'conditionally_include_and_instantiate' ) );
 		add_action( 'plugins_loaded', array( $this, 'plugin_localization' ) );
 		add_action( 'gform_enqueue_scripts', array( $this, 'conditionally_enqueue_styling' ) );
 	}
@@ -115,4 +115,5 @@ class Adapter_Gravity_Add_On_Plugin {
 			wp_enqueue_style( $this->plugin_slug . '-gravity-style' , plugins_url( $this->plugin_slug . '/css/aga-gravity.css' ), array(), $this->plugin_version );
 		}
 	}
+
 }

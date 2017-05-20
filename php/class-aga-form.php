@@ -169,4 +169,5 @@ class AGA_Form {
 		$form_markup = do_shortcode( self::$instance->shortcode_string );
 		return $content . $form_markup;
 	}
+
 }

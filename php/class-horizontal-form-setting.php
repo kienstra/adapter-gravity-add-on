@@ -27,4 +27,5 @@ class Horizontal_Form_Setting extends AGA_Setting {
 		) );
 		return parent::$instance->settings_with_new_markup();
 	}
+
 }
