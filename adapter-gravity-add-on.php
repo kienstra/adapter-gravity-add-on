@@ -18,7 +18,16 @@ Author URI: www.ryankienstra.com
 License: GPL2
 */
 
-require_once dirname( __FILE__ ) . '/php/class-adapter-add-on.php';
-
-global $adapter_gravity_add_on_plugin;
-$adapter_gravity_add_on_plugin = new Adapter_Gravity_Add_On_Plugin();
+/**
+ * Register the plugin as an add-on if the Gravity Form method exists.
+ *
+ * @return void.
+ */
+function register() {
+	if ( method_exists( 'GFForms', 'include_addon_framework' ) ) {
+		\GFForms::include_addon_framework();
+		require_once dirname( __FILE__ ) . '/php/class-adapter-add-on.php';
+		\GFAddOn::register( 'AdapterGravityAddOn\Adapter_Add_On' );
+	}
+}
+add_action( 'gform_loaded', 'AdapterGravityAddOn\register', 5 );

@@ -10,21 +10,63 @@ namespace AdapterGravityAddOn;
 /**
  * Class Adapter_Add_On
  */
-class Adapter_Add_On {
-
-	/**
-	 * Plugin slug.
-	 *
-	 * @var string
-	 */
-	public $plugin_slug = 'adapter-gravity-add-on';
+class Adapter_Add_On extends \GFAddOn {
 
 	/**
 	 * Plugin version.
 	 *
 	 * @var string
 	 */
-	public $plugin_version = '1.0.1';
+	protected $_version = '1.0.2';
+
+	/**
+	 * Minimum version of Gravity Forms allowed.
+	 *
+	 * @var string
+	 */
+	protected $_min_gravityforms_version = '1.9';
+
+	/**
+	 * Plugin slug.
+	 *
+	 * @var string
+	 */
+	protected $_slug = 'adapter-gravity-add-on';
+
+	/**
+	 * Path to the main add-on file.
+	 *
+	 * @var string
+	 */
+	protected $_path = 'adapter-gravity-add-on/php/class-adapter_add-on.php';
+
+	/**
+	 * Full path to add-on file.
+	 *
+	 * @var string
+	 */
+	protected $_full_path = __FILE__;
+
+	/**
+	 * Plugin version.
+	 *
+	 * @var string
+	 */
+	protected $_title = 'Adapter Gravity Add On';
+
+	/**
+	 * Short title.
+	 *
+	 * @var string
+	 */
+	protected $_short_title = 'Adapter Add On';
+
+	/**
+	 * Instance of this class
+	 *
+	 * @var object
+	 */
+	private static $_instance = null;
 
 	/**
 	 * Whether to enqueue this plugin's styling.
@@ -41,12 +83,24 @@ class Adapter_Add_On {
 	public $components = array();
 
 	/**
-	 * Construct the class.
+	 * Get the instance of the add-on class.
+	 *
+	 * @return object $adapter_add_on Instance of Adapter_Add_On.
 	 */
-	public function __construct() {
-		add_action( 'gform_loaded', array( $this, 'conditionally_include_and_instantiate' ) );
-		add_action( 'plugins_loaded', array( $this, 'plugin_localization' ) );
-		add_action( 'gform_enqueue_scripts', array( $this, 'conditionally_enqueue_styling' ) );
+	public static function get_instance() {
+		if ( null === self::$_instance ) {
+			self::$_instance = new Adapter_Add_On();
+		}
+		return self::$_instance;
+	}
+
+	/**
+	 * Call the parent init method, and add the plugin actions.
+	 */
+	public function init() {
+		parent::init();
+		$this->plugin_localization();
+		$this->load_and_instantiate();
 	}
 
 	/**
@@ -57,11 +111,9 @@ class Adapter_Add_On {
 	 *
 	 * @return void.
 	 */
-	public function conditionally_include_and_instantiate() {
-		if ( class_exists( 'GFAPI' ) && class_exists( 'RGFormsModel' ) ) {
-			$this->load_plugin_files();
-			$this->instantiate_classes();
-		}
+	public function load_and_instantiate() {
+		$this->load_plugin_files();
+		$this->instantiate_classes();
 	}
 
 	/**
@@ -92,15 +144,15 @@ class Adapter_Add_On {
 	 * @return void.
 	 */
 	public function plugin_localization() {
-		load_plugin_textdomain( $this->plugin_slug, false, $this->plugin_slug . '/languages' );
+		load_plugin_textdomain( $this->_slug, false, $this->_slug . '/languages' );
 	}
 
 	/**
-	 * Enqueue this plugin's styling if the condition is true.
+	 * Get the stylesheets to enqueue.
 	 *
-	 * @return void.
+	 * @return array $styles The stylesheets to enqueue..
 	 */
-	public function conditionally_enqueue_styling() {
+	public function styles() {
 
 		/**
 		 * Filter whether to enqueue this plugin's styling.
@@ -109,9 +161,15 @@ class Adapter_Add_On {
 		 */
 		$do_enqueue = apply_filters( 'aga_do_enqueue_css' , $this->do_enqueue_plugin_styling_by_default );
 
-		if ( $do_enqueue ) {
-			wp_enqueue_style( $this->plugin_slug . '-gravity-style' , plugins_url( $this->plugin_slug . '/css/aga-gravity.css' ), array(), $this->plugin_version );
-		}
+		$styles = array(
+			array(
+				'handle'  => $this->_slug . '-gravity-style',
+				'src'     => plugins_url( $this->_slug . '/css/aga-gravity.css' ),
+				'version' => $this->_version,
+				'enqueue' => $do_enqueue,
+			),
+		);
+		return array_merge( parent::styles(), $styles );
 	}
 
 }
