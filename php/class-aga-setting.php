@@ -60,14 +60,15 @@ class AGA_Setting {
 	public function set_values( $setting_variables ) {
 		$this->setting_name = isset( $setting_variables['setting_name'] ) ? $setting_variables['setting_name'] : '';
 		$this->setting_description = isset( $setting_variables['setting_description'] ) ? $setting_variables['setting_description'] : '';
+		$this->add_setting();
 	}
 
 	/**
-	 * Get the settings object, but with different markup.
+	 * Add the new setting to the existing settings.
 	 *
-	 * @return array $settings With different markup for a specific setting.
+	 * @return void.
 	 */
-	public function get_settings() {
+	public function add_setting() {
 		$checked_value = $this->checked_value( $this->setting_name, $this->form );
 		$markup = '<tr>
 						<th>
@@ -78,6 +79,14 @@ class AGA_Setting {
 						</td>
 				  </tr>';
 		$this->settings['Form Layout'][ $this->setting_name ] = $markup;
+	}
+
+	/**
+	 * Get the settings object, but with different markup.
+	 *
+	 * @return array $settings With different markup for a specific setting.
+	 */
+	public function get_settings() {
 		return $this->settings;
 	}
 
