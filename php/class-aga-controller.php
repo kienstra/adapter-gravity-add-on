@@ -23,9 +23,9 @@ class AGA_Controller {
 	 * Construct the class.
 	 */
 	public function __construct() {
-		add_action( 'template_redirect', array( $this, 'aga_search_for_form_to_display_at_end_of_post' ) );
-		add_filter( 'gform_field_content', array( $this, 'aga_set_class_of_input_tags' ), 12, 5 );
-		add_filter( 'gform_submit_button', array( $this, 'aga_submit_button' ), 10, 2 );
+		add_action( 'template_redirect', array( $this, 'search_for_form_to_display_at_end_of_post' ) );
+		add_filter( 'gform_field_content', array( $this, 'set_class_of_input_tags' ), 12, 5 );
+		add_filter( 'gform_submit_button', array( $this, 'submit_button' ), 10, 2 );
 	}
 
 	/**
@@ -33,9 +33,9 @@ class AGA_Controller {
 	 *
 	 * @return void.
 	 */
-	public function aga_search_for_form_to_display_at_end_of_post() {
+	public function search_for_form_to_display_at_end_of_post() {
 		$forms = \RGFormsModel::get_forms( null, 'title' );
-		$this->aga_manage_form_options( $forms );
+		$this->manage_form_options( $forms );
 	}
 
 	/**
@@ -44,10 +44,10 @@ class AGA_Controller {
 	 * @param array $forms Gravity Forms that the Model returned.
 	 * @return void
 	 */
-	public function aga_manage_form_options( $forms ) {
+	public function manage_form_options( $forms ) {
 		foreach ( $forms as $form ) {
-			$this->aga_maybe_append_form_to_end_of_post( $form );
-			$this->aga_maybe_display_form_horizontally( $form );
+			$this->maybe_append_form_to_post( $form );
+			$this->maybe_display_form_horizontally( $form );
 		}
 	}
 
@@ -57,9 +57,9 @@ class AGA_Controller {
 	 * @param object $form Gravity form to possible append.
 	 * @return void
 	 */
-	public function aga_maybe_append_form_to_end_of_post( $form ) {
-		if ( $this->aga_do_append_form_to_end_of_post( $form->id ) ) {
-			$this->aga_append_form_to_end_of_single_post_page( $form->id );
+	public function maybe_append_form_to_post( $form ) {
+		if ( $this->do_append_form_to_post( $form->id ) ) {
+			$this->append_form_to_single_post_page( $form->id );
 		}
 	}
 
@@ -69,7 +69,7 @@ class AGA_Controller {
 	 * @param int $form_id ID of the Gravity Form.
 	 * @return boolean $do_append Whether to append the form
 	 */
-	public function aga_do_append_form_to_end_of_post( $form_id ) {
+	public function do_append_form_to_post( $form_id ) {
 		$form = \GFAPI::get_form( $form_id );
 		return ( ( isset( $form['aga_bottom_of_post'] ) ) && ( '1' === $form['aga_bottom_of_post'] ) );
 	}
@@ -80,7 +80,7 @@ class AGA_Controller {
 	 * @param int $form_id ID of the Gravity Form.
 	 * @return void.
 	 */
-	public function aga_append_form_to_end_of_single_post_page( $form_id ) {
+	public function append_form_to_single_post_page( $form_id ) {
 		if ( is_single() && ( 'post' === get_post_type() ) ) {
 			$form = new AGA_Form( $form_id );
 			add_filter( 'the_content', array( $form, 'append_form_to_content' ), 100 );
@@ -93,9 +93,9 @@ class AGA_Controller {
 	 * @param object $form Gravity form.
 	 * @return void.
 	 */
-	public function aga_maybe_display_form_horizontally( $form ) {
-		if ( $this->aga_do_display_horizontally( $form->id ) ) {
-			$this->aga_display_form_horizontally( $form->id );
+	public function maybe_display_form_horizontally( $form ) {
+		if ( $this->do_display_horizontally( $form->id ) ) {
+			$this->display_form_horizontally( $form->id );
 		}
 	}
 
@@ -105,7 +105,7 @@ class AGA_Controller {
 	 * @param int $form_id ID of the Gravity Form.
 	 * @return boolean $do_display_horizontally Whether to show the form length-wise.
 	 */
-	public function aga_do_display_horizontally( $form_id ) {
+	public function do_display_horizontally( $form_id ) {
 		$form = \GFAPI::get_form( $form_id );
 		return ( ( isset( $form['aga_horizontal_display'] ) ) && ( '1' === $form['aga_horizontal_display'] ) );
 	}
@@ -116,10 +116,9 @@ class AGA_Controller {
 	 * @param int $form_id ID of the Gravity Form.
 	 * @return void.
 	 */
-	public function aga_display_form_horizontally( $form_id ) {
+	public function display_form_horizontally( $form_id ) {
 		$form = \GFAPI::get_form( $form_id );
-		$form_with_horizontal_display = $this->aga_add_horizontal_display( $form );
-		\GFAPI::update_form( $form_with_horizontal_display , $form_id );
+		\GFAPI::update_form( $this->add_horizontal_display( $form ), $form_id );
 	}
 
 	/**
@@ -128,10 +127,10 @@ class AGA_Controller {
 	 * @param object $form Gravity form.
 	 * @return object $form With altered property.
 	 */
-	public function aga_add_horizontal_display( $form ) {
-		if ( $this->aga_form_does_not_have_any_classes( $form ) ) {
+	public function add_horizontal_display( $form ) {
+		if ( $this->form_does_not_have_any_classes( $form ) ) {
 			$form['cssClass'] = 'gform_inline';
-		} elseif ( $this->aga_form_has_classes_but_not_an_inline_class( $form ) ) {
+		} elseif ( $this->form_has_classes_but_not_an_inline_class( $form ) ) {
 			$form['cssClass'] = $form['cssClass'] . ' gform_inline';
 		}
 		return $form;
@@ -143,7 +142,7 @@ class AGA_Controller {
 	 * @param object $form Gravity form.
 	 * @return boolean $does_not_have_classes If the form has no classes.
 	 */
-	public function aga_form_does_not_have_any_classes( $form ) {
+	public function form_does_not_have_any_classes( $form ) {
 		return ( ( isset( $form['cssClass'] ) && ( '' === $form['cssClass'] ) ) );
 	}
 
@@ -153,7 +152,7 @@ class AGA_Controller {
 	 * @param object $form Gravity form.
 	 * @return boolean $has_classes_but_no_inline If the form has classes, but not 'gform_inline'.
 	 */
-	public function aga_form_has_classes_but_not_an_inline_class( $form ) {
+	public function form_has_classes_but_not_an_inline_class( $form ) {
 		return ( ( isset( $form['cssClass'] ) ) && ( false === strpos( $form['cssClass'] , 'gform_inline' ) ) );
 	}
 
@@ -167,7 +166,7 @@ class AGA_Controller {
 	 * @param int     $form_id ID of the Gravity Form.
 	 * @return string $content Filtered, and now includes a class in the <input> elements.
 	 */
-	public function aga_set_class_of_input_tags( $content, $field, $value, $lead_id, $form_id ) {
+	public function set_class_of_input_tags( $content, $field, $value, $lead_id, $form_id ) {
 
 		/**
 		* New class(es) for Gravity Form inputs.
@@ -177,9 +176,9 @@ class AGA_Controller {
 		* @param string $class New class(es) of the input, space-separated.
 		* @param int $form_id The id of the Gravity Form.
 		*/
-		$new_class = apply_filters( 'aga_gravity_form_input_class', $this->default_class_of_input, $form_id );
+		$new_class = apply_filters( 'gravity_form_input_class', $this->default_class_of_input, $form_id );
 
-		return $this->aga_add_class_to_input( $content, esc_attr( $new_class ) );
+		return $this->add_class_to_input( $content, esc_attr( $new_class ) );
 	}
 
 	/**
@@ -189,7 +188,7 @@ class AGA_Controller {
 	 * @param string $new_class To add to <input>.
 	 * @return string $content Now includes the new class.
 	 */
-	public function aga_add_class_to_input( $content, $new_class ) {
+	public function add_class_to_input( $content, $new_class ) {
 		return preg_replace( "/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/", '$1' . esc_attr( $new_class ) . '\s', $content );
 	}
 
@@ -200,7 +199,7 @@ class AGA_Controller {
 	 * @param object $form Current Gravity form.
 	 * @return string $filtered_button Markup of button, with new class(es).
 	 */
-	public function aga_submit_button( $button_input, $form ) {
+	public function submit_button( $button_input, $form ) {
 
 		/**
 		* New class(es) for Gravity Form submit buttons.
@@ -208,7 +207,7 @@ class AGA_Controller {
 		* @param string $class New class(es) of the input, space-separated.
 		* @param object $form The current form.
 		*/
-		$new_classes = apply_filters( 'aga_submit_button_classes' , 'btn btn-primary btn-med' , $form );
+		$new_classes = apply_filters( 'submit_button_classes' , 'btn btn-primary btn-med' , $form );
 
 		$class_attribute = "class='";
 		if ( false !== strpos( $button_input, $class_attribute ) ) {
