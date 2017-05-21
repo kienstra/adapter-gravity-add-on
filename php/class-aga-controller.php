@@ -81,7 +81,7 @@ class AGA_Controller {
 	 * @return void.
 	 */
 	public function aga_append_form_to_end_of_single_post_page( $form_id ) {
-		if ( $this->aga_is_page_a_single_post() ) {
+		if ( is_single() && ( 'post' === get_post_type() ) ) {
 			$form = new AGA_Form( $form_id );
 			add_filter( 'the_content', array( $form, 'append_form_to_content' ), 100 );
 		}
@@ -155,15 +155,6 @@ class AGA_Controller {
 	 */
 	public function aga_form_has_classes_but_not_an_inline_class( $form ) {
 		return ( ( isset( $form['cssClass'] ) ) && ( false === strpos( $form['cssClass'] , 'gform_inline' ) ) );
-	}
-
-	/**
-	 * Find if the page is a single post.
-	 *
-	 * @return boolean $is_single_post If the page is single and of type 'post'.
-	 */
-	public function aga_is_page_a_single_post() {
-		return ( is_single() && ( 'post' === get_post_type() ) );
 	}
 
 	/**
