@@ -179,8 +179,7 @@ class AGA_Controller {
 		*/
 		$new_class = apply_filters( 'aga_gravity_form_input_class', $this->default_class_of_input, $form_id );
 
-		$new_content = $this->aga_add_class_to_input( $content, esc_attr( $new_class ) );
-		return $new_content;
+		return $this->aga_add_class_to_input( $content, esc_attr( $new_class ) );
 	}
 
 	/**
@@ -191,8 +190,7 @@ class AGA_Controller {
 	 * @return string $content Now includes the new class.
 	 */
 	public function aga_add_class_to_input( $content, $new_class ) {
-		$content_with_new_class = preg_replace( "/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/", '$1' . esc_attr( $new_class ) . '\s', $content );
-		return $content_with_new_class;
+		return preg_replace( "/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/", '$1' . esc_attr( $new_class ) . '\s', $content );
 	}
 
 	/**
@@ -215,13 +213,11 @@ class AGA_Controller {
 		$class_attribute = "class='";
 		if ( false !== strpos( $button_input, $class_attribute ) ) {
 			$class_attribute_with_new_classes = $class_attribute . esc_attr( $new_classes ) . '\s';
-			$filtered_button = str_replace( $class_attribute, $class_attribute_with_new_classes, $button_input );
-			return $filtered_button;
+			return str_replace( $class_attribute, $class_attribute_with_new_classes, $button_input );
 		} else {
 			$opening_input = '<input';
 			$input_with_new_classes = $opening_input . ' class="' . esc_attr( $new_classes ) . '"';
-			$filtered_button = str_replace( $opening_input, $input_with_new_classes, $button_input );
-			return $filtered_button;
+			return str_replace( $opening_input, $input_with_new_classes, $button_input );
 		}
 	}
 
