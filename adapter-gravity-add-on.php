@@ -18,7 +18,7 @@ Author URI: www.ryankienstra.com
 License: GPL2
 */
 
-require_once dirname( __FILE__ ) . '/php/class-adapter-gravity-add-on-plugin.php';
+require_once dirname( __FILE__ ) . '/php/class-adapter-add-on.php';
 
 global $adapter_gravity_add_on_plugin;
 $adapter_gravity_add_on_plugin = new Adapter_Gravity_Add_On_Plugin();

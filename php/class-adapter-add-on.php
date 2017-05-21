@@ -1,6 +1,6 @@
 <?php
 /**
- * Class file for Adapter_Gravity_Add_On_Plugin
+ * Class file for Adapter_Add_On
  *
  * @package AdapterGravityAddOn
  */
@@ -8,9 +8,9 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Adapter_Gravity_Add_On_Plugin
+ * Class Adapter_Add_On
  */
-class Adapter_Gravity_Add_On_Plugin {
+class Adapter_Add_On {
 
 	/**
 	 * Plugin slug.
