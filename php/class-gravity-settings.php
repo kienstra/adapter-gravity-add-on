@@ -28,7 +28,7 @@ class Gravity_Settings {
 	 * @param object $form The form object that is shown.
 	 * @return array  $settings Now with options to place the label inline and at the bottom.
 	 */
-	function add_bottom_of_post_setting( $settings, $form ) {
+	public function add_bottom_of_post_setting( $settings, $form ) {
 		$bottom_of_post_setting = new AGA_Setting( $settings, $form );
 		$bottom_of_post_setting->set_values( array(
 			'setting_name'        => 'aga_bottom_of_post',
@@ -44,7 +44,7 @@ class Gravity_Settings {
 	 * @param object $form The form object that is shown.
 	 * @return array  $settings Now with options to place the label inline and at the bottom.
 	 */
-	function add_horizontal_setting( $settings, $form ) {
+	public function add_horizontal_setting( $settings, $form ) {
 		$horizontal_form_setting = new AGA_Setting( $settings, $form );
 		$horizontal_form_setting->set_values( array(
 			'setting_name'        => 'aga_horizontal_display',
@@ -59,7 +59,7 @@ class Gravity_Settings {
 	 * @param object $form The form object that is shown.
 	 * @return object $form With additional settings.
 	 */
-	function save_settings( $form ) {
+	public function save_settings( $form ) {
 		$form['aga_bottom_of_post'] = rgpost( 'aga_bottom_of_post' );
 		$form['aga_horizontal_display'] = rgpost( 'aga_horizontal_display' );
 		return $form;

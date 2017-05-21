@@ -100,7 +100,7 @@ class Adapter_Gravity_Add_On_Plugin {
 	 *
 	 * @return void.
 	 */
-	function conditionally_enqueue_styling() {
+	public function conditionally_enqueue_styling() {
 
 		/**
 		 * Filter whether to enqueue this plugin's styling.

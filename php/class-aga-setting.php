@@ -17,28 +17,28 @@ class AGA_Setting {
 	 *
 	 * @var array
 	 */
-	protected $settings;
+	public $settings;
 
 	/**
 	 * Settings form
 	 *
 	 * @var object
 	 */
-	protected $form;
+	public $form;
 
 	/**
 	 * Setting name
 	 *
 	 * @var string
 	 */
-	protected $setting_name;
+	public $setting_name;
 
 	/**
 	 * Description of settings
 	 *
 	 * @var string
 	 */
-	protected $setting_description;
+	public $setting_description;
 
 	/**
 	 * Construct instance of class.
