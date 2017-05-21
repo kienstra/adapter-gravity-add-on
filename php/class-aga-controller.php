@@ -82,8 +82,8 @@ class AGA_Controller {
 	 */
 	public function aga_append_form_to_end_of_single_post_page( $form_id ) {
 		if ( $this->aga_is_page_a_single_post() ) {
-			AGA_Form::add_form( $form_id );
-			add_filter( 'the_content' , array( 'AdapterGravityAddOn\AGA_Form', 'append_form_to_content' ), '100' );
+			$form = new AGA_Form( $form_id );
+			add_filter( 'the_content', array( $form, 'append_form_to_content' ), 100 );
 		}
 	}
 
