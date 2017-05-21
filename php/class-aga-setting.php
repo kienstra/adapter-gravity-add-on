@@ -69,13 +69,12 @@ class AGA_Setting {
 	 * @return void.
 	 */
 	public function add_setting() {
-		$checked_value = $this->checked_value( $this->setting_name, $this->form );
 		$markup = '<tr>
 						<th>
 							<label for="' . esc_attr( $this->setting_name ) . '">' . esc_html( $this->setting_description ) . '</label>
 						</th>
 						<td>
-							<input type="checkbox" value="1" checked="' . $checked_value . '" name="' . esc_attr( $this->setting_name ) . '">
+							<input type="checkbox" value="1" ' . checked( $this->is_checked(), true, false ) . ' name="' . esc_attr( $this->setting_name ) . '">
 						</td>
 				  </tr>';
 		$this->settings['Form Layout'][ $this->setting_name ] = $markup;
@@ -91,16 +90,12 @@ class AGA_Setting {
 	}
 
 	/**
-	 * Get the attribute's value for whether the <input> is checked.
+	 * Get whether the 'checked' attribute for the <input> should appear.
 	 *
-	 * To output in an <input type="checkbox"> element.
-	 *
-	 * @param string $setting_name Name of the setting.
-	 * @param Object $form Gravity Form object.
-	 * @return string $checked_attribute Attribute and value for whether the <input> is checked.
+	 * @return boolean $is_checked Whether the checked attribute should appear as 'checked'.
 	 */
-	public function checked_value( $setting_name, $form ) {
-		return rgar( $form, $setting_name ) ? 'checked' : '';
+	public function is_checked() {
+		return rgar( $this->form, $this->setting_name );
 	}
 
 }

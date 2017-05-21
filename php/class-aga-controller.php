@@ -128,7 +128,7 @@ class AGA_Controller {
 	 * @return object $form With altered property.
 	 */
 	public function add_horizontal_display( $form ) {
-		if ( $this->form_does_not_have_any_classes( $form ) ) {
+		if ( $this->form_does_not_have_any_class( $form ) ) {
 			$form['cssClass'] = 'gform_inline';
 		} elseif ( $this->form_has_classes_but_not_an_inline_class( $form ) ) {
 			$form['cssClass'] = $form['cssClass'] . ' gform_inline';
@@ -142,7 +142,7 @@ class AGA_Controller {
 	 * @param object $form Gravity form.
 	 * @return boolean $does_not_have_classes If the form has no classes.
 	 */
-	public function form_does_not_have_any_classes( $form ) {
+	public function form_does_not_have_any_class( $form ) {
 		return ( ( isset( $form['cssClass'] ) && ( '' === $form['cssClass'] ) ) );
 	}
 
