@@ -68,13 +68,13 @@ class AGA_Setting {
 	 * @return array $settings With different markup for a specific setting.
 	 */
 	public function get_settings() {
-		$checked_attribute = $this->get_gform_checked_attribute( $this->setting_name, $this->form );
+		$checked_value = $this->checked_value( $this->setting_name, $this->form );
 		$markup = '<tr>
 						<th>
 							<label for="' . esc_attr( $this->setting_name ) . '">' . esc_html( $this->setting_description ) . '</label>
 						</th>
 						<td>
-							<input type="checkbox" value="1" ' . $checked_attribute . ' name="' . esc_attr( $this->setting_name ) . '">
+							<input type="checkbox" value="1" checked="' . $checked_value . '" name="' . esc_attr( $this->setting_name ) . '">
 						</td>
 				  </tr>';
 		$this->settings['Form Layout'][ $this->setting_name ] = $markup;
@@ -82,7 +82,7 @@ class AGA_Setting {
 	}
 
 	/**
-	 * Get the attribute and value for whether the form is checked.
+	 * Get the attribute's value for whether the <input> is checked.
 	 *
 	 * To output in an <input type="checkbox"> element.
 	 *
@@ -90,9 +90,8 @@ class AGA_Setting {
 	 * @param Object $form Gravity Form object.
 	 * @return string $checked_attribute Attribute and value for whether the <input> is checked.
 	 */
-	public function get_gform_checked_attribute( $setting_name, $form ) {
-		$is_checked = rgar( $form, $setting_name );
-		return checked( $is_checked , '1' , false );
+	public function checked_value( $setting_name, $form ) {
+		return rgar( $form, $setting_name ) ? 'checked' : '';
 	}
 
 }
