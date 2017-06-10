@@ -56,8 +56,8 @@ class Gravity_Settings {
 	/**
 	 * Get the form settings, with additional options.
 	 *
-	 * @param object $form The form object that is shown.
-	 * @return object $form With additional settings.
+	 * @param array $form The form that is shown.
+	 * @return array $form With additional settings.
 	 */
 	public function save_settings( $form ) {
 		$form['aga_bottom_of_post'] = rgpost( 'aga_bottom_of_post' );

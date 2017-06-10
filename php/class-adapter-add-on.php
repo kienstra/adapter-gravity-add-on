@@ -62,13 +62,6 @@ class Adapter_Add_On extends \GFAddOn {
 	protected $_short_title = 'Adapter Add On';
 
 	/**
-	 * Instance of this class
-	 *
-	 * @var object
-	 */
-	private static $_instance = null;
-
-	/**
 	 * Whether to enqueue this plugin's styling.
 	 *
 	 * @var boolean
@@ -83,15 +76,18 @@ class Adapter_Add_On extends \GFAddOn {
 	public $components = array();
 
 	/**
-	 * Get the instance of the add-on class.
+	 * Get the instance of this plugin
 	 *
-	 * @return object $adapter_add_on Instance of Adapter_Add_On.
+	 * @return object $instance Plugin instance.
 	 */
 	public static function get_instance() {
-		if ( null === self::$_instance ) {
-			self::$_instance = new Adapter_Add_On();
+		static $instance;
+
+		if ( ! $instance instanceof Plugin ) {
+			$instance = new Plugin;
 		}
-		return self::$_instance;
+
+		return $instance;
 	}
 
 	/**
@@ -153,13 +149,12 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return array $styles The stylesheets to enqueue..
 	 */
 	public function styles() {
-
 		/**
 		 * Filter whether to enqueue this plugin's styling.
 		 *
 		 * @param boolean $do_enqueue Whether to enqueue styling.
 		 */
-		$do_enqueue = apply_filters( 'aga_do_enqueue_css' , $this->do_enqueue_plugin_styling_by_default );
+		$do_enqueue = apply_filters( 'aga_do_enqueue_css', $this->do_enqueue_plugin_styling_by_default );
 
 		$styles = array(
 			array(

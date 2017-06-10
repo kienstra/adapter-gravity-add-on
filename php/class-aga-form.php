@@ -13,13 +13,6 @@ namespace AdapterGravityAddOn;
 class AGA_Form {
 
 	/**
-	 * Instance of this class.
-	 *
-	 * @var object
-	 */
-	private static $instance;
-
-	/**
 	 * This form's ID.
 	 *
 	 * @var int
@@ -51,7 +44,7 @@ class AGA_Form {
 	 * @param string $content Post content to filter.
 	 * @return string $content Filtered post content markup.
 	 */
-	public function append_form_to_content( $content ) {
+	public function append_form_to_content( $form_id, $content ) {
 
 		/**
 		* Whether to use ajax in the Gravity Form at the bottom of a single post.
@@ -60,7 +53,7 @@ class AGA_Form {
 		*/
 		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post', $this->do_use_ajax_by_default );
 
-		return $content . gravity_form( $this->form_id, false, false, false, '', $do_ajax, 1, false );
+		return $content . gravity_form( $form_id, false, false, false, '', $do_ajax, 1, false );
 	}
 
 }

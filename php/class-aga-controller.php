@@ -23,7 +23,8 @@ class AGA_Controller {
 	 * Construct the class.
 	 */
 	public function __construct() {
-		add_action( 'template_redirect', array( $this, 'search_for_form_to_display_at_end_of_post' ) );
+		add_action( 'gform_pre_form_settings_save', array( $this, 'handle_horizontal_display' ) );
+		add_filter( 'the_content', array( $this, 'conditionally_append_form' ), 100 );
 		add_filter( 'gform_field_content', array( $this, 'set_class_of_input_tags' ), 12, 5 );
 		add_filter( 'gform_submit_button', array( $this, 'submit_button' ), 10, 2 );
 	}
@@ -31,106 +32,115 @@ class AGA_Controller {
 	/**
 	 * Iterate through Gravity Forms, and conditionally append one to the end of posts.
 	 *
-	 * @return void.
+	 * @param array $form The form that is shown.
+	 * @return array $form With additional settings.
 	 */
-	public function search_for_form_to_display_at_end_of_post() {
+	public function handle_horizontal_display( $form ) {
 		$forms = \RGFormsModel::get_forms( null, 'title' );
-		$this->manage_form_options( $forms );
+		foreach ( $forms as $form ) {
+			return $this->conditionally_display_form_horizontally( $form );
+		}
 	}
 
 	/**
-	 * Manage options for the forms.
+	 * Conditionally append a form to the post content.
 	 *
-	 * @param array $forms Gravity Forms that the Model returned.
-	 * @return void
+	 * @param string $content Post content.
+	 * @return string $content Post content, possibly filtered.
 	 */
-	public function manage_form_options( $forms ) {
+	public function conditionally_display_form_horizontally( $content ) {
+		$forms = \RGFormsModel::get_forms( null, 'title' );
 		foreach ( $forms as $form ) {
-			$this->maybe_append_form_to_post( $form );
 			$this->maybe_display_form_horizontally( $form );
 		}
+		return $content;
 	}
 
 	/**
-	 * Conditionally append form to the end of a post.
+	 * Conditionally append a form to the post content.
 	 *
-	 * @param object $form Gravity form to possible append.
-	 * @return void
+	 * @todo: clarify how the the $form is different from $form.
+	 * @param string $content Post content.
+	 * @return string $content Post content, possibly filtered.
 	 */
-	public function maybe_append_form_to_post( $form ) {
-		if ( $this->do_append_form_to_post( $form->id ) ) {
-			$this->append_form_to_single_post_page( $form->id );
+	public function conditionally_append_form( $content ) {
+		$forms = \RGFormsModel::get_forms( null, 'title' );
+		foreach ( $forms as $form ) {
+			if ( $this->do_append_form_to_post( \GFAPI::get_form( $form->id ) ) ) {
+				return $this->append_form_to_content( $form->id, $content );
+			}
 		}
+		return $content;
 	}
 
 	/**
-	 * Find whether to append a form to the end of the post.
+	 * Whether to append a form to the end of the post.
 	 *
-	 * @param int $form_id ID of the Gravity Form.
-	 * @return boolean $do_append Whether to append the form
+	 * @param array $form Gravity Form.
+	 * @return boolean $do_append Whether to append the form to the post content.
 	 */
-	public function do_append_form_to_post( $form_id ) {
-		$form = \GFAPI::get_form( $form_id );
-		return ( ( isset( $form['aga_bottom_of_post'] ) ) && ( '1' === $form['aga_bottom_of_post'] ) );
+	public function do_append_form_to_post( $form ) {
+		$do_append = (
+			isset( $form['aga_bottom_of_post'] )
+			&&
+			( '1' === $form['aga_bottom_of_post'] )
+			&&
+			is_single()
+			&&
+			( 'post' === get_post_type() )
+		);
+		return $do_append;
 	}
 
 	/**
-	 * Add a form to the end of a single post page.
+	 * Append Gravity Form to the end of the post content.
 	 *
-	 * @param int $form_id ID of the Gravity Form.
-	 * @return void.
+	 * Filter callback for 'the_content.'
+	 * Use the form that this class processed.
+	 *
+	 * @param int    $form_id ID of the Gravity Form.
+	 * @param string $content Post content to filter.
+	 * @return string $content Filtered post content markup.
 	 */
-	public function append_form_to_single_post_page( $form_id ) {
-		if ( is_single() && ( 'post' === get_post_type() ) ) {
-			$form = new AGA_Form( $form_id );
-			add_filter( 'the_content', array( $form, 'append_form_to_content' ), 100 );
-		}
+	public function append_form_to_content( $form_id, $content ) {
+
+		/**
+		* Whether to use ajax in the Gravity Form at the bottom of a single post.
+		*
+		* @param boolean $do_ajax Whether to use ajax.
+		*/
+		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post', $this->do_use_ajax_by_default );
+
+		return $content . gravity_form( $form_id, false, false, false, '', $do_ajax, 1, false );
 	}
 
 	/**
 	 * Conditionally display the form horizontally.
 	 *
 	 * @param object $form Gravity form.
-	 * @return void.
+	 * @return array $form Gravity form.
 	 */
 	public function maybe_display_form_horizontally( $form ) {
-		if ( $this->do_display_horizontally( $form->id ) ) {
-			$this->display_form_horizontally( $form->id );
+		$full_form = \GFAPI::get_form( $form->id );
+		if ( isset( $full_form['aga_horizontal_display'] ) && ( '1' === $full_form['aga_horizontal_display'] ) ) {
+			// @todo: Fix error that begins here.
+			return \GFAPI::update_form( $this->add_horizontal_display( $full_form ), $full_form->id );
 		}
-	}
-
-	/**
-	 * Whether to display the form horizontally.
-	 *
-	 * @param int $form_id ID of the Gravity Form.
-	 * @return boolean $do_display_horizontally Whether to show the form length-wise.
-	 */
-	public function do_display_horizontally( $form_id ) {
-		$form = \GFAPI::get_form( $form_id );
-		return ( ( isset( $form['aga_horizontal_display'] ) ) && ( '1' === $form['aga_horizontal_display'] ) );
-	}
-
-	/**
-	 * Show the form horizontally.
-	 *
-	 * @param int $form_id ID of the Gravity Form.
-	 * @return void.
-	 */
-	public function display_form_horizontally( $form_id ) {
-		$form = \GFAPI::get_form( $form_id );
-		\GFAPI::update_form( $this->add_horizontal_display( $form ), $form_id );
+		return $full_form;
 	}
 
 	/**
 	 * Add a class to display the form horizontally.
 	 *
-	 * @param object $form Gravity form.
-	 * @return object $form With altered property.
+	 * @param array $form Gravity form.
+	 * @return array $form With altered property.
 	 */
 	public function add_horizontal_display( $form ) {
-		if ( $this->form_does_not_have_any_class( $form ) ) {
+		if ( ! isset( $form['cssClass'] ) ) {
+			return $form;
+		} elseif ( '' === $form['cssClass'] ) {
 			$form['cssClass'] = 'gform_inline';
-		} elseif ( $this->form_has_classes_but_not_an_inline_class( $form ) ) {
+		} elseif ( false === strpos( $form['cssClass'], 'gform_inline' ) ) {
 			$form['cssClass'] = $form['cssClass'] . ' gform_inline';
 		}
 		return $form;
