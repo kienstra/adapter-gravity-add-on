@@ -83,8 +83,8 @@ class Adapter_Add_On extends \GFAddOn {
 	public static function get_instance() {
 		static $instance;
 
-		if ( ! $instance instanceof Plugin ) {
-			$instance = new Plugin;
+		if ( ! $instance instanceof Adapter_Add_On ) {
+			$instance = new Adapter_Add_On();
 		}
 
 		return $instance;
@@ -96,18 +96,6 @@ class Adapter_Add_On extends \GFAddOn {
 	public function init() {
 		parent::init();
 		$this->plugin_localization();
-		$this->load_and_instantiate();
-	}
-
-	/**
-	 * Conditionally include plugin files and instantiate the classes.
-	 *
-	 * Only do this if the dependency plugin Gravity Forms is activated.
-	 * Check for the presence of classes GFAPI and RGFormsModel.
-	 *
-	 * @return void.
-	 */
-	public function load_and_instantiate() {
 		$this->load_plugin_files();
 		$this->instantiate_classes();
 	}

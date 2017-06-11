@@ -28,6 +28,7 @@ class Test_Plugin extends \WP_UnitTestCase {
 	 */
 	public function setUp() {
 		parent::setUp();
+		include_once( dirname( __FILE__ ) . '/../../../gravityforms/gravityforms.php' );
 		include_once( dirname( __FILE__ ) . '/../../adapter-gravity-add-on.php' );
 		$this->instance = Plugin::get_instance();
 	}
@@ -56,11 +57,6 @@ class Test_Plugin extends \WP_UnitTestCase {
 	 * @see Plugin::register().
 	 */
 	public function test_register() {
-		$this->instance->register();
-		// Gravity Forms isn't yet included, so the file inclusion shouldn't take place.
-		$this->assertFalse( class_exists( 'AdapterGravityAddOn\Adapter_Add_On' ) );
-
-		require_once( dirname( __FILE__ ) . '/../../../gravityforms/gravityforms.php' );
 		$this->instance->register();
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Adapter_Add_On' ) );
 		$this->assertTrue( class_exists( '\GFAddOn' ) );
