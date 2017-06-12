@@ -106,9 +106,8 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return void
 	 */
 	public function load_plugin_files() {
-		require_once __DIR__ . '/class-aga-form.php';
-		require_once __DIR__ . '/class-aga-setting.php';
-		require_once __DIR__ . '/class-gravity-settings.php';
+		require_once __DIR__ . '/class-layout-setting.php';
+		require_once __DIR__ . '/class-gravity-setting.php';
 		require_once __DIR__ . '/class-controller.php';
 	}
 
@@ -118,8 +117,8 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return void
 	 */
 	public function instantiate_classes() {
-		$this->components['gravity_settings'] = new Gravity_Settings();
-		$this->components['controller'] = new AGA_Controller();
+		$this->components['gravity_settings'] = new Gravity_Setting();
+		$this->components['controller'] = new Controller();
 	}
 
 	/**

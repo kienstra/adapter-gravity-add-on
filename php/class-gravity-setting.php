@@ -8,9 +8,9 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Gravity_Settings
+ * Class Gravity_Setting
  */
-class Gravity_Settings {
+class Gravity_Setting {
 
 	/**
 	 * Add the filters for the class.
