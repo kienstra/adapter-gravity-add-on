@@ -8,9 +8,9 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class AGA_Controller
+ * Class Controller
  */
-class AGA_Controller {
+class Controller {
 
 	/**
 	 * Default class of the input tags.
