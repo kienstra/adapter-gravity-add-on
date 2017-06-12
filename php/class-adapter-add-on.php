@@ -103,7 +103,7 @@ class Adapter_Add_On extends \GFAddOn {
 	/**
 	 * Load the files for the plugin.
 	 *
-	 * @return void.
+	 * @return void
 	 */
 	public function load_plugin_files() {
 		require_once __DIR__ . '/class-aga-form.php';
@@ -115,7 +115,7 @@ class Adapter_Add_On extends \GFAddOn {
 	/**
 	 * Instantiate the plugin classes.
 	 *
-	 * @return void.
+	 * @return void
 	 */
 	public function instantiate_classes() {
 		$this->components['gravity_settings'] = new Gravity_Settings();
@@ -125,7 +125,7 @@ class Adapter_Add_On extends \GFAddOn {
 	/**
 	 * Load the textdomain for the plugin, enabling translation.
 	 *
-	 * @return void.
+	 * @return void
 	 */
 	public function plugin_localization() {
 		load_plugin_textdomain( $this->_slug, false, $this->_slug . '/languages' );

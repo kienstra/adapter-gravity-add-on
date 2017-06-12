@@ -37,7 +37,7 @@ class Plugin {
 	/**
 	 * Register the plugin as an add-on if the Gravity Form method exists.
 	 *
-	 * @return void.
+	 * @return void
 	 */
 	function register() {
 		if ( method_exists( 'GFForms', 'include_addon_framework' ) ) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Class file for AGA_Setting
+ * Class file for Layout_Setting
  *
  * @package AdapterGravityAddOn
  */
@@ -8,9 +8,9 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class AGA_Setting
+ * Class Layout_Setting
  */
-class AGA_Setting {
+class Layout_Setting {
 
 	/**
 	 * Gravity Form settings
@@ -66,7 +66,7 @@ class AGA_Setting {
 	/**
 	 * Add the new setting to the existing settings.
 	 *
-	 * @return void.
+	 * @return void
 	 */
 	public function add_setting() {
 		$markup = '<tr>
@@ -77,6 +77,7 @@ class AGA_Setting {
 							<input type="checkbox" value="1" ' . checked( $this->is_checked(), true, false ) . ' name="' . esc_attr( $this->setting_name ) . '">
 						</td>
 				  </tr>';
+
 		$this->settings['Form Layout'][ $this->setting_name ] = $markup;
 	}
 

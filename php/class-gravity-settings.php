@@ -29,7 +29,7 @@ class Gravity_Settings {
 	 * @return array  $settings Now with options to place the label inline and at the bottom.
 	 */
 	public function add_bottom_of_post_setting( $settings, $form ) {
-		$bottom_of_post_setting = new AGA_Setting( $settings, $form );
+		$bottom_of_post_setting = new Layout_Setting( $settings, $form );
 		$bottom_of_post_setting->set_values( array(
 			'setting_name'        => 'aga_bottom_of_post',
 			'setting_description' => __( 'Display at the bottom of every single-post page' , 'adapter-gravity-add-on' ),
@@ -45,7 +45,7 @@ class Gravity_Settings {
 	 * @return array  $settings Now with options to place the label inline and at the bottom.
 	 */
 	public function add_horizontal_setting( $settings, $form ) {
-		$horizontal_form_setting = new AGA_Setting( $settings, $form );
+		$horizontal_form_setting = new Layout_Setting( $settings, $form );
 		$horizontal_form_setting->set_values( array(
 			'setting_name'        => 'aga_horizontal_display',
 			'setting_description' => __( 'Display form horizontally' , 'adapter-gravity-add-on' ),
