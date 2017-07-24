@@ -31,9 +31,8 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	 */
 	public function setUp() {
 		parent::setUp();
-		include_once( dirname( __FILE__ ) . '/../../../gravityforms/gravityforms.php' );
-		include_once( dirname( __FILE__ ) . '/../../adapter-gravity-add-on.php' );
-		$this->instance = Plugin::get_instance();
+		do_action( 'gform_loaded' );
+		$this->instance = Adapter_Add_On::get_instance();
 	}
 
 	/**
@@ -42,7 +41,14 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	 * @see Adapter_Add_Onn::__construct().
 	 */
 	public function test_construct() {
-		$this->assertEquals( 5, has_action( 'gform_loaded', array( $this->instance, 'register' ) ) );
+		$this->assertInternalType( 'string', $this->instance->_version );
+		$this->assertInternalType( 'string', $this->instance->_min_gravityforms_version );
+		$this->assertInternalType( 'string', $this->instance->_slug );
+		$this->assertInternalType( 'string', $this->instance->_path );
+		$this->assertInternalType( 'string', $this->instance->_full_path );
+		$this->assertInternalType( 'string', $this->instance->_title );
+		$this->assertInternalType( 'string', $this->instance->_short_title );
+		$this->assertEquals( true, $this->instance->do_enqueue_plugin_styling_by_default );
 	}
 
 }
