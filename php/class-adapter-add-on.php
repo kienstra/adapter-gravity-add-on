@@ -64,7 +64,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 *
 	 * @var string
 	 */
-	public $_short_title = 'Adapter Add On';
+	public $_short_title;
 
 	/**
 	 * Whether to enqueue this plugin's styling.
@@ -154,22 +154,34 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return array $styles The stylesheets to enqueue..
 	 */
 	public function styles() {
+		$styles = array(
+			array(
+				'handle'  => $this->_slug . '-gravity-style',
+				'src'     => plugins_url( $this->_slug . '/css/aga-gravity.css' ),
+				'version' => $this->_version,
+				'enqueue' => array(
+					array( $this, 'do_enqueue' ),
+				),
+			),
+		);
+
+		return array_merge( parent::styles(), $styles );
+	}
+
+	/**
+	 * Whether to enqueue this addon's styling.
+	 *
+	 * @return boolean $do_enqueue Whether to enqueue this addon's styling.
+	 */
+	public function do_enqueue() {
+
 		/**
 		 * Filter whether to enqueue this plugin's styling.
 		 *
 		 * @param boolean $do_enqueue Whether to enqueue styling.
 		 */
 		$do_enqueue = apply_filters( 'aga_do_enqueue_css', $this->do_enqueue_plugin_styling_by_default );
-
-		$styles = array(
-			array(
-				'handle'  => $this->_slug . '-gravity-style',
-				'src'     => plugins_url( $this->_slug . '/css/aga-gravity.css' ),
-				'version' => $this->_version,
-				'enqueue' => $do_enqueue,
-			),
-		);
-		return array_merge( parent::styles(), $styles );
+		return ( $do_enqueue && ( ! is_admin() ) );
 	}
 
 }
