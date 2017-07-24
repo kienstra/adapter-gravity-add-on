@@ -13,6 +13,13 @@ namespace AdapterGravityAddOn;
 class Gravity_Setting {
 
 	/**
+	 * Plugin version.
+	 *
+	 * @var string
+	 */
+	public $bottom_of_post = 'aga_bottom_of_post';
+
+	/**
 	 * Add the filters for the class.
 	 */
 	public function __construct() {
@@ -31,7 +38,7 @@ class Gravity_Setting {
 	public function add_bottom_of_post_setting( $settings, $form ) {
 		$bottom_of_post_setting = new Layout_Setting( $settings, $form );
 		$bottom_of_post_setting->set_values( array(
-			'setting_name'        => 'aga_bottom_of_post',
+			'setting_name'        => $this->bottom_of_post,
 			'setting_description' => __( 'Display at the bottom of every single-post page' , 'adapter-gravity-add-on' ),
 		) );
 		return $bottom_of_post_setting->get_settings();
@@ -60,7 +67,7 @@ class Gravity_Setting {
 	 * @return array $form With additional settings.
 	 */
 	public function save_settings( $form ) {
-		$form['aga_bottom_of_post'] = rgpost( 'aga_bottom_of_post' );
+		$form[ $this->bottom_of_post ] = rgpost( $this->bottom_of_post );
 		$form['aga_horizontal_display'] = rgpost( 'aga_horizontal_display' );
 		return $form;
 	}

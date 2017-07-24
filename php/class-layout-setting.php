@@ -76,7 +76,7 @@ class Layout_Setting {
 						<td>
 							<input type="checkbox" value="1" ' . checked( $this->is_checked(), true, false ) . ' name="' . esc_attr( $this->setting_name ) . '">
 						</td>
-				  </tr>';
+					</tr>';
 
 		$this->settings['Form Layout'][ $this->setting_name ] = $markup;
 	}
