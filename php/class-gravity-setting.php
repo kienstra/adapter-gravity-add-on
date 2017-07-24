@@ -37,10 +37,10 @@ class Gravity_Setting {
 	 */
 	public function add_bottom_of_post_setting( $settings, $form ) {
 		$bottom_of_post_setting = new Layout_Setting( $settings, $form );
-		$bottom_of_post_setting->set_values( array(
-			'setting_name'        => $this->bottom_of_post,
-			'setting_description' => __( 'Display at the bottom of every single-post page' , 'adapter-gravity-add-on' ),
-		) );
+		$bottom_of_post_setting->set_values(
+			$this->bottom_of_post,
+			__( 'Display at the bottom of every single-post page', 'adapter-gravity-add-on' )
+		);
 		return $bottom_of_post_setting->get_settings();
 	}
 
@@ -53,10 +53,10 @@ class Gravity_Setting {
 	 */
 	public function add_horizontal_setting( $settings, $form ) {
 		$horizontal_form_setting = new Layout_Setting( $settings, $form );
-		$horizontal_form_setting->set_values( array(
-			'setting_name'        => 'aga_horizontal_display',
-			'setting_description' => __( 'Display form horizontally' , 'adapter-gravity-add-on' ),
-		) );
+		$horizontal_form_setting->set_values(
+			'aga_horizontal_display',
+			__( 'Display form horizontally', 'adapter-gravity-add-on' )
+		);
 		return $horizontal_form_setting->get_settings();
 	}
 

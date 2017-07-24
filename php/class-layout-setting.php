@@ -54,12 +54,13 @@ class Layout_Setting {
 	/**
 	 * Store the name and description.
 	 *
-	 * @param array $setting_variables Gravity forms settings for forms.
+	 * @param string $name Gravity form name.
+	 * @param string $description Gravity form description.
 	 * @return void
 	 */
-	public function set_values( $setting_variables ) {
-		$this->setting_name = isset( $setting_variables['setting_name'] ) ? $setting_variables['setting_name'] : '';
-		$this->setting_description = isset( $setting_variables['setting_description'] ) ? $setting_variables['setting_description'] : '';
+	public function set_values( $name, $description ) {
+		$this->setting_name = $name;
+		$this->setting_description = $description;
 		$this->add_setting();
 	}
 
@@ -78,7 +79,9 @@ class Layout_Setting {
 						</td>
 					</tr>';
 
-		$this->settings['Form Layout'][ $this->setting_name ] = $markup;
+		if ( isset( $this->settings['Form Layout'][ $this->setting_name ] ) ) {
+			$this->settings['Form Layout'][ $this->setting_name ] = $markup;
+		}
 	}
 
 	/**

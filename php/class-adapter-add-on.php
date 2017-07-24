@@ -135,7 +135,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return void
 	 */
 	public function instantiate_classes() {
-		$this->components['gravity_setting'] = new Gravity_Setting( $this );
+		$this->components['gravity_setting'] = new Gravity_Setting();
 		$this->components['email_form'] = new Email_Form( $this );
 	}
 
