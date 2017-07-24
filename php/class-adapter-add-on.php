@@ -53,11 +53,11 @@ class Adapter_Add_On extends \GFAddOn {
 	public $_full_path = __FILE__;
 
 	/**
-	 * Plugin version.
+	 * Plugin title.
 	 *
 	 * @var string
 	 */
-	public $_title = 'Adapter Gravity Add On';
+	public $_title;
 
 	/**
 	 * Short title.
@@ -81,7 +81,7 @@ class Adapter_Add_On extends \GFAddOn {
 	public $components = array();
 
 	/**
-	 * Get the instance of this add-on.
+	 * Statically get the instance of this add-on.
 	 *
 	 * @return object $instance Plugin instance.
 	 */
@@ -96,7 +96,20 @@ class Adapter_Add_On extends \GFAddOn {
 	}
 
 	/**
+	 * Assign properties during the class constructor.
+	 *
+	 * @return void
+	 */
+	public function pre_init() {
+		parent::pre_init();
+		$this->_title = __( 'Adapter Gravity Add On', 'adapter-gravity-add-on' );
+		$this->_short_title = __( 'Adapter Add On', 'adapter-gravity-add-on' );
+	}
+
+	/**
 	 * Call the parent init method, and add the plugin actions.
+	 *
+	 * @return void
 	 */
 	public function init() {
 		parent::init();
