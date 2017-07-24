@@ -21,7 +21,7 @@ class Plugin {
 		static $instance;
 
 		if ( ! $instance instanceof Plugin ) {
-			$instance = new Plugin;
+			$instance = new Plugin();
 		}
 
 		return $instance;
@@ -30,7 +30,7 @@ class Plugin {
 	/**
 	 * Add the filters for the class.
 	 */
-	public function __construct() {
+	private function __construct() {
 		add_action( 'gform_loaded', array( $this, 'register' ), 5 );
 	}
 
