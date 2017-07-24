@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller for Adapter Gravity Add On
+ * Email form, to optionally place at the end of a post.
  *
  * @package AdapterGravityAddOn
  */
@@ -8,9 +8,16 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Controller
+ * Class Email_Form
  */
-class Controller {
+class Email_Form {
+
+	/**
+	 * Instance of this plugin.
+	 *
+	 * @var object
+	 */
+	public $plugin;
 
 	/**
 	 * Default class of the input tags.
@@ -20,9 +27,19 @@ class Controller {
 	public $default_class_of_input = 'form-control';
 
 	/**
-	 * Construct the class.
+	 * Default classes of the submit button.
+	 *
+	 * @var string
 	 */
-	public function __construct() {
+	public $default_submit_button_classes = 'btn btn-primary btn-med';
+
+	/**
+	 * Construct the class.
+	 *
+	 * @param object $plugin Instance of Plugin.
+	 */
+	public function __construct( $plugin ) {
+		$this->plugin = $plugin;
 		add_action( 'gform_pre_form_settings_save', array( $this, 'handle_horizontal_display' ) );
 		add_filter( 'the_content', array( $this, 'conditionally_append_form' ), 100 );
 		add_filter( 'gform_field_content', array( $this, 'set_class_of_input_tags' ), 12, 5 );
@@ -33,7 +50,7 @@ class Controller {
 	 * Iterate through Gravity Forms, and conditionally append one to the end of posts.
 	 *
 	 * @param array $form The form that is shown.
-	 * @return array $form With additional settings.
+	 * @return string $form Markup, with additional settings.
 	 */
 	public function handle_horizontal_display( $form ) {
 		$forms = \RGFormsModel::get_forms( null, 'title' );
@@ -45,15 +62,15 @@ class Controller {
 	/**
 	 * Conditionally append a form to the post content.
 	 *
-	 * @param string $content Post content.
-	 * @return string $content Post content, possibly filtered.
+	 * @param array $form Gravity form.
+	 * @return array $form Gravity form, possibly with altered content.
 	 */
-	public function conditionally_display_form_horizontally( $content ) {
+	public function conditionally_display_form_horizontally( $form ) {
 		$forms = \RGFormsModel::get_forms( null, 'title' );
 		foreach ( $forms as $form ) {
 			$this->maybe_display_form_horizontally( $form );
 		}
-		return $content;
+		return $form;
 	}
 
 	/**
@@ -66,7 +83,7 @@ class Controller {
 	public function conditionally_append_form( $content ) {
 		$forms = \RGFormsModel::get_forms( null, 'title' );
 		foreach ( $forms as $form ) {
-			if ( $this->do_append_form_to_post( \GFAPI::get_form( $form->id ) ) ) {
+			if ( $this->do_append_form_to_content( \GFAPI::get_form( $form->id ) ) ) {
 				return $this->append_form_to_content( $form->id, $content );
 			}
 		}
@@ -74,22 +91,21 @@ class Controller {
 	}
 
 	/**
-	 * Whether to append a form to the end of the post.
+	 * Whether to append a form to the content.
 	 *
 	 * @param array $form Gravity Form.
 	 * @return boolean $do_append Whether to append the form to the post content.
 	 */
-	public function do_append_form_to_post( $form ) {
-		$do_append = (
-			isset( $form['aga_bottom_of_post'] )
+	public function do_append_form_to_content( $form ) {
+		return (
+			isset( $form[ $this->plugin->components['gravity_setting']->bottom_of_post ] )
 			&&
-			( '1' === $form['aga_bottom_of_post'] )
+			( '1' === $form[ $this->plugin->components['gravity_setting']->bottom_of_post ] )
 			&&
 			is_single()
 			&&
 			( 'post' === get_post_type() )
 		);
-		return $do_append;
 	}
 
 	/**
@@ -118,7 +134,7 @@ class Controller {
 	 * Conditionally display the form horizontally.
 	 *
 	 * @param object $form Gravity form.
-	 * @return array $form Gravity form.
+	 * @return array|\WP_Error $form Gravity form, or \WP_Error.
 	 */
 	public function maybe_display_form_horizontally( $form ) {
 		$full_form = \GFAPI::get_form( $form->id );
@@ -133,7 +149,7 @@ class Controller {
 	 * Add a class to display the form horizontally.
 	 *
 	 * @param array $form Gravity form.
-	 * @return array $form With altered property.
+	 * @return array $form Possibly with altered properties.
 	 */
 	public function add_horizontal_display( $form ) {
 		if ( ! isset( $form['cssClass'] ) ) {
@@ -147,28 +163,9 @@ class Controller {
 	}
 
 	/**
-	 * Find if the form has no classes.
-	 *
-	 * @param object $form Gravity form.
-	 * @return boolean $does_not_have_classes If the form has no classes.
-	 */
-	public function form_does_not_have_any_class( $form ) {
-		return ( ( isset( $form['cssClass'] ) && ( '' === $form['cssClass'] ) ) );
-	}
-
-	/**
-	 * Find if the form has classes, but no inline class.
-	 *
-	 * @param object $form Gravity form.
-	 * @return boolean $has_classes_but_no_inline If the form has classes, but not 'gform_inline'.
-	 */
-	public function form_has_classes_but_not_an_inline_class( $form ) {
-		return ( ( isset( $form['cssClass'] ) ) && ( false === strpos( $form['cssClass'] , 'gform_inline' ) ) );
-	}
-
-	/**
 	 * Filter callback to add a class to the input element.
 	 *
+	 * @action gform_field_content
 	 * @param string  $content Field content.
 	 * @param object  $field For the input tag.
 	 * @param string  $value Initial value of the field.
@@ -203,7 +200,7 @@ class Controller {
 	}
 
 	/**
-	 * Add classes to the submit button.
+	 * Get the submit button with added classes.
 	 *
 	 * @param string $button_input Button to filter.
 	 * @param object $form Current Gravity form.
@@ -217,9 +214,9 @@ class Controller {
 		* @param string $class New class(es) of the input, space-separated.
 		* @param object $form The current form.
 		*/
-		$new_classes = apply_filters( 'submit_button_classes' , 'btn btn-primary btn-med' , $form );
+		$new_classes = apply_filters( 'aga_submit_button_classes', $this->default_submit_button_classes, $form );
 
-		$class_attribute = "class='";
+		$class_attribute = 'class="';
 		if ( false !== strpos( $button_input, $class_attribute ) ) {
 			$class_attribute_with_new_classes = $class_attribute . esc_attr( $new_classes ) . '\s';
 			return str_replace( $class_attribute, $class_attribute_with_new_classes, $button_input );
