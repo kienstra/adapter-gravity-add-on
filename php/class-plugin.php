@@ -39,7 +39,7 @@ class Plugin {
 	 *
 	 * @return void
 	 */
-	function register() {
+	public function register() {
 		if ( method_exists( 'GFForms', 'include_addon_framework' ) ) {
 			\GFForms::include_addon_framework();
 			require_once dirname( __FILE__ ) . '/class-adapter-add-on.php';
