@@ -15,13 +15,34 @@ namespace AdapterGravityAddOn;
 class Test_Adapter_Gravity_Add_On extends \WP_UnitTestCase {
 
 	/**
+	 * Instance of this plugin.
+	 *
+	 * @var object
+	 */
+	public $instance;
+
+	/**
 	 * Setup.
 	 *
 	 * @inheritdoc
 	 */
 	public function setUp() {
 		parent::setUp();
-		include_once( dirname( __FILE__ ) . '/../adapter-gravity-add-on.php' );
+
+		$dependency_file = dirname( __FILE__ ) . '/../../gravityforms/gravityforms.php';
+		$dependency_name = __( 'Gravity Forms', 'adapter-gravity-add-on' );
+
+		if ( ! file_exists( $dependency_file ) ) {
+			$this->markTestSkipped( sprintf(
+				__( 'Cannot test the Adapter Gravity Add On because the %s dependency is not present.', 'adapter-gravity-add-on' ),
+				$dependency_name
+			) );
+			return;
+		} else {
+			include_once( $dependency_file );
+		}
+
+		$this->instance = Plugin::get_instance();
 	}
 
 	/**

@@ -12,7 +12,7 @@ namespace AdapterGravityAddOn;
  *
  * @package AdapterGravityAddOn
  */
-class Test_Plugin extends \WP_UnitTestCase {
+class Test_Plugin extends Test_Adapter_Gravity_Add_On {
 
 	/**
 	 * Instance of Plugin.
