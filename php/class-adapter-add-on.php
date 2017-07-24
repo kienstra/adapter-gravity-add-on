@@ -9,6 +9,11 @@ namespace AdapterGravityAddOn;
 
 /**
  * Class Adapter_Add_On
+ *
+ * The properties in this override those defined in \GFAddOn.
+ * So their names are already defined.
+ *
+ * @see https://www.gravityhelp.com/documentation/article/gfaddon
  */
 class Adapter_Add_On extends \GFAddOn {
 
@@ -17,49 +22,49 @@ class Adapter_Add_On extends \GFAddOn {
 	 *
 	 * @var string
 	 */
-	protected $_version = '1.0.2';
+	public $_version = '1.0.2';
 
 	/**
 	 * Minimum version of Gravity Forms allowed.
 	 *
 	 * @var string
 	 */
-	protected $_min_gravityforms_version = '1.9';
+	public $_min_gravityforms_version = '1.9';
 
 	/**
 	 * Plugin slug.
 	 *
 	 * @var string
 	 */
-	protected $_slug = 'adapter-gravity-add-on';
+	public $_slug = 'adapter-gravity-add-on';
 
 	/**
 	 * Path to the main add-on file.
 	 *
 	 * @var string
 	 */
-	protected $_path = 'adapter-gravity-add-on/php/class-adapter_add-on.php';
+	public $_path = 'adapter-gravity-add-on/php/class-adapter_add-on.php';
 
 	/**
 	 * Full path to add-on file.
 	 *
 	 * @var string
 	 */
-	protected $_full_path = __FILE__;
+	public $_full_path = __FILE__;
 
 	/**
 	 * Plugin version.
 	 *
 	 * @var string
 	 */
-	protected $_title = 'Adapter Gravity Add On';
+	public $_title = 'Adapter Gravity Add On';
 
 	/**
 	 * Short title.
 	 *
 	 * @var string
 	 */
-	protected $_short_title = 'Adapter Add On';
+	public $_short_title = 'Adapter Add On';
 
 	/**
 	 * Whether to enqueue this plugin's styling.
@@ -76,7 +81,7 @@ class Adapter_Add_On extends \GFAddOn {
 	public $components = array();
 
 	/**
-	 * Get the instance of this plugin
+	 * Get the instance of this add-on.
 	 *
 	 * @return object $instance Plugin instance.
 	 */
