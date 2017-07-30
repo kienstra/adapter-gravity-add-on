@@ -85,4 +85,28 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Email_Form' ) );
 	}
 
+	/**
+	 * Test instantiate_classes().
+	 *
+	 * @see Adapter_Add_Onn::instantiate_classes().
+	 */
+	public function test_instantiate_classes() {
+		$this->assertEquals( 'AdapterGravityAddOn\Gravity_Setting', get_class( $this->instance->components['gravity_setting'] ) );
+		$this->assertEquals( 'AdapterGravityAddOn\Email_Form', get_class( $this->instance->components['email_form'] ) );
+	}
+
+	/**
+	 * Test styles().
+	 *
+	 * @see Adapter_Add_Onn::styles().
+	 */
+	public function test_styles() {
+		$style = $this->instance->styles()[2];
+		$this->assertTrue( in_array( $this->instance->_slug . '-gravity-style', $style, true ) );
+		$this->assertTrue( in_array( plugins_url( $this->instance->_slug . '/css/aga-gravity.css' ), $style, true ) );
+		$this->assertTrue( in_array( $this->instance->_version, $style, true ) );
+		$this->assertEquals( 'AdapterGravityAddOn\Adapter_Add_On', get_class( $style['enqueue'][0][0] ) );
+		$this->assertEquals( 'do_enqueue', $style['enqueue'][0][1] );
+	}
+
 }
