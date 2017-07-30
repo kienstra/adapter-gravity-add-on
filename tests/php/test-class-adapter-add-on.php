@@ -109,4 +109,15 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 		$this->assertEquals( 'do_enqueue', $style['enqueue'][0][1] );
 	}
 
+	/**
+	 * Test do_enqueue().
+	 *
+	 * @see Adapter_Add_Onn::do_enqueue().
+	 */
+	public function test_do_enqueue() {
+		$this->assertTrue( $this->instance->do_enqueue() );
+		add_filter( 'aga_do_enqueue_css', '__return_false' );
+		$this->assertFalse( $this->instance->do_enqueue() );
+	}
+
 }
