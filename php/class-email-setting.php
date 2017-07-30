@@ -24,7 +24,7 @@ class Email_Setting {
 	 *
 	 */
 	public function __construct() {
-		add_filter( 'gform_form_settings', array( $this, 'add_bottom_of_post_setting' ), 10, 2 );
+		add_filter( 'gform_form_settings', array( $this, 'get_bottom_of_post_setting' ), 10, 2 );
 		add_filter( 'gform_form_settings', array( $this, 'add_horizontal_setting' ), 10, 2 );
 		add_filter( 'gform_pre_form_settings_save', array( $this, 'save_settings' ) );
 	}
@@ -36,7 +36,7 @@ class Email_Setting {
 	 * @param object $form The form object that is shown.
 	 * @return array $settings Now with options to place the label inline and at the bottom.
 	 */
-	public function add_bottom_of_post_setting( $settings, $form ) {
+	public function get_bottom_of_post_setting( $settings, $form ) {
 		$bottom_of_post_setting = new Layout_Setting( $settings, $form );
 		$bottom_of_post_setting->set_values(
 			$this->bottom_of_post,
