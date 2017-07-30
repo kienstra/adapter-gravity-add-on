@@ -43,6 +43,14 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	public function test_get_instance() {
 		$this->assertEquals( 'AdapterGravityAddOn\Adapter_Add_On', get_class( Adapter_Add_On::get_instance() ) );
 		$this->assertEquals( $this->instance, Adapter_Add_On::get_instance() );
+		$this->assertInternalType( 'string', $this->instance->_version );
+		$this->assertInternalType( 'string', $this->instance->_min_gravityforms_version );
+		$this->assertInternalType( 'string', $this->instance->_slug );
+		$this->assertInternalType( 'string', $this->instance->_path );
+		$this->assertInternalType( 'string', $this->instance->_full_path );
+		$this->assertInternalType( 'string', $this->instance->_title );
+		$this->assertInternalType( 'string', $this->instance->_short_title );
+		$this->assertEquals( true, $this->instance->do_enqueue_plugin_styling_by_default );
 	}
 
 	/**
@@ -56,19 +64,13 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	}
 
 	/**
-	 * Test construct().
+	 * Test plugin_textdomain().
 	 *
-	 * @see Adapter_Add_Onn::__construct().
+	 * @see Adapter_Add_Onn::plugin_textdomain().
 	 */
-	public function test_construct() {
-		$this->assertInternalType( 'string', $this->instance->_version );
-		$this->assertInternalType( 'string', $this->instance->_min_gravityforms_version );
-		$this->assertInternalType( 'string', $this->instance->_slug );
-		$this->assertInternalType( 'string', $this->instance->_path );
-		$this->assertInternalType( 'string', $this->instance->_full_path );
-		$this->assertInternalType( 'string', $this->instance->_title );
-		$this->assertInternalType( 'string', $this->instance->_short_title );
-		$this->assertEquals( true, $this->instance->do_enqueue_plugin_styling_by_default );
+	public function test_plugin_textdomain() {
+		$this->instance->init();
+		$this->assertEquals( 10, has_action( 'init', array( $this->instance, 'plugin_textdomain' ) ) );
 	}
 
 	/**
@@ -81,16 +83,6 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Layout_Setting' ) );
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Gravity_Setting' ) );
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Email_Form' ) );
-	}
-
-	/**
-	 * Test plugin_textdomain().
-	 *
-	 * @see Adapter_Add_Onn::plugin_textdomain().
-	 */
-	public function test_plugin_textdomain() {
-		$this->instance->init();
-		$this->assertEquals( 10, has_action( 'init', array( $this->instance, 'plugin_textdomain' ) ) );
 	}
 
 }
