@@ -18,13 +18,6 @@ include_once( dirname( __FILE__ ) . '/../test-adapter-gravity-add-on.php' );
 class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 
 	/**
-	 * Instance of Plugin.
-	 *
-	 * @var object.
-	 */
-	public $instance;
-
-	/**
 	 * Setup.
 	 *
 	 * @inheritdoc
