@@ -183,7 +183,6 @@ class Email_Form {
 	 * @return string $content Filtered, and now includes a class in the <input> elements.
 	 */
 	public function set_class_of_input_tags( $content, $field, $value, $lead_id, $form_id ) {
-
 		/**
 		* New class(es) for Gravity Form inputs.
 		*

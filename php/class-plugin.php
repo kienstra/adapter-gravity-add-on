@@ -28,7 +28,7 @@ class Plugin {
 	}
 
 	/**
-	 * Add the filters for the class.
+	 * Load this add-on with the Gravity Forms add-on hook.
 	 */
 	private function __construct() {
 		add_action( 'gform_loaded', array( $this, 'register' ), 5 );

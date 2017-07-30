@@ -11,7 +11,7 @@ namespace AdapterGravityAddOn;
  * Class Adapter_Add_On
  *
  * The properties in this override those defined in \GFAddOn.
- * So their names are already defined.
+ * So their names are predetermined.
  *
  * @see https://www.gravityhelp.com/documentation/article/gfaddon
  */
@@ -98,6 +98,9 @@ class Adapter_Add_On extends \GFAddOn {
 	/**
 	 * Assign properties during the class constructor.
 	 *
+	 * It's not possible to assign these in the same lines as the property declarations.
+	 * These are expressions.
+	 *
 	 * @return void
 	 */
 	public function pre_init() {
@@ -113,9 +116,19 @@ class Adapter_Add_On extends \GFAddOn {
 	 */
 	public function init() {
 		parent::init();
-		$this->plugin_localization();
 		$this->load_plugin_files();
 		$this->instantiate_classes();
+		add_action( 'init', array( $this, 'plugin_textdomain' ) );
+	}
+
+	/**
+	 * Load the textdomain for the plugin, enabling translation.
+	 *
+	 * @action init
+	 * @return void
+	 */
+	public function plugin_textdomain() {
+		load_plugin_textdomain( $this->_slug, false, $this->_slug . '/languages' );
 	}
 
 	/**
@@ -137,15 +150,6 @@ class Adapter_Add_On extends \GFAddOn {
 	public function instantiate_classes() {
 		$this->components['gravity_setting'] = new Gravity_Setting();
 		$this->components['email_form'] = new Email_Form( $this );
-	}
-
-	/**
-	 * Load the textdomain for the plugin, enabling translation.
-	 *
-	 * @return void
-	 */
-	public function plugin_localization() {
-		load_plugin_textdomain( $this->_slug, false, $this->_slug . '/languages' );
 	}
 
 	/**
