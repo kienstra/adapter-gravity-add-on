@@ -90,7 +90,7 @@ class Email_Form {
 	public function conditionally_append_form( $content ) {
 		$forms = \RGFormsModel::get_forms( null, 'title' );
 		foreach ( $forms as $form ) {
-			if ( $this->do_append_form_to_content( \GFAPI::get_form( $form->id ) ) ) {
+			if ( isset( $form->id ) && $this->do_append_form_to_content( \GFAPI::get_form( $form->id ) ) ) {
 				return $this->append_form_to_content( $form->id, $content );
 			}
 		}
@@ -105,9 +105,9 @@ class Email_Form {
 	 */
 	public function do_append_form_to_content( $form ) {
 		return (
-			isset( $form[ $this->plugin->components['gravity_setting']->bottom_of_post ] )
+			isset( $form[ $this->plugin->components['email_setting']->bottom_of_post ] )
 			&&
-			( '1' === $form[ $this->plugin->components['gravity_setting']->bottom_of_post ] )
+			( '1' === $form[ $this->plugin->components['email_setting']->bottom_of_post ] )
 			&&
 			is_single()
 			&&

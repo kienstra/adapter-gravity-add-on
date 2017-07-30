@@ -81,7 +81,7 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	public function test_load_plugin_files() {
 		$this->instance->load_plugin_files();
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Layout_Setting' ) );
-		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Gravity_Setting' ) );
+		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Email_Setting' ) );
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Email_Form' ) );
 	}
 
@@ -91,7 +91,7 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	 * @see Adapter_Add_Onn::instantiate_classes().
 	 */
 	public function test_instantiate_classes() {
-		$this->assertEquals( 'AdapterGravityAddOn\Gravity_Setting', get_class( $this->instance->components['gravity_setting'] ) );
+		$this->assertEquals( 'AdapterGravityAddOn\Email_Setting', get_class( $this->instance->components['email_setting'] ) );
 		$this->assertEquals( 'AdapterGravityAddOn\Email_Form', get_class( $this->instance->components['email_form'] ) );
 	}
 

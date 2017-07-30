@@ -1,6 +1,6 @@
 <?php
 /**
- * Extra settings for Adapter Gravity Add On
+ * Email settings for Adapter Gravity Add On
  *
  * @package AdapterGravityAddOn
  */
@@ -8,12 +8,12 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Gravity_Setting
+ * Class Email_Setting
  */
-class Gravity_Setting {
+class Email_Setting {
 
 	/**
-	 * Plugin version.
+	 * Bottom of post setting name.
 	 *
 	 * @var string
 	 */

@@ -138,7 +138,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 */
 	public function load_plugin_files() {
 		require_once __DIR__ . '/class-layout-setting.php';
-		require_once __DIR__ . '/class-gravity-setting.php';
+		require_once __DIR__ . '/class-email-setting.php';
 		require_once __DIR__ . '/class-email-form.php';
 	}
 
@@ -148,7 +148,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return void
 	 */
 	public function instantiate_classes() {
-		$this->components['gravity_setting'] = new Gravity_Setting();
+		$this->components['email_setting'] = new Email_Setting();
 		$this->components['email_form'] = new Email_Form( $this );
 	}
 
