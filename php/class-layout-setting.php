@@ -79,7 +79,7 @@ class Layout_Setting {
 						</td>
 					</tr>';
 
-		if ( isset( $this->settings['Form Layout'][ $this->setting_name ] ) ) {
+		if ( isset( $this->settings['Form Layout'] ) && is_array( $this->settings['Form Layout'] ) ) {
 			$this->settings['Form Layout'][ $this->setting_name ] = $markup;
 		}
 	}
