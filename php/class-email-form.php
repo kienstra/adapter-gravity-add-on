@@ -47,7 +47,7 @@ class Email_Form {
 	 */
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
-		add_action( 'gform_pre_form_settings_save', array( $this, 'handle_horizontal_display' ) );
+		add_action( 'gform_pre_form_settings_save', array( $this, 'horizontal_display' ) );
 		add_filter( 'the_content', array( $this, 'conditionally_append_form' ), 100 );
 		add_filter( 'gform_field_content', array( $this, 'set_class_of_input_tags' ), 12, 5 );
 		add_filter( 'gform_submit_button', array( $this, 'submit_button' ), 10, 2 );
@@ -59,7 +59,7 @@ class Email_Form {
 	 * @param array $form The form that is shown.
 	 * @return string $form Markup, with additional settings.
 	 */
-	public function handle_horizontal_display( $form ) {
+	public function horizontal_display( $form ) {
 		$forms = \RGFormsModel::get_forms( null, 'title' );
 		foreach ( $forms as $form ) {
 			return $this->conditionally_display_form_horizontally( $form );
