@@ -13,11 +13,11 @@ namespace AdapterGravityAddOn;
 class Email_Setting {
 
 	/**
-	 * Instance of the plugin.
+	 * Instance of the add-on.
 	 *
 	 * @var object
 	 */
-	public $plugin;
+	public $add_on;
 
 	/**
 	 * Bottom of post setting name.
@@ -34,12 +34,12 @@ class Email_Setting {
 	public $horizontal_display = 'aga_horizontal_display';
 
 	/**
-	 * Instantiate the class.
+	 * Instantiate the add-on.
 	 *
-	 * @param object $plugin Instance of the plugin.
+	 * @param object $add_on Instance of the plugin.
 	 */
-	public function __construct( $plugin ) {
-		$this->plugin = $plugin;
+	public function __construct( $add_on ) {
+		$this->add_on = $add_on;
 	}
 
 	/**

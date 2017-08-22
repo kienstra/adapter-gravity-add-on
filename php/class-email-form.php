@@ -17,7 +17,7 @@ class Email_Form {
 	 *
 	 * @var object
 	 */
-	public $plugin;
+	public $add_on;
 
 	/**
 	 * Default class of the input tags.
@@ -43,10 +43,10 @@ class Email_Form {
 	/**
 	 * Construct the class.
 	 *
-	 * @param object $plugin Instance of Plugin.
+	 * @param object $add_on Instance of Plugin.
 	 */
-	public function __construct( $plugin ) {
-		$this->plugin = $plugin;
+	public function __construct( $add_on ) {
+		$this->add_on = $add_on;
 	}
 
 	/**
@@ -118,9 +118,9 @@ class Email_Form {
 	 */
 	public function do_append_form_to_content( $form ) {
 		return (
-			isset( $form[ $this->plugin->components['email_setting']->bottom_of_post ] )
+			isset( $form[ $this->add_on->components['email_setting']->bottom_of_post ] )
 			&&
-			( '1' === $form[ $this->plugin->components['email_setting']->bottom_of_post ] )
+			( '1' === $form[ $this->add_on->components['email_setting']->bottom_of_post ] )
 			&&
 			is_single()
 			&&

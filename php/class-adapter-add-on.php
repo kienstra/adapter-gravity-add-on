@@ -74,7 +74,7 @@ class Adapter_Add_On extends \GFAddOn {
 	public $do_enqueue_plugin_styling_by_default = true;
 
 	/**
-	 * Plugin components.
+	 * Add-on components.
 	 *
 	 * @var array
 	 */
