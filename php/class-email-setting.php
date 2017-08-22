@@ -27,6 +27,13 @@ class Email_Setting {
 	public $bottom_of_post = 'aga_bottom_of_post';
 
 	/**
+	 * Horizontal display setting name.
+	 *
+	 * @var string
+	 */
+	public $horizontal_display = 'aga_horizontal_display';
+
+	/**
 	 * Instantiate the class.
 	 *
 	 * @param object $plugin Instance of the plugin.
@@ -70,9 +77,9 @@ class Email_Setting {
 	 * @return array  $settings Now with options to place the label inline and at the bottom.
 	 */
 	public function get_horizontal_setting( $settings, $form ) {
-		 $horizontal_form_setting = new Layout_Setting( $settings, $form );
+		$horizontal_form_setting = new Layout_Setting( $settings, $form );
 		$horizontal_form_setting->set_values(
-			'aga_horizontal_display',
+			$this->horizontal_display,
 			__( 'Display form horizontally', 'adapter-gravity-add-on' )
 		);
 		return $horizontal_form_setting->get_settings();
@@ -86,7 +93,7 @@ class Email_Setting {
 	 */
 	public function save_settings( $form ) {
 		$form[ $this->bottom_of_post ] = rgpost( $this->bottom_of_post );
-		$form['aga_horizontal_display'] = rgpost( 'aga_horizontal_display' );
+		$form[ $this->horizontal_display ] = rgpost( $this->horizontal_display );
 		return $form;
 	}
 
