@@ -67,6 +67,25 @@ class Email_Form {
 	}
 
 	/**
+	 * Add a class to display the form horizontally.
+	 *
+	 * @param array $form Gravity form.
+	 * @return array $form Possibly with altered properties.
+	 */
+	public function add_horizontal_display( $form ) {
+		$class = 'gform-inline';
+		$setting = 'cssClass';
+		if ( ! isset( $form[ $setting ] ) ) {
+			return $form;
+		} elseif ( '' === $form[ $setting ] ) {
+			$form[ $setting ] = $class;
+		} elseif ( false === strpos( $form[ $setting ], $class ) ) {
+			$form[ $setting ] = $form[ $setting ] . ' ' . $class;
+		}
+		return $form;
+	}
+
+	/**
 	 * Conditionally append a form to the post content.
 	 *
 	 * @todo: clarify how the the $form is different from $form.
@@ -138,25 +157,6 @@ class Email_Form {
 			return \GFAPI::update_form( $this->add_horizontal_display( $full_form ), $full_form->id );
 		}
 		return $full_form;
-	}
-
-	/**
-	 * Add a class to display the form horizontally.
-	 *
-	 * @param array $form Gravity form.
-	 * @return array $form Possibly with altered properties.
-	 */
-	public function add_horizontal_display( $form ) {
-		$class = 'gform-inline';
-		$setting = 'cssClass';
-		if ( ! isset( $form[ $setting ] ) ) {
-			return $form;
-		} elseif ( '' === $form[ $setting ] ) {
-			$form[ $setting ] = $class;
-		} elseif ( false === strpos( $form[ $setting ], $class ) ) {
-			$form[ $setting ] = $form[ $setting ] . ' ' . $class;
-		}
-		return $form;
 	}
 
 	/**
