@@ -99,7 +99,7 @@ class Layout_Setting {
 	 * @return boolean $is_checked Whether the checked attribute should appear as 'checked'.
 	 */
 	public function is_checked() {
-		return rgar( $this->form, $this->setting_name );
+		return ( isset( $this->form[ $this->setting_name ] ) && ( '1' === $this->form[ $this->setting_name ] ) );
 	}
 
 }
