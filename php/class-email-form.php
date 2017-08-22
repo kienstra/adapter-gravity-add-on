@@ -147,7 +147,7 @@ class Email_Form {
 	 * @return array $form Possibly with altered properties.
 	 */
 	public function add_horizontal_display( $form ) {
-		$class = 'gform_inline';
+		$class = 'gform-inline';
 		$setting = 'cssClass';
 		if ( ! isset( $form[ $setting ] ) ) {
 			return $form;

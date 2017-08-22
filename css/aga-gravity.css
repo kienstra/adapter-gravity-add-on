@@ -6,29 +6,29 @@
 }
 
 /* Inline forms */
-.gform_inline .gform_body .top_label .gfield_label {
+.gform-inline .gform_body .top_label .gfield_label {
 	margin-left: .5em;
 }
 
-.gform_inline .gform_button {
+.gform-inline .gform_button {
 	margin-left: .5em;
 }
 
-.gform_wrapper .gform_inline * {
+.gform_wrapper .gform-inline * {
 	display: inline;
 }
 
-.gform_wrapper .gform_inline .gform_body .ginput_container input {
+.gform_wrapper .gform-inline .gform_body .ginput_container input {
 	max-width: 200px;
 	width: auto;
 }
 
-.gform_wrapper .gform_inline .gform_body .gfield {
+.gform_wrapper .gform-inline .gform_body .gfield {
 	display: inline-flex;
 	padding-right: .5em;
 }
 
-.gform_wrapper .gform_inline .gfield_required {
+.gform_wrapper .gform-inline .gfield_required {
 	display: none;
 }
 
@@ -38,8 +38,8 @@
 	padding-left: 0;
 }
 
-.type-page .gform_wrapper .gform_inline ,
-.widget .gform_wrapper .gform_inline {
+.type-page .gform_wrapper .gform-inline ,
+.widget .gform_wrapper .gform-inline {
 	padding-left: 0;
 }
 
