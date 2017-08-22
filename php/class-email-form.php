@@ -47,6 +47,14 @@ class Email_Form {
 	 */
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
+	}
+
+	/**
+	 * Add the filters for the class.
+	 *
+	 * @return void
+	 */
+	public function init() {
 		add_filter( 'gform_pre_render', array( $this, 'conditionally_display_form_horizontally' ) );
 		add_filter( 'the_content', array( $this, 'conditionally_append_form' ), 100 );
 		add_filter( 'gform_field_content', array( $this, 'set_class_of_input_tags' ), 12, 5 );

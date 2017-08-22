@@ -13,6 +13,13 @@ namespace AdapterGravityAddOn;
 class Email_Setting {
 
 	/**
+	 * Instance of the plugin.
+	 *
+	 * @var object
+	 */
+	public $plugin;
+
+	/**
 	 * Bottom of post setting name.
 	 *
 	 * @var string
@@ -20,10 +27,20 @@ class Email_Setting {
 	public $bottom_of_post = 'aga_bottom_of_post';
 
 	/**
+	 * Instantiate the class.
+	 *
+	 * @param object $plugin Instance of the plugin.
+	 */
+	public function __construct( $plugin ) {
+		$this->plugin = $plugin;
+	}
+
+	/**
 	 * Add the filters for the class.
 	 *
+	 * @return void
 	 */
-	public function __construct() {
+	public function init() {
 		add_filter( 'gform_form_settings', array( $this, 'get_bottom_of_post_setting' ), 10, 2 );
 		add_filter( 'gform_form_settings', array( $this, 'get_horizontal_setting' ), 10, 2 );
 		add_filter( 'gform_pre_form_settings_save', array( $this, 'save_settings' ) );
@@ -53,7 +70,7 @@ class Email_Setting {
 	 * @return array  $settings Now with options to place the label inline and at the bottom.
 	 */
 	public function get_horizontal_setting( $settings, $form ) {
-		$horizontal_form_setting = new Layout_Setting( $settings, $form );
+		 $horizontal_form_setting = new Layout_Setting( $settings, $form );
 		$horizontal_form_setting->set_values(
 			'aga_horizontal_display',
 			__( 'Display form horizontally', 'adapter-gravity-add-on' )
