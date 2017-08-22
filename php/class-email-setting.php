@@ -88,6 +88,9 @@ class Email_Setting {
 	/**
 	 * Get the form settings, with additional options.
 	 *
+	 * This saves the values of the new settings that this class adds.
+	 * rgpost() is a Gravity Forms helper function.
+	 *
 	 * @param array $form The form that is shown.
 	 * @return array $form With additional settings.
 	 */
