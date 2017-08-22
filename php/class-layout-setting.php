@@ -43,8 +43,8 @@ class Layout_Setting {
 	/**
 	 * Construct instance of class.
 	 *
-	 * @param array  $settings Associated with forms.
-	 * @param object $form The form object that is shown.
+	 * @param array $settings Associated with forms.
+	 * @param array $form The form that is shown.
 	 */
 	public function __construct( $settings, $form ) {
 		$this->settings = $settings;

@@ -32,8 +32,8 @@ class Email_Setting {
 	/**
 	 * Add a setting to display the form at the bottom of posts.
 	 *
-	 * @param array  $settings Associated with forms.
-	 * @param object $form The form object that is shown.
+	 * @param array $settings Associated with forms.
+	 * @param array $form The form that is shown.
 	 * @return array $settings Now with options to place the label inline and at the bottom.
 	 */
 	public function get_bottom_of_post_setting( $settings, $form ) {
@@ -48,8 +48,8 @@ class Email_Setting {
 	/**
 	 * Get the form settings, with additional options.
 	 *
-	 * @param array  $settings Associated with forms.
-	 * @param object $form The form object that is shown.
+	 * @param array $settings Associated with forms.
+	 * @param array $form The form that is shown.
 	 * @return array  $settings Now with options to place the label inline and at the bottom.
 	 */
 	public function get_horizontal_setting( $settings, $form ) {

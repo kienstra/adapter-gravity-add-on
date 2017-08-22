@@ -47,23 +47,10 @@ class Email_Form {
 	 */
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
-		add_action( 'gform_pre_form_settings_save', array( $this, 'horizontal_display' ) );
+		add_filter( 'gform_pre_form_settings_save', array( $this, 'conditionally_display_form_horizontally' ) );
 		add_filter( 'the_content', array( $this, 'conditionally_append_form' ), 100 );
 		add_filter( 'gform_field_content', array( $this, 'set_class_of_input_tags' ), 12, 5 );
 		add_filter( 'gform_submit_button', array( $this, 'submit_button' ), 10, 2 );
-	}
-
-	/**
-	 * Iterate through Gravity Forms, and conditionally append one to the end of posts.
-	 *
-	 * @param array $form The form that is shown.
-	 * @return string $form Markup, with additional settings.
-	 */
-	public function horizontal_display( $form ) {
-		$forms = \RGFormsModel::get_forms( null, 'title' );
-		foreach ( $forms as $form ) {
-			return $this->conditionally_display_form_horizontally( $form );
-		}
 	}
 
 	/**
@@ -73,9 +60,8 @@ class Email_Form {
 	 * @return array $form Gravity form, possibly with altered content.
 	 */
 	public function conditionally_display_form_horizontally( $form ) {
-		$forms = \RGFormsModel::get_forms( null, 'title' );
-		foreach ( $forms as $form ) {
-			$this->maybe_display_form_horizontally( $form );
+		if ( isset( $form['aga_horizontal_display'] ) && ( '1' === $form['aga_horizontal_display'] ) ) {
+			return $this->add_horizontal_display( $form );
 		}
 		return $form;
 	}
@@ -161,12 +147,14 @@ class Email_Form {
 	 * @return array $form Possibly with altered properties.
 	 */
 	public function add_horizontal_display( $form ) {
-		if ( ! isset( $form['cssClass'] ) ) {
+		$class = 'gform_inline';
+		$setting = 'cssClass';
+		if ( ! isset( $form[ $setting ] ) ) {
 			return $form;
-		} elseif ( '' === $form['cssClass'] ) {
-			$form['cssClass'] = 'gform_inline';
-		} elseif ( false === strpos( $form['cssClass'], 'gform_inline' ) ) {
-			$form['cssClass'] = $form['cssClass'] . ' gform_inline';
+		} elseif ( '' === $form[ $setting ] ) {
+			$form[ $setting ] = $class;
+		} elseif ( false === strpos( $form[ $setting ], $class ) ) {
+			$form[ $setting ] = $form[ $setting ] . ' ' . $class;
 		}
 		return $form;
 	}
