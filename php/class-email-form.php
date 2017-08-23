@@ -212,7 +212,7 @@ class Email_Form {
 
 		$class_attribute = 'class="';
 		if ( false !== strpos( $button_input, $class_attribute ) ) {
-			$class_attribute_with_new_classes = $class_attribute . esc_attr( $new_classes ) . '\s';
+			$class_attribute_with_new_classes = $class_attribute . esc_attr( $new_classes ) . ' ';
 			return str_replace( $class_attribute, $class_attribute_with_new_classes, $button_input );
 		} else {
 			$opening_input = '<input';

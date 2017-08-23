@@ -234,6 +234,21 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 	}
 
 	/**
+	 * Test set_class_of_input.
+	 *
+	 * @see Email_Form::set_class_of_input().
+	 */
+	public function test_submit_button() {
+		$submit = '<input type="submit" class="foo-class">';
+		$actual_button = $this->instance->submit_button( $submit, array() );
+		$this->assertContains( $this->instance->default_submit_button_classes, $actual_button );
+
+		$submit_no_class = '<input type="submit">';
+		$actual_button = $this->instance->submit_button( $submit_no_class, array() );
+		$this->assertContains( $this->instance->default_submit_button_classes, $actual_button );
+	}
+
+	/**
 	 * Create a Gravity form.
 	 *
 	 * @param string $title New Gravity form title.
