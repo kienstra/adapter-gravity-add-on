@@ -58,4 +58,48 @@ class Test_Class_Layout_Setting extends Test_Adapter_Gravity_Add_On {
 		$this->assertEquals( $this->instance->form, $form );
 	}
 
+	/**
+	 * Test set_values().
+	 *
+	 * @see Layout_Setting::set_values().
+	 */
+	public function test_set_values() {
+		$layout_key = 'Form Layout';
+		$name = 'Example Name';
+		$initial_settings = array(
+			$layout_key => array(),
+		);
+		$form = array(
+			$name => '1',
+		);
+
+		$description = 'Baz description';
+		$this->instance = new Layout_Setting( $initial_settings, $form );
+		$this->instance->set_values( $name, $description );
+		$this->assertEquals( $name, $this->instance->setting_name );
+		$this->assertEquals( $description, $this->instance->setting_description );
+
+		$markup = $this->instance->settings[ $layout_key ][ $name ];
+		$this->assertContains( $name, $markup );
+		$this->assertContains( $description, $markup );
+	}
+
+	/**
+	 * Test get_settings().
+	 *
+	 * @see Layout_Setting::get_settings().
+	 */
+	public function test_get_settings() {
+		$name = 'Example Name';
+		$layout_key = 'Form Layout';
+		$initial_settings = array(
+			$layout_key => array(),
+		);
+		$form = array(
+			$name => '1',
+		);
+		$this->instance = new Layout_Setting( $initial_settings, $form );
+		$this->assertEquals( $this->instance->settings, $this->instance->get_settings() );
+	}
+
 }
