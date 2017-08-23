@@ -66,7 +66,7 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 		$this->instance->init();
 		$this->assertEquals( 10, has_filter( 'gform_pre_render', array( $this->instance, 'conditionally_display_form_horizontally' ) ) );
 		$this->assertEquals( 100, has_filter( 'the_content', array( $this->instance, 'conditionally_append_form' ) ) );
-		$this->assertEquals( 12, has_filter( 'gform_field_content', array( $this->instance, 'set_class_of_input_tags' ) ) );
+		$this->assertEquals( 12, has_filter( 'gform_field_content', array( $this->instance, 'set_class_of_input' ) ) );
 		$this->assertEquals( 10, has_filter( 'gform_submit_button', array( $this->instance, 'submit_button' ) ) );
 	}
 
@@ -129,7 +129,7 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 	}
 
 	/**
-	 * Test conditionally_append_form).
+	 * Test conditionally_append_form.
 	 *
 	 * @see Email_Form::conditionally_append_form().
 	 */
@@ -195,7 +195,7 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 	}
 
 	/**
-	 * Test append_form_to_content).
+	 * Test append_form_to_content.
 	 *
 	 * @see Email_Form::append_form_to_content().
 	 */
@@ -211,25 +211,25 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 	}
 
 	/**
-	 * Test set_class_of_input_tags).
+	 * Test set_class_of_input.
 	 *
-	 * @see Email_Form::set_class_of_input_tags().
+	 * @see Email_Form::set_class_of_input().
 	 */
-	public function test_set_class_of_input_tags() {
+	public function test_set_class_of_input() {
 		$initial_class = 'baz-class';
 		$initial_content = '<input type="checkbox" class="' . $initial_class . '">';
 		$field = new \stdClass();
-		$actual_content = $this->instance->set_class_of_input_tags( $initial_content, $field, '', 1, 1 );
+		$actual_content = $this->instance->set_class_of_input( $initial_content, $field, '', 1, 1 );
 		$this->assertEquals( $actual_content, $initial_content );
 
 		$email_input = '<input type=\'email\' class=\'' . $initial_class . '\'>';
-		$actual_content = $this->instance->set_class_of_input_tags( $email_input, $field, '', 1, 1 );
+		$actual_content = $this->instance->set_class_of_input( $email_input, $field, '', 1, 1 );
 		$new_classes = $this->instance->default_class_of_input;
 		$this->assertContains( $initial_class, $actual_content );
 		$this->assertContains( $new_classes, $actual_content );
 
 		$text_input = '<input type=\'text\' class=\'' . $initial_class . '\'>';
-		$actual_content = $this->instance->set_class_of_input_tags( $text_input, $field, '', 1, 1 );
+		$actual_content = $this->instance->set_class_of_input( $text_input, $field, '', 1, 1 );
 		$this->assertContains( $new_classes, $actual_content );
 	}
 
