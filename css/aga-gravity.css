@@ -10,7 +10,8 @@
 	margin-left: .5em;
 }
 
-.gform-inline .gform_button {
+.gform_wrapper .gform-inline .gform_button,
+.gform_wrapper .gform-inline .gform_footer .btn-primary {
 	margin-left: .5em;
 }
 

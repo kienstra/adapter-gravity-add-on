@@ -34,6 +34,7 @@ class Test_Adapter_Gravity_Add_On extends \WP_UnitTestCase {
 
 		if ( ! file_exists( $dependency_file ) ) {
 			$this->markTestSkipped( sprintf(
+				/* translators: %s: dependency name */
 				__( 'Cannot test the Adapter Gravity Add On because the %s dependency is not present.', 'adapter-gravity-add-on' ),
 				$dependency_name
 			) );
