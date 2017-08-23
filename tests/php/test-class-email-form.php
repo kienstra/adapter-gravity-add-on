@@ -50,6 +50,8 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 	public function test_construct() {
 		$this->assertEquals( __NAMESPACE__ . '\Email_Form', get_class( $this->instance ) );
 		$this->assertEquals( __NAMESPACE__ . '\Adapter_Add_On', get_class( $this->instance->add_on ) );
+		$this->assertEquals( 'gform-inline', $this->instance->horizontal_class );
+		$this->assertEquals( 'cssCLass', $this->instance->css_class_setting );
 		$this->assertEquals( 'form-control', $this->instance->default_class_of_input );
 		$this->assertEquals( 'btn btn-primary btn-med', $this->instance->default_submit_button_classes );
 		$this->assertTrue( $this->instance->use_ajax_by_default );

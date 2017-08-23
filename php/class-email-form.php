@@ -20,6 +20,20 @@ class Email_Form {
 	public $add_on;
 
 	/**
+	 * Class that causes a horizontal display.
+	 *
+	 * @var string
+	 */
+	public $horizontal_class = 'gform-inline';
+
+	/**
+	 * Key for the form's CSS class setting.
+	 *
+	 * @var string
+	 */
+	public $css_class_setting = 'cssClass';
+
+	/**
 	 * Default class of the input tags.
 	 *
 	 * @var string
@@ -81,14 +95,13 @@ class Email_Form {
 	 * @return array $form Possibly with altered properties.
 	 */
 	public function add_horizontal_display( $form ) {
-		$class = 'gform-inline';
 		$setting = 'cssClass';
-		if ( ! isset( $form[ $setting ] ) ) {
+		if ( ! isset( $form[ $this->css_class_setting ] ) ) {
 			return $form;
-		} elseif ( '' === $form[ $setting ] ) {
-			$form[ $setting ] = $class;
-		} elseif ( false === strpos( $form[ $setting ], $class ) ) {
-			$form[ $setting ] = $form[ $setting ] . ' ' . $class;
+		} elseif ( '' === $form[ $this->css_class_setting ] ) {
+			$form[ $this->css_class_setting ] = $this->horizontal_class;
+		} elseif ( false === strpos( $form[ $setting ], $this->horizontal_class ) ) {
+			$form[ $this->css_class_setting ] = $form[ $this->css_class_setting ] . ' ' . $this->horizontal_class;
 		}
 		return $form;
 	}
