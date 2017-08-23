@@ -107,4 +107,78 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 		$this->assertEquals( $pre_existing_class, $actual_form[ $this->instance->css_class_setting ] );
 	}
 
+	/**
+	 * Test add_horizontal_display).
+	 *
+	 * @see Email_Form::add_horizontal_display().
+	 */
+	public function test_add_horizontal_display() {
+		$form = array(
+			$this->instance->css_class_setting => '',
+		);
+		$actual_form = $this->instance->add_horizontal_display( $form );
+		$this->assertEquals( $this->instance->horizontal_class, $actual_form[ $this->instance->css_class_setting ] );
+
+		$classes = 'example-class bar-class';
+		$form_with_classes = array(
+			$this->instance->css_class_setting => $classes,
+		);
+		$actual_form = $this->instance->add_horizontal_display( $form_with_classes );
+		$expected_classes = $classes . ' ' . $this->instance->horizontal_class;
+		$this->assertEquals( $expected_classes, $actual_form[ $this->instance->css_class_setting ] );
+	}
+
+	/**
+	 * Test conditionally_append_form).
+	 *
+	 * @see Email_Form::conditionally_append_form().
+	 */
+	public function test_conditionally_append_form() {
+		global $wp_query, $post;
+		$gf_upgrade = \gf_upgrade();
+		$gf_upgrade->install();
+
+		$title = 'A New Test Form Title';
+		$new_form_id = \RGFormsModel::insert_form( $title );
+		$description = 'Example description';
+		$form_meta = array(
+			'id'                   => $new_form_id,
+			'description'          => $description,
+			'labelPlacement'       => 'top_label',
+			'descriptionPlacement' => 'below',
+			'button'               => array(
+				'type'                 => 'text',
+				'text'                 => 'Submit',
+				'imageUrl'             => '',
+			),
+			'fields'               => array(),
+		);
+		\RGFormsModel::update_form_meta( $new_form_id, $form_meta );
+		$initial_content = 'Example content';
+		$actual_content = $this->instance->conditionally_append_form( $initial_content );
+		$this->assertEquals( $initial_content, $actual_content );
+
+		$new_form_meta = array_merge(
+			$form_meta,
+			array(
+				$this->add_on->components['email_setting']->bottom_of_post => '1',
+			)
+		);
+		\RGFormsModel::update_form_meta( $new_form_id, $new_form_meta );
+		$actual_content = $this->instance->conditionally_append_form( $initial_content );
+		$this->assertEquals( $initial_content, $actual_content );
+
+		// @codingStandardsIgnoreStart
+		$wp_query->is_single = true;
+		$post = $this->factory()->post->create( array( 'post_type' => 'post' ) );
+		// @codingStandardsIgnoreEnd
+		$actual_content = $this->instance->conditionally_append_form( $initial_content );
+		// This should have the form appended to the content.
+		$this->assertContains( $initial_content, $actual_content );
+		$this->assertContains( 'gform_wrapper_' . $new_form_id , $actual_content );
+		$this->assertNotContains( $title, $actual_content );
+		$this->assertNotContains( $description, $actual_content );
+		$this->assertContains( 'gform_ajax', $actual_content );
+	}
+
 }
