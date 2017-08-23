@@ -110,7 +110,9 @@ class Email_Form {
 	/**
 	 * Conditionally append a form to the post content.
 	 *
-	 * @todo: clarify how the the $form is different from $form.
+	 * The form returned from \GFAPI::get_form( $form->id ) has more metadata.
+	 * So it's not possible to simply pass $form to $this->do_append_form_to_content().
+	 *
 	 * @param string $content Post content.
 	 * @return string $content Post content, possibly filtered.
 	 */

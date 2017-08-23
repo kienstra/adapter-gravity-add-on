@@ -181,4 +181,28 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 		$this->assertContains( 'gform_ajax', $actual_content );
 	}
 
+	/**
+	 * Test do_append_form_to_content).
+	 *
+	 * @see Email_Form::do_append_form_to_content().
+	 */
+	public function test_do_append_form_to_content() {
+		global $wp_query, $post;
+		$form = array(
+			'id' => 1234,
+		);
+		$this->assertFalse( $this->instance->do_append_form_to_content( $form ) );
+
+		$form = array(
+			$this->add_on->components['email_setting']->bottom_of_post => '1',
+		);
+		$this->assertFalse( $this->instance->do_append_form_to_content( $form ) );
+
+		// @codingStandardsIgnoreStart
+		$wp_query->is_single = true;
+		$post = $this->factory()->post->create( array( 'post_type' => 'post' ) );
+		// @codingStandardsIgnoreEnd
+		$this->assertTrue( $this->instance->do_append_form_to_content( $form ) );
+	}
+
 }
