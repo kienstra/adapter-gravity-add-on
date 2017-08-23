@@ -211,6 +211,29 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 	}
 
 	/**
+	 * Test set_class_of_input_tags).
+	 *
+	 * @see Email_Form::set_class_of_input_tags().
+	 */
+	public function test_set_class_of_input_tags() {
+		$initial_class = 'baz-class';
+		$initial_content = '<input type="checkbox" class="' . $initial_class . '">';
+		$field = new \stdClass();
+		$actual_content = $this->instance->set_class_of_input_tags( $initial_content, $field, '', 1, 1 );
+		$this->assertEquals( $actual_content, $initial_content );
+
+		$email_input = '<input type=\'email\' class=\'' . $initial_class . '\'>';
+		$actual_content = $this->instance->set_class_of_input_tags( $email_input, $field, '', 1, 1 );
+		$new_classes = $this->instance->default_class_of_input;
+		$this->assertContains( $initial_class, $actual_content );
+		$this->assertContains( $new_classes, $actual_content );
+
+		$text_input = '<input type=\'text\' class=\'' . $initial_class . '\'>';
+		$actual_content = $this->instance->set_class_of_input_tags( $text_input, $field, '', 1, 1 );
+		$this->assertContains( $new_classes, $actual_content );
+	}
+
+	/**
 	 * Create a Gravity form.
 	 *
 	 * @param string $title New Gravity form title.

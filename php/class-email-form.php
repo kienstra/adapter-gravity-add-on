@@ -190,18 +190,7 @@ class Email_Form {
 		*/
 		$new_class = apply_filters( 'gravity_form_input_class', $this->default_class_of_input, $form_id );
 
-		return $this->add_class_to_input( $content, esc_attr( $new_class ) );
-	}
-
-	/**
-	 * Add a class to the input element.
-	 *
-	 * @param string $content Field content.
-	 * @param string $new_class To add to <input>.
-	 * @return string $content Now includes the new class.
-	 */
-	public function add_class_to_input( $content, $new_class ) {
-		return preg_replace( "/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/", '$1' . esc_attr( $new_class ) . '\s', $content );
+		return preg_replace( '/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/', '$1' . esc_attr( $new_class ) . ' ', $content );
 	}
 
 	/**
