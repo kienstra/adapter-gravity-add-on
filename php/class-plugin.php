@@ -35,7 +35,7 @@ class Plugin {
 	}
 
 	/**
-	 * Register the plugin as an add-on if the Gravity Form method exists.
+	 * Register the add-on, using strategy that Gravity Form recommends.
 	 *
 	 * @return void
 	 */

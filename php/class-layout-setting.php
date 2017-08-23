@@ -22,7 +22,7 @@ class Layout_Setting {
 	/**
 	 * Settings form
 	 *
-	 * @var object
+	 * @var array
 	 */
 	public $form;
 
