@@ -102,4 +102,29 @@ class Test_Class_Layout_Setting extends Test_Adapter_Gravity_Add_On {
 		$this->assertEquals( $this->instance->settings, $this->instance->get_settings() );
 	}
 
+	/**
+	 * Test is_checked().
+	 *
+	 * @see Layout_Setting::is_checked().
+	 */
+	public function test_is_checked() {
+		$settings = array();
+		$name = 'Example Name';
+		$description = 'Bar Description';
+		$form = array(
+			$name => '1',
+		);
+		$this->instance = new Layout_Setting( $settings, $form );
+		$this->instance->set_values( $name, $description );
+		$this->assertTrue( $this->instance->is_checked() );
+
+		// When the value of the $name key is not '1', this should not be checked.
+		$form_not_checked = array(
+			$name => '',
+		);
+		$this->instance = new Layout_Setting( $settings, $form_not_checked );
+		$this->instance->set_values( $name, $description );
+		$this->assertFalse( $this->instance->is_checked() );
+	}
+
 }
