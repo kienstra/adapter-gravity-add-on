@@ -82,7 +82,8 @@ class Email_Form {
 	 * @return array $form Gravity form, possibly with altered content.
 	 */
 	public function conditionally_display_form_horizontally( $form ) {
-		if ( isset( $form['aga_horizontal_display'] ) && ( '1' === $form['aga_horizontal_display'] ) ) {
+		$horizontal_setting = $this->add_on->components['email_setting']->horizontal_display;
+		if ( isset( $form[ $horizontal_setting ] ) && ( '1' === $form[ $horizontal_setting ] ) ) {
 			return $this->add_horizontal_display( $form );
 		}
 		return $form;
