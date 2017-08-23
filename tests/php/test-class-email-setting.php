@@ -120,4 +120,26 @@ class Test_Class_Email_Setting extends Test_Adapter_Gravity_Add_On {
 		$this->assertNotContains( 'checked=\'checked\'', $markup_not_checked );
 	}
 
+	/**
+	 * Test save_settings().
+	 *
+	 * @see Email_Setting::save_settings().
+	 */
+	public function test_save_settings() {
+		$form = array();
+		$bottom_of_post = '1';
+		$horizontal_display = '';
+		$_POST[ $this->instance->bottom_of_post ] = $bottom_of_post;
+		$_POST[ $this->instance->horizontal_display ] = $horizontal_display;
+		$actual_form = $this->instance->save_settings( $form );
+		$this->assertEquals( $bottom_of_post, $actual_form[ $this->instance->bottom_of_post ] );
+		$this->assertEquals( $horizontal_display, $actual_form[ $this->instance->horizontal_display ] );
+
+		// If the values aren't in $_POST, they should be '' in the returned form.
+		$_POST = array();
+		$actual_form_no_values = $this->instance->save_settings( $form );
+		$this->assertEquals( '', $actual_form_no_values[ $this->instance->bottom_of_post ] );
+		$this->assertEquals( '', $actual_form_no_values[ $this->instance->horizontal_display ] );
+	}
+
 }
