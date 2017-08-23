@@ -153,21 +153,6 @@ class Email_Form {
 	}
 
 	/**
-	 * Conditionally display the form horizontally.
-	 *
-	 * @param object $form Gravity form.
-	 * @return array|\WP_Error $form Gravity form, or \WP_Error.
-	 */
-	public function maybe_display_form_horizontally( $form ) {
-		$full_form = \GFAPI::get_form( $form->id );
-		if ( isset( $full_form['aga_horizontal_display'] ) && ( '1' === $full_form['aga_horizontal_display'] ) ) {
-			// @todo: Fix error that begins here.
-			return \GFAPI::update_form( $this->add_horizontal_display( $full_form ), $full_form->id );
-		}
-		return $full_form;
-	}
-
-	/**
 	 * Filter callback to add a class to the input element.
 	 *
 	 * @action gform_field_content
