@@ -139,30 +139,19 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 		$gf_upgrade->install();
 
 		$title = 'A New Test Form Title';
-		$new_form_id = \RGFormsModel::insert_form( $title );
-		$description = 'Example description';
-		$form_meta = array(
-			'id'                   => $new_form_id,
-			'description'          => $description,
-			'labelPlacement'       => 'top_label',
-			'descriptionPlacement' => 'below',
-			'button'               => array(
-				'type'                 => 'text',
-				'text'                 => 'Submit',
-				'imageUrl'             => '',
-			),
-			'fields'               => array(),
-		);
-		\RGFormsModel::update_form_meta( $new_form_id, $form_meta );
+		$new_form_id = $this->gravity_form_factory( $title );
+
 		$initial_content = 'Example content';
 		$actual_content = $this->instance->conditionally_append_form( $initial_content );
 		$this->assertEquals( $initial_content, $actual_content );
 
+		$description = 'An example description';
 		$new_form_meta = array_merge(
-			$form_meta,
 			array(
 				$this->add_on->components['email_setting']->bottom_of_post => '1',
-			)
+				'description'                                              => $description,
+			),
+			\RGFormsModel::get_form_meta( $new_form_id )
 		);
 		\RGFormsModel::update_form_meta( $new_form_id, $new_form_meta );
 		$actual_content = $this->instance->conditionally_append_form( $initial_content );
@@ -203,6 +192,48 @@ class Test_Class_Email_Form extends Test_Adapter_Gravity_Add_On {
 		$post = $this->factory()->post->create( array( 'post_type' => 'post' ) );
 		// @codingStandardsIgnoreEnd
 		$this->assertTrue( $this->instance->do_append_form_to_content( $form ) );
+	}
+
+	/**
+	 * Test append_form_to_content).
+	 *
+	 * @see Email_Form::append_form_to_content().
+	 */
+	public function test_append_form_to_content() {
+		$title = 'A New Test Form Title';
+		$new_form_id = $this->gravity_form_factory( $title );
+		$initial_content = 'Some example content';
+		$actual_content = $this->instance->append_form_to_content( $new_form_id, $initial_content );
+
+		$this->assertContains( $initial_content, $actual_content );
+		$this->assertContains( 'gform_wrapper', $actual_content );
+		$this->assertContains( 'gform_footer', $actual_content );
+	}
+
+	/**
+	 * Create a Gravity form.
+	 *
+	 * @param string $title New Gravity form title.
+	 * @return string $id The ID of the new form.
+	 */
+	public function gravity_form_factory( $title ) {
+		$new_form_id = \RGFormsModel::insert_form( $title );
+		$description = 'Example description';
+		$form_meta = array(
+			'id'                   => $new_form_id,
+			'description'          => $description,
+			'labelPlacement'       => 'top_label',
+			'descriptionPlacement' => 'below',
+			'button'               => array(
+				'type'                 => 'text',
+				'text'                 => 'Submit',
+				'imageUrl'             => '',
+			),
+			'fields'               => array(),
+		);
+		\RGFormsModel::update_form_meta( $new_form_id, $form_meta );
+
+		return $new_form_id;
 	}
 
 }
