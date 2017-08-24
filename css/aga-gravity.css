@@ -15,7 +15,8 @@
 	margin-left: .5em;
 }
 
-.gform_wrapper .gform-inline * {
+.gform_wrapper .gform-inline *,
+.gform_wrapper .gform-inline ul.gform_fields {
 	display: inline;
 }
 
@@ -25,7 +26,7 @@
 }
 
 .gform_wrapper .gform-inline .gform_body .gfield {
-	display: inline-flex;
+	display: inline;
 	padding-right: .5em;
 }
 
