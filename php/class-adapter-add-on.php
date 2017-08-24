@@ -10,7 +10,7 @@ namespace AdapterGravityAddOn;
 /**
  * Main add-on class.
  *
- * Mainly follows the add-on conventions from the Gravity Form documentation.
+ * Mainly follows the add-on conventions from the Gravity Forms documentation.
  * The properties in this override those defined in \GFAddOn.
  * So their names are predetermined.
  *
@@ -44,7 +44,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 *
 	 * @var string
 	 */
-	public $_path = 'adapter-gravity-add-on/php/class-adapter_add-on.php';
+	public $_path;
 
 	/**
 	 * Full path to add-on file.
@@ -97,7 +97,7 @@ class Adapter_Add_On extends \GFAddOn {
 	}
 
 	/**
-	 * Assign properties during the class constructor.
+	 * Assign add-on properties.
 	 *
 	 * It's not possible to assign these in the same lines as the property declarations.
 	 * These are expressions.
@@ -106,6 +106,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 */
 	public function pre_init() {
 		parent::pre_init();
+		$this->_path = $this->_slug . '/php/class-adapter-add-on.php';
 		$this->_title = __( 'Adapter Gravity Add On', 'adapter-gravity-add-on' );
 		$this->_short_title = __( 'Adapter Add On', 'adapter-gravity-add-on' );
 	}
@@ -129,7 +130,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return void
 	 */
 	public function plugin_textdomain() {
-		load_plugin_textdomain( $this->_slug, false, $this->_slug . '/languages' );
+		load_plugin_textdomain( $this->_slug, false, $this->_full_path . '/languages' );
 	}
 
 	/**

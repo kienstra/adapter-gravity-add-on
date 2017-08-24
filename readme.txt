@@ -43,7 +43,7 @@ Gravity Forms 1.9.
 == Changelog ==
 
 = 1.0.2 =
-* Improved compatibility with Gravity Forms version 2.0 and above. Removes support for placeholders, as Gravity Forms now includes them.
+* Improved compatibility with Gravity Forms version 1.9 and above. Removes support for placeholders, as Gravity Forms now includes them.
 
 = 1.0.1 =
 * Security improvements.
@@ -54,7 +54,7 @@ Gravity Forms 1.9.
 == Upgrade Notice ==
 
 = 1.0.2 =
-Please upgrade if you have Gravity Forms 2.0. If you've used this add-on to output a placeholder, please follow the instructions in the screencast to enter a placeholder in the native Gravity Forms editor.
+Please upgrade if you have Gravity Forms 1.9. If you've used this add-on to output a placeholder, please follow the instructions in the screencast to enter a placeholder in the native Gravity Forms editor.
 
 = 1.0.1 =
 Please upgrade for the security improvements.
