@@ -78,6 +78,9 @@ class Layout_Setting {
 	/**
 	 * Add the new setting to the existing settings.
 	 *
+	 * Using the name and description from set_values().
+	 * Add the markup for a checkbox to the 'Form Layout' section.
+	 *
 	 * @return void
 	 */
 	public function add_setting() {
@@ -96,7 +99,10 @@ class Layout_Setting {
 	}
 
 	/**
-	 * Get the settings object, but with different markup.
+	 * Get the settings array, but with different markup.
+	 *
+	 * This markup will include a checkbox, as created in add_setting().
+	 * To be returned in the Gravity Forms filter callback 'gform_form_settings.'
 	 *
 	 * @return array $settings With different markup for a specific setting.
 	 */

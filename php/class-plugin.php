@@ -48,9 +48,9 @@ class Plugin {
 	}
 
 	/**
-	 * Register the add-on, using strategy that Gravity F\orm recommends.
+	 * Register the add-on, using strategy that Gravity Forms recommends.
 	 *
-	 * If the needed Gravity Forms method doesn't exist, display an admin error and return.
+	 * If the needed Gravity Forms method does not exist, display an admin error and return.
 	 * Otherwise, require and register the main add-on file.
 	 *
 	 * @return void|null
@@ -66,7 +66,7 @@ class Plugin {
 	}
 
 	/**
-	 * Admin error message if Gravity Forms doesn't appear to be installed.
+	 * Admin error message if Gravity Forms does not appear to be installed.
 	 *
 	 * @return void
 	 */
