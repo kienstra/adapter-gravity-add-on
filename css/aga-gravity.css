@@ -6,16 +6,15 @@
 }
 
 /* Inline forms */
-.gform-inline .gform_body .top_label .gfield_label {
-	margin-left: .5em;
-}
-
 .gform_wrapper .gform-inline .gform_button,
 .gform_wrapper .gform-inline .gform_footer .btn-primary {
 	margin-left: .5em;
 }
 
-.gform_wrapper .gform-inline *,
+.gform_wrapper .gform-inline .gform_body,
+.gform_wrapper .gform-inline .gform_footer,
+.gform_wrapper .gform-inline input,
+.gform_wrapper .gform-inline .ginput_container,
 .gform_wrapper .gform-inline ul.gform_fields {
 	display: inline;
 }
