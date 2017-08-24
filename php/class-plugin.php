@@ -8,7 +8,13 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Plugin
+ * Registers this add-on via the Gravity Forms add-on framework.
+ *
+ * First, includes the add-on framework.
+ * Then, includes and registers the add-on with it.
+ * Most of the main plugin settings are actually in Adapter_Add_On.
+ *
+ * @see https://www.gravityhelp.com/documentation/article/gfaddon
  */
 class Plugin {
 

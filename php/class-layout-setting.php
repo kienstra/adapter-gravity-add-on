@@ -13,6 +13,9 @@ namespace AdapterGravityAddOn;
  * In the Gravity Form 'Form Settings' page, this adds checkboxes to the 'Form Layout' section.
  * Pass the name and description to the set_values() method.
  * And call get_settings() to get all of the markup for this 'Form Layout' section, including the new checkbox.
+ * Used in the callbacks to 'gform_form_settings.'
+ *
+ * @see Email_Setting::get_bottom_of_post_setting(), Email_Setting::get_horizontal_setting()
  */
 class Layout_Setting {
 

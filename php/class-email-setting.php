@@ -8,7 +8,12 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Email_Setting
+ * Adds checkboxes to the 'Form Layout' section on the 'Form Settings' page.
+ *
+ * Uses Gravity Forms filters to add checkboxes to that settings section.
+ * And adds checkboxes to display the form at the bottom of the page, and to display it horizontally.
+ *
+ * @see class Layout_Setting
  */
 class Email_Setting {
 

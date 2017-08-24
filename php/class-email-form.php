@@ -8,7 +8,10 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Email_Form
+ * Handles the front-end display of the email form.
+ *
+ * Based on the settings, displays a form at the end of posts, and/or horizontally.
+ * Also, adds classes to <input> elements of type 'text,' 'email,' and 'submit.'
  */
 class Email_Form {
 
@@ -180,6 +183,7 @@ class Email_Form {
 	 * @return string $content Filtered, and now includes a class in the <input> elements.
 	 */
 	public function set_class_of_input( $content, $field, $value, $lead_id, $form_id ) {
+
 		/**
 		* New class(es) for Gravity Form inputs.
 		*
