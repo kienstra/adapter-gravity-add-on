@@ -41,7 +41,7 @@ class Email_Setting {
 	/**
 	 * Instantiate the add-on.
 	 *
-	 * @param object $add_on Instance of the plugin.
+	 * @param object $add_on Instance of the add-on.
 	 */
 	public function __construct( $add_on ) {
 		$this->add_on = $add_on;
@@ -61,6 +61,9 @@ class Email_Setting {
 	/**
 	 * Add a setting to display the form at the bottom of posts.
 	 *
+	 * In the 'Form Layout' section of the 'Form Settings' page.
+	 * If this checkbox is checked, the form will display at the bottom of every post.
+	 *
 	 * @param array $settings Associated with forms.
 	 * @param array $form The form that is shown.
 	 * @return array $settings Now with options to place the label inline and at the bottom.
@@ -75,7 +78,10 @@ class Email_Setting {
 	}
 
 	/**
-	 * Get the form settings, with additional options.
+	 * Get the form settings, with a checkbox to display the form horizontally.
+	 *
+	 * In the 'Form Layout' section of the 'Form Settings' page.
+	 * When checked, this checkbox adds a class to the form, which causes it to display horizontally.
 	 *
 	 * @param array $settings Associated with forms.
 	 * @param array $form The form that is shown.
@@ -91,15 +97,19 @@ class Email_Setting {
 	}
 
 	/**
-	 * Get the form settings, with additional options.
+	 * Save the new form settings.
 	 *
 	 * This saves the values of the new settings that this class adds.
+	 * Including the settings to display horizontally, and at the bottom of the post.
 	 * rgpost() is a Gravity Forms helper function.
 	 *
 	 * @param array $form The form that is shown.
-	 * @return array $form With additional settings.
+	 * @return array $form With additional settings, or null if $form is not an array.
 	 */
 	public function save_settings( $form ) {
+		if ( ! is_array( $form ) ) {
+			return $form;
+		}
 		$form[ $this->bottom_of_post ] = rgpost( $this->bottom_of_post );
 		$form[ $this->horizontal_display ] = rgpost( $this->horizontal_display );
 		return $form;
