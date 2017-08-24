@@ -13,7 +13,7 @@ namespace AdapterGravityAddOn;
 class Email_Form {
 
 	/**
-	 * Instance of this plugin.
+	 * Instance of this add-on.
 	 *
 	 * @var object
 	 */

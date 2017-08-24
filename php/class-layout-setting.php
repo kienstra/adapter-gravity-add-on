@@ -9,6 +9,10 @@ namespace AdapterGravityAddOn;
 
 /**
  * Class Layout_Setting
+ *
+ * In the Gravity Form 'Form Settings' page, this adds checkboxes to the 'Form Layout' section.
+ * Pass the name and description to the set_values() method.
+ * And call get_settings() to get all of the markup for this 'Form Layout' section, including the new checkbox.
  */
 class Layout_Setting {
 
@@ -53,6 +57,10 @@ class Layout_Setting {
 
 	/**
 	 * Store the name and description.
+	 *
+	 * These are needed to create the setting markup.
+	 * Then, store this markup in the settings.
+	 * Adding this markup to the settings is the main purpose of this class.
 	 *
 	 * @param string $name Gravity form name.
 	 * @param string $description Gravity form description.
