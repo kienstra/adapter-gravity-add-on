@@ -8,8 +8,9 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Class Adapter_Add_On
+ * Main add-on class.
  *
+ * Mainly follows the add-on conventions from the Gravity Form documentation.
  * The properties in this override those defined in \GFAddOn.
  * So their names are predetermined.
  *
