@@ -8,7 +8,7 @@
 namespace AdapterGravityAddOn;
 
 /**
- * Main add-on class.
+ * Add-on class.
  *
  * Mainly follows the add-on conventions from the Gravity Forms documentation.
  * The properties in this override those defined in \GFAddOn.
@@ -99,9 +99,6 @@ class Adapter_Add_On extends \GFAddOn {
 	/**
 	 * Assign add-on properties.
 	 *
-	 * It's not possible to assign these in the same lines as the property declarations.
-	 * These are expressions.
-	 *
 	 * @return void
 	 */
 	public function pre_init() {
@@ -130,18 +127,18 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return void
 	 */
 	public function plugin_textdomain() {
-		load_plugin_textdomain( $this->_slug, false, $this->_full_path . '/languages' );
+		load_plugin_textdomain( $this->_slug );
 	}
 
 	/**
-	 * Load the files for the plugin.
+	 * Load the add-on files.
 	 *
 	 * @return void
 	 */
 	public function load_plugin_files() {
-		require_once __DIR__ . '/class-layout-setting.php';
 		require_once __DIR__ . '/class-email-setting.php';
 		require_once __DIR__ . '/class-email-form.php';
+		require_once __DIR__ . '/class-layout-setting.php';
 	}
 
 	/**
@@ -157,7 +154,10 @@ class Adapter_Add_On extends \GFAddOn {
 	}
 
 	/**
-	 * Get the stylesheets to enqueue.
+	 * Get the stylesheet to enqueue.
+	 *
+	 * Follows the convention for add-ons in the Gravity Forms documentation.
+	 * Uses this class's method do_enqueue() as a callback.
 	 *
 	 * @return array $styles The stylesheets to enqueue..
 	 */
@@ -177,7 +177,7 @@ class Adapter_Add_On extends \GFAddOn {
 	}
 
 	/**
-	 * Whether to enqueue this addon's styling.
+	 * Whether to enqueue this add-on's styling.
 	 *
 	 * @return boolean $do_enqueue Whether to enqueue this addon's styling.
 	 */
