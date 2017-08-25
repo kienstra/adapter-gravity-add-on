@@ -24,13 +24,16 @@
 	width: auto;
 }
 
-/*
- * When there is a name with one field, like only a first name, Gravity Forms makes it full-width.
- * This makes inline display of the form impossible, so change the width to auto.
- */
+/* Override Gravity Forms styles that interfere with horizontal display */
 @media only screen and (min-width: 641px) {
-	.gform-inline div.ginput_complex.ginput_container.gf_name_has_1 span {
+	/* When there is a name with one field, like only a first name, Gravity Forms makes it full-width. */
+	.gform-inline ul.gform_fields div.ginput_complex.ginput_container.gf_name_has_1 span {
 		width: auto
+	}
+
+	.gform_wrapper .gform-inline .gform_footer:not(.top_label) {
+		margin-left: 0;
+		width: auto;
 	}
 }
 
@@ -70,7 +73,7 @@
 	padding: .5em 0 1em 0;
 }
 
-.type-page .gform_wrapper .gform_footer ,
+.type-page .gform_wrapper .gform_footer,
 .widget .gform_wrapper .gform_footer {
 	margin-top: 0;
 }

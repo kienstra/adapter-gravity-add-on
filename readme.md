@@ -28,11 +28,15 @@ Easy email opt-ins with Gravity Forms. Display them horizontally, at the end of 
 1. Scroll down to "Form Layout."
 1. You'll see options to "Display at the bottom of every single-post page" and "Display form horizontally."
 1. Select one or both of these.
+1. If you selected "Display form horizontally," follow the setup video below.
+
+Setup:
+[![Play video on YouTube](https://i1.ytimg.com/vi/xPHsKf5rUNg/hqdefault.jpg)](https://www.youtube.com/watch?v=xPHsKf5rUNg)
 
 ## Frequently Asked Questions ##
 
 ### What does this require? ###
-Gravity Forms 1.9.
+Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
 
 
 ## Screenshots ##
@@ -64,7 +68,7 @@ Gravity Forms 1.9.
 ## Upgrade Notice ##
 
 ### 1.0.2 ###
-Please upgrade if you have Gravity Forms 1.9 or above. If you've used this add-on to output a placeholder, please follow the instructions in the screencast to enter a placeholder in the native Gravity Forms editor.
+Please upgrade if you have Gravity Forms 1.9 or above. If you've used this to display a form horizontally or output a placeholder, please follow the instructions in this [setup video](https://youtu.be/xPHsKf5rUNg).
 
 ### 1.0.1 ###
 Please upgrade for the security improvements.
