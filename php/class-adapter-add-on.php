@@ -33,7 +33,7 @@ class Adapter_Add_On extends \GFAddOn {
 	public $_min_gravityforms_version = '1.9';
 
 	/**
-	 * Plugin slug.
+	 * Add-on slug.
 	 *
 	 * @var string
 	 */
@@ -68,11 +68,11 @@ class Adapter_Add_On extends \GFAddOn {
 	public $_short_title;
 
 	/**
-	 * Whether to enqueue this plugin's styling.
+	 * Whether to enqueue this add-on's styling.
 	 *
 	 * @var boolean
 	 */
-	public $do_enqueue_plugin_styling_by_default = true;
+	public $do_enqueue_add_on_styling_by_default = true;
 
 	/**
 	 * Add-on components.
@@ -115,18 +115,18 @@ class Adapter_Add_On extends \GFAddOn {
 	 */
 	public function init() {
 		parent::init();
-		$this->load_plugin_files();
+		$this->load_add_on_files();
 		$this->instantiate_classes();
-		add_action( 'init', array( $this, 'plugin_textdomain' ) );
+		add_action( 'init', array( $this, 'textdomain' ) );
 	}
 
 	/**
-	 * Load the textdomain for the plugin, enabling translation.
+	 * Load the textdomain for the add-on, enabling translation.
 	 *
 	 * @action init
 	 * @return void
 	 */
-	public function plugin_textdomain() {
+	public function textdomain() {
 		load_plugin_textdomain( $this->_slug );
 	}
 
@@ -135,14 +135,14 @@ class Adapter_Add_On extends \GFAddOn {
 	 *
 	 * @return void
 	 */
-	public function load_plugin_files() {
+	public function load_add_on_files() {
 		require_once __DIR__ . '/class-email-setting.php';
 		require_once __DIR__ . '/class-email-form.php';
 		require_once __DIR__ . '/class-layout-setting.php';
 	}
 
 	/**
-	 * Instantiate the plugin classes.
+	 * Instantiate the add-on classes.
 	 *
 	 * @return void
 	 */
@@ -184,11 +184,11 @@ class Adapter_Add_On extends \GFAddOn {
 	public function do_enqueue() {
 
 		/**
-		 * Filter whether to enqueue this plugin's styling.
+		 * Filter whether to enqueue this add-on's styling.
 		 *
 		 * @param boolean $do_enqueue Whether to enqueue styling.
 		 */
-		$do_enqueue = apply_filters( 'aga_do_enqueue_css', $this->do_enqueue_plugin_styling_by_default );
+		$do_enqueue = apply_filters( 'aga_do_enqueue_css', $this->do_enqueue_add_on_styling_by_default );
 		return ( $do_enqueue && ( ! is_admin() ) );
 	}
 

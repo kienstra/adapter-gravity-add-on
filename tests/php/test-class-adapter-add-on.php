@@ -11,7 +11,7 @@ namespace AdapterGravityAddOn;
 include_once( dirname( __FILE__ ) . '/../test-adapter-gravity-add-on.php' );
 
 /**
- * Tests for class Adapter_Add_Onn.
+ * Tests for class Adapter_Add_On.
  *
  * @package AdapterGravityAddOn
  */
@@ -31,7 +31,7 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	/**
 	 * Test get_instance().
 	 *
-	 * @see Adapter_Add_Onn::get_instance().
+	 * @see Adapter_Add_On::get_instance().
 	 */
 	public function test_get_instance() {
 		$this->assertEquals( 'AdapterGravityAddOn\Adapter_Add_On', get_class( Adapter_Add_On::get_instance() ) );
@@ -43,13 +43,13 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 		$this->assertInternalType( 'string', $this->instance->_full_path );
 		$this->assertInternalType( 'string', $this->instance->_title );
 		$this->assertInternalType( 'string', $this->instance->_short_title );
-		$this->assertEquals( true, $this->instance->do_enqueue_plugin_styling_by_default );
+		$this->assertEquals( true, $this->instance->do_enqueue_add_on_styling_by_default );
 	}
 
 	/**
 	 * Test pre_init().
 	 *
-	 * @see Adapter_Add_Onn::pre_init().
+	 * @see Adapter_Add_On::pre_init().
 	 */
 	public function test_pre_init() {
 		$this->assertEquals( 'Adapter Gravity Add On', $this->instance->_title );
@@ -57,22 +57,22 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	}
 
 	/**
-	 * Test plugin_textdomain().
+	 * Test textdomain().
 	 *
-	 * @see Adapter_Add_Onn::plugin_textdomain().
+	 * @see Adapter_Add_On::textdomain().
 	 */
-	public function test_plugin_textdomain() {
+	public function test_textdomain() {
 		$this->instance->init();
-		$this->assertEquals( 10, has_action( 'init', array( $this->instance, 'plugin_textdomain' ) ) );
+		$this->assertEquals( 10, has_action( 'init', array( $this->instance, 'textdomain' ) ) );
 	}
 
 	/**
-	 * Test load_plugin_files().
+	 * Test load_add_on_files().
 	 *
-	 * @see Adapter_Add_Onn::load_plugin_files().
+	 * @see Adapter_Add_On::load_add_on_files().
 	 */
-	public function test_load_plugin_files() {
-		$this->instance->load_plugin_files();
+	public function test_load_add_on_files() {
+		$this->instance->load_add_on_files();
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Layout_Setting' ) );
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Email_Setting' ) );
 		$this->assertTrue( class_exists( 'AdapterGravityAddOn\Email_Form' ) );
@@ -81,7 +81,7 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	/**
 	 * Test instantiate_classes().
 	 *
-	 * @see Adapter_Add_Onn::instantiate_classes().
+	 * @see Adapter_Add_On::instantiate_classes().
 	 */
 	public function test_instantiate_classes() {
 		$this->assertEquals( 'AdapterGravityAddOn\Email_Setting', get_class( $this->instance->components['email_setting'] ) );
@@ -91,7 +91,7 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	/**
 	 * Test styles().
 	 *
-	 * @see Adapter_Add_Onn::styles().
+	 * @see Adapter_Add_On::styles().
 	 */
 	public function test_styles() {
 		$style = $this->instance->styles()[2];
@@ -105,7 +105,7 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	/**
 	 * Test do_enqueue().
 	 *
-	 * @see Adapter_Add_Onn::do_enqueue().
+	 * @see Adapter_Add_On::do_enqueue().
 	 */
 	public function test_do_enqueue() {
 		$this->assertTrue( $this->instance->do_enqueue() );
