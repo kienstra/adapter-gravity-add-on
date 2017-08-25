@@ -29,7 +29,6 @@ Easy email opt-ins with Gravity Forms. Display them horizontally, at the end of 
 1. Select one or both of these.
 1. If you selected "Display form horizontally," follow the setup video below.
 
-Setup:
 [youtube https://youtu.be/xPHsKf5rUNg]
 == Frequently Asked Questions ==
 
