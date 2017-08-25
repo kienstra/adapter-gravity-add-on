@@ -24,6 +24,21 @@
 	width: auto;
 }
 
+/*
+ * When there is a name with one field, like only a first name, Gravity Forms makes it full-width.
+ * This makes inline display of the form impossible, so change the width to auto.
+ */
+@media only screen and (min-width: 641px) {
+	.gform-inline div.ginput_complex.ginput_container.gf_name_has_1 span {
+		width: auto
+	}
+}
+
+/* Override padding in Gravity Forms browsers.css file */
+.gform_wrapper.gf_browser_chrome .gform-inline ul.gform_fields li.gfield span.name_first {
+	padding-top: 0;
+}
+
 .gform_wrapper .gform-inline .gform_body .gfield {
 	display: inline;
 	padding-right: .5em;
