@@ -57,7 +57,7 @@ Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
 == Upgrade Notice ==
 
 = 1.0.2 =
-Please upgrade if you have Gravity Forms 1.9 or above. If you've used this add-on to output a placeholder, please follow the instructions in the screencast to enter a placeholder in the native Gravity Forms editor.
+Please upgrade if you have Gravity Forms 1.9 or above. If you've used this to display a form horizontally or output a placeholder, please follow the instructions in this [setup video](https://youtu.be/xPHsKf5rUNg).
 
 = 1.0.1 =
 Please upgrade for the security improvements.
