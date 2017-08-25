@@ -140,6 +140,11 @@ class Test_Class_Email_Setting extends Test_Adapter_Gravity_Add_On {
 		$actual_form_no_values = $this->instance->save_settings( $form );
 		$this->assertEquals( '', $actual_form_no_values[ $this->instance->bottom_of_post ] );
 		$this->assertEquals( '', $actual_form_no_values[ $this->instance->horizontal_display ] );
+
+		$form_non_array = new \stdClass();
+		$actual_form_non_array = $this->instance->save_settings( $form_non_array );
+		$this->assertEquals( 'stdClass', get_class( $actual_form_non_array ) );
+		$this->assertEquals( $form_non_array, $actual_form_non_array );
 	}
 
 }
