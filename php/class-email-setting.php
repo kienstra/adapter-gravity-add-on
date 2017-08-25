@@ -56,6 +56,7 @@ class Email_Setting {
 		add_filter( 'gform_form_settings', array( $this, 'get_bottom_of_post_setting' ), 10, 2 );
 		add_filter( 'gform_form_settings', array( $this, 'get_horizontal_setting' ), 10, 2 );
 		add_filter( 'gform_pre_form_settings_save', array( $this, 'save_settings' ) );
+		add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
 	}
 
 	/**
