@@ -86,7 +86,7 @@ class AdapterAddOn extends GFAddOn {
 	public $components = [];
 
 	/**
-	 * Assign add-on properties.
+	 * Assigns the add-on properties.
 	 *
 	 * @return void
 	 */
@@ -99,11 +99,9 @@ class AdapterAddOn extends GFAddOn {
 	}
 
 	/**
-	 * Statically get the instance of this add-on.
-	 *
-	 * @return object $instance Plugin instance.
+	 * Statically gets the instance of this add-on.
 	 */
-	public static function get_instance() {
+	public static function get_instance(): AdapterAddOn {
 		static $instance;
 
 		if ( ! $instance instanceof AdapterAddOn ) {
@@ -115,8 +113,6 @@ class AdapterAddOn extends GFAddOn {
 
 	/**
 	 * Call the parent init method, and add the plugin actions.
-	 *
-	 * @return void
 	 */
 	public function init() {
 		$this->instantiate_classes();
@@ -125,8 +121,6 @@ class AdapterAddOn extends GFAddOn {
 
 	/**
 	 * Instantiate the add-on classes.
-	 *
-	 * @return void
 	 */
 	public function instantiate_classes() {
 		$email_setting = new EmailSetting();
@@ -141,10 +135,8 @@ class AdapterAddOn extends GFAddOn {
 	 *
 	 * Follows the convention for add-ons in the Gravity Forms documentation.
 	 * Uses this class's method do_enqueue() as a callback.
-	 *
-	 * @return array $styles The stylesheets to enqueue..
 	 */
-	public function styles() {
+	public function styles(): array {
 		$styles = [
 			[
 				'handle'  => $this->_slug . '-gravity-style',
