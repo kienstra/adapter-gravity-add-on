@@ -44,13 +44,6 @@ class AdapterAddOn extends GFAddOn {
 	public $_slug = 'adapter-gravity-add-on';
 
 	/**
-	 * Path to the main add-on file.
-	 *
-	 * @var string
-	 */
-	public $_path;
-
-	/**
 	 * Full path to add-on file.
 	 *
 	 * @var string
@@ -58,32 +51,11 @@ class AdapterAddOn extends GFAddOn {
 	public $_full_path = __FILE__;
 
 	/**
-	 * Plugin title.
-	 *
-	 * @var string
-	 */
-	public $_title;
-
-	/**
-	 * Short title.
-	 *
-	 * @var string
-	 */
-	public $_short_title;
-
-	/**
 	 * Whether to enqueue this add-on's styling.
 	 *
 	 * @var boolean
 	 */
 	public $do_enqueue_add_on_styling_by_default = true;
-
-	/**
-	 * Add-on components.
-	 *
-	 * @var array
-	 */
-	public $components = [];
 
 	/**
 	 * Assigns the add-on properties.
@@ -156,7 +128,7 @@ class AdapterAddOn extends GFAddOn {
 	 *
 	 * @return boolean $do_enqueue Whether to enqueue this addon's styling.
 	 */
-	public function do_enqueue() {
+	public function do_enqueue(): bool {
 		/**
 		 * Filter whether to enqueue this add-on's styling.
 		 *
