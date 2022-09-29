@@ -48,7 +48,7 @@ class Plugin {
 		}
 
 		GFForms::include_addon_framework();
-		\GFAddOn::register( __NAMESPACE__ . '\AdapterAddOn' );
+		GFAddOn::register( __NAMESPACE__ . '\AdapterAddOn' );
 	}
 
 	/**
