@@ -7,6 +7,7 @@
 
 namespace AdapterGravityAddOn;
 
+use GFAPI;
 use RGFormsModel;
 
 /**
@@ -23,13 +24,6 @@ class EmailForm {
 	 * @var EmailSetting
 	 */
 	public $email_setting;
-
-	/**
-	 * Whether to use AJAX by default for the Gravity form.
-	 *
-	 * @var string
-	 */
-	public $use_ajax_by_default = true;
 
 	/**
 	 * Construct the class.
@@ -50,16 +44,17 @@ class EmailForm {
 	/**
 	 * Conditionally append a form to the post content.
 	 *
-	 * The form returned from \GFAPI::get_form( $form->id ) has more metadata.
+	 * The form returned from GFAPI::get_form( $form->id ) has more metadata.
 	 * So it's not possible to simply pass $form to $this->do_append_form_to_content().
 	 */
 	public function conditionally_append_form( string $content ): string {
 		$forms = RGFormsModel::get_forms();
 		foreach ( $forms as $form ) {
-			if ( isset( $form->id ) && $this->do_append_form_to_content( \GFAPI::get_form( $form->id ) ) ) {
+			if ( isset( $form->id ) && $this->do_append_form_to_content( GFAPI::get_form( $form->id ) ) ) {
 				return $this->append_form_to_content( $form->id, $content );
 			}
 		}
+
 		return $content;
 	}
 
@@ -85,16 +80,6 @@ class EmailForm {
 	 * Use the form that this class processed.
 	 */
 	public function append_form_to_content( int $form_id, string $content ): string {
-		/**
-		* Whether to use ajax in the Gravity Form at the bottom of a single post.
-		*
-		* @param boolean $do_ajax Whether to use ajax.
-		*/
-		$do_ajax = apply_filters( 'aga_use_ajax_in_form_at_bottom_of_single_post', $this->use_ajax_by_default );
-		if ( ! is_bool( $do_ajax ) ) {
-			$do_ajax = $this->use_ajax_by_default;
-		}
-
-		return $content . gravity_form( $form_id, false, false, false, '', $do_ajax, 1, false );
+		return $content . gravity_form( $form_id, false, false, false, '', true, 1, false );
 	}
 }
