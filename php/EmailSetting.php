@@ -15,26 +15,8 @@ namespace AdapterGravityAddOn;
  */
 class EmailSetting {
 
-	/**
-	 * Instance of the add-on.
-	 *
-	 * @var object
-	 */
-	public $add_on;
-
-	/**
-	 * Bottom of post setting name.
-	 *
-	 * @var string
-	 */
-	public $bottom_of_post = 'aga_bottom_of_post';
-
-	/**
-	 * Horizontal display setting name.
-	 *
-	 * @var string
-	 */
-	public $horizontal_display = 'aga_horizontal_display';
+	public string $bottom_of_post = 'aga_bottom_of_post';
+	public string $horizontal_display = 'aga_horizontal_display';
 
 	/**
 	 * Add the filters for the class.
