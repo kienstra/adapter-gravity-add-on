@@ -79,7 +79,6 @@ class AdapterAddOn extends GFAddOn {
 	 * Get the stylesheet to enqueue.
 	 *
 	 * Follows the convention for add-ons in the Gravity Forms documentation.
-	 * Uses this class's method do_enqueue() as a callback.
 	 */
 	public function styles(): array {
 		return array_merge(

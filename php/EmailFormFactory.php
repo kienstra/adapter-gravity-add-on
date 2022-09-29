@@ -9,6 +9,7 @@ namespace AdapterGravityAddOn;
 
 use GFAPI;
 use GFFormsModel;
+use gravity_form;
 
 /**
  * Handles the front-end display of the email form.
@@ -21,8 +22,11 @@ class EmailFormFactory {
 		return new EmailForm(
 			$email_setting,
 			GFFormsModel::get_forms(),
-			static function ( $form_id ) {
+			static function( $form_id ) {
 				return GFAPI::get_form( $form_id );
+			},
+			static function( ...$args ) {
+				gravity_form( ...$args );
 			}
 		);
 	}

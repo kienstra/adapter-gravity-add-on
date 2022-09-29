@@ -1,0 +1,64 @@
+<?php
+/**
+ * Test for EmailSetting.
+ *
+ * @package AdapterGravityAddOn
+ */
+
+namespace AdapterGravityAddOn;
+
+use Mockery;
+use Brain\Monkey\Functions;
+use PHPUnit\Framework\TestCase;
+
+/**
+ * Test for EmailForm.
+ *
+ * @package AdapterGravityAddOn
+ */
+class EmailSettingTest extends TestCase {
+
+	use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+
+	public function test_get_bottom_of_post_setting() {
+		Functions\expect( '__' )
+			->andReturnFirstArg();
+
+		$this->assertEquals(
+			[
+				'form_options' => [
+					'fields' => [
+						[
+							'name'  => 'aga_bottom_of_post',
+							'type'  => 'toggle',
+							'label' => 'Display at the bottom of every single-post page',
+						],
+					],
+				],
+			],
+			( new EmailSetting(
+			) )->get_bottom_of_post_setting( [] )
+		);
+	}
+
+	public function test_get_horizontal_setting() {
+		Functions\expect( '__' )
+			->andReturnFirstArg();
+
+		$this->assertEquals(
+			[
+				'form_options' => [
+					'fields' => [
+						[
+							'name'  => 'aga_horizontal_display',
+							'type'  => 'toggle',
+							'label' => 'Display form horizontally',
+						],
+					],
+				],
+			],
+			( new EmailSetting(
+			) )->get_horizontal_setting( [] )
+		);
+	}
+}

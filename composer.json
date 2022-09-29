@@ -25,10 +25,15 @@
     "psr-4": {
       "AdapterGravityAddOn\\": "php/"
     }
-  } ,
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AdapterGravityAddOn\\": "tests/"
+    }
+  },
   "scripts": {
     "lint": "phpcs" ,
     "lint-fix": "phpcbf" ,
-    "test": "phpunit"
+    "test": "phpunit --do-not-cache-result"
   }
 }

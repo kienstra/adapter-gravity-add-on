@@ -7,11 +7,6 @@
 
 namespace AdapterGravityAddOn;
 
-use GFAPI;
-use phpDocumentor\Reflection\PseudoTypes\CallableString;
-use phpDocumentor\Reflection\Types\Callable_;
-use RGFormsModel;
-
 /**
  * Handles the front-end display of the email form.
  *
@@ -22,14 +17,16 @@ class EmailForm {
 	private $email_setting;
 	private $forms;
 	private $get_form;
+	private $gravity_form;
 
 	/**
 	 * Construct the class.
 	 */
-	public function __construct( $email_setting, $forms, $get_form ) {
+	public function __construct( $email_setting, $forms, $get_form, $gravity_form ) {
 		$this->email_setting = $email_setting;
 		$this->forms         = $forms;
 		$this->get_form      = $get_form;
+		$this->gravity_form  = $gravity_form;
 	}
 
 	/**
@@ -77,6 +74,6 @@ class EmailForm {
 	 * Use the form that this class processed.
 	 */
 	public function append_form_to_content( int $form_id, string $content ): string {
-		return $content . gravity_form( $form_id, false, false, false, '', true, 1, false );
+		return $content . call_user_func( $this->gravity_form, $form_id, false, false, false, '', true, 1, false );
 	}
 }
