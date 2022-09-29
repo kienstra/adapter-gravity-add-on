@@ -31,8 +31,7 @@ jobs:
           command: |
             composer zip
       - store_artifacts:
-            path: ~/project
-            destination: adapter-gravity-add-on.zip
+            path: ~/project/adapter-gravity-add-on.zip
 
 workflows:
   test-flow:
