@@ -5,6 +5,7 @@
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax" />
 		<exclude name="WordPress.Files.FileName" />
 		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
+		<exclude name="Squiz.Commenting.VariableComment.Missing" />
 	</rule>
 
 	<rule ref="WordPress-Docs" />

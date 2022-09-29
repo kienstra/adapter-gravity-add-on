@@ -22,40 +22,13 @@ use GFAddOn;
  */
 class AdapterAddOn extends GFAddOn {
 
-	/**
-	 * Plugin version.
-	 *
-	 * @var string
-	 */
-	public $_version = '1.0.2';
-
-	/**
-	 * Minimum version of Gravity Forms allowed.
-	 *
-	 * @var string
-	 */
-	public $_min_gravityforms_version = '1.9';
-
-	/**
-	 * Add-on slug.
-	 *
-	 * @var string
-	 */
-	public $_slug = 'adapter-gravity-add-on';
-
-	/**
-	 * Full path to add-on file.
-	 *
-	 * @var string
-	 */
-	public $_full_path = __FILE__;
-
-	/**
-	 * Whether to enqueue this add-on's styling.
-	 *
-	 * @var boolean
-	 */
-	public $do_enqueue_add_on_styling_by_default = true;
+	public string $_version                           = '1.0.2';
+	public string $_min_gravityforms_version          = '1.9';
+	public string $_slug                              = 'adapter-gravity-add-on';
+	public string $_full_path                         = __FILE__;
+	public bool $do_enqueue_add_on_styling_by_default = true;
+	public EmailForm $email_form;
+	public EmailSetting $email_setting;
 
 	/**
 	 * Assigns the add-on properties.
@@ -92,8 +65,8 @@ class AdapterAddOn extends GFAddOn {
 	}
 
 	/**
-	 * Instantiate the add-on classes.
-	 */
+-	 * Instantiate the add-on classes.
+-	 */
 	public function instantiate_classes() {
 		$email_setting = new EmailSetting();
 		$email_form    = new EmailForm( $email_setting );
@@ -109,18 +82,19 @@ class AdapterAddOn extends GFAddOn {
 	 * Uses this class's method do_enqueue() as a callback.
 	 */
 	public function styles(): array {
-		$styles = [
+		return array_merge(
+			parent::styles(),
 			[
-				'handle'  => $this->_slug . '-gravity-style',
-				'src'     => plugins_url( $this->_slug . '/css/aga-gravity.css' ),
-				'version' => $this->_version,
-				'enqueue' => [
-					[ $this, 'do_enqueue' ],
+				[
+					'handle'  => $this->_slug . '-gravity-style',
+					'src'     => plugins_url( $this->_slug . '/css/aga-gravity.css' ),
+					'version' => $this->_version,
+					'enqueue' => [
+						[ $this, 'do_enqueue' ],
+					],
 				],
-			],
-		];
-
-		return array_merge( parent::styles(), $styles );
+			]
+		);
 	}
 
 	/**
