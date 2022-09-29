@@ -38,8 +38,6 @@ class EmailSetting {
 
 	/**
 	 * Add the filters for the class.
-	 *
-	 * @return void
 	 */
 	public function init() {
 		add_filter( 'gform_form_settings_fields', [ $this, 'get_bottom_of_post_setting' ] );
@@ -51,11 +49,8 @@ class EmailSetting {
 	 *
 	 * In the 'Form Layout' section of the 'Form Settings' page.
 	 * If this checkbox is checked, the form will display at the bottom of every post.
-	 *
-	 * @param array $fields Associated with forms.
-	 * @return array $fields Now with options to place the label inline and at the bottom.
 	 */
-	public function get_bottom_of_post_setting( $fields ) {
+	public function get_bottom_of_post_setting( array $fields ): array {
 		$fields['form_options']['fields'][] = [
 			'name'  => $this->bottom_of_post,
 			'type'  => 'toggle',
@@ -70,11 +65,8 @@ class EmailSetting {
 	 *
 	 * In the 'Form Layout' section of the 'Form Settings' page.
 	 * When checked, this checkbox adds a class to the form, which causes it to display horizontally.
-	 *
-	 * @param array $fields Associated with forms.
-	 * @return array  $fields Now with options to place the label inline and at the bottom.
 	 */
-	public function get_horizontal_setting( $fields ) {
+	public function get_horizontal_setting( array $fields ): array {
 		$fields['form_options']['fields'][] = [
 			'name'  => $this->horizontal_display,
 			'type'  => 'toggle',

@@ -40,8 +40,6 @@ class Plugin {
 	 *
 	 * If the needed Gravity Forms method does not exist, display an admin error and return.
 	 * Otherwise, require and register the main add-on file.
-	 *
-	 * @return void|null
 	 */
 	public function register() {
 		if ( ! method_exists( 'GFForms', 'include_addon_framework' ) ) {
@@ -55,8 +53,6 @@ class Plugin {
 
 	/**
 	 * Admin error message if Gravity Forms does not appear to be installed.
-	 *
-	 * @return void
 	 */
 	public function gravity_not_installed() {
 		?>

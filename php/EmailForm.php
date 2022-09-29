@@ -19,39 +19,11 @@ use RGFormsModel;
 class EmailForm {
 
 	/**
-	 * Instance of this add-on.
+	 * Instance of EmailSetting.
 	 *
-	 * @var object
+	 * @var EmailSetting
 	 */
 	public $email_setting;
-
-	/**
-	 * Class that causes a horizontal display.
-	 *
-	 * @var string
-	 */
-	public $horizontal_class = 'gform-inline';
-
-	/**
-	 * Key for the form's CSS class setting.
-	 *
-	 * @var string
-	 */
-	public $css_class_setting = 'cssClass';
-
-	/**
-	 * Default class of the input tags.
-	 *
-	 * @var string
-	 */
-	public $default_class_of_input = 'form-control';
-
-	/**
-	 * Default classes of the submit button.
-	 *
-	 * @var string
-	 */
-	public $default_submit_button_classes = 'btn btn-primary btn-med';
 
 	/**
 	 * Whether to use AJAX by default for the Gravity form.
@@ -71,14 +43,10 @@ class EmailForm {
 
 	/**
 	 * Add the filters for the class.
-	 *
-	 * @return void
 	 */
 	public function init() {
 		add_filter( 'gform_pre_render', [ $this, 'conditionally_display_form_horizontally' ] );
 		add_filter( 'the_content', [ $this, 'conditionally_append_form' ], 100 );
-		add_filter( 'gform_field_content', [ $this, 'set_class_of_input' ], 12, 5 );
-		add_filter( 'gform_submit_button', [ $this, 'submit_button' ], 10, 2 );
 	}
 
 	/**
@@ -111,11 +79,8 @@ class EmailForm {
 	 *
 	 * The form returned from \GFAPI::get_form( $form->id ) has more metadata.
 	 * So it's not possible to simply pass $form to $this->do_append_form_to_content().
-	 *
-	 * @param string $content Post content.
-	 * @return string $content Post content, possibly filtered.
 	 */
-	public function conditionally_append_form( $content ) {
+	public function conditionally_append_form( string $content ): string {
 		$forms = RGFormsModel::get_forms();
 		foreach ( $forms as $form ) {
 			if ( isset( $form->id ) && $this->do_append_form_to_content( \GFAPI::get_form( $form->id ) ) ) {
@@ -127,11 +92,8 @@ class EmailForm {
 
 	/**
 	 * Whether to append a form to the content.
-	 *
-	 * @param array $form Gravity Form.
-	 * @return boolean $do_append Whether to append the form to the post content.
 	 */
-	public function do_append_form_to_content( $form ) {
+	public function do_append_form_to_content( array $form ): bool {
 		return (
 			isset( $form[ $this->email_setting->bottom_of_post ] )
 			&&
@@ -148,12 +110,8 @@ class EmailForm {
 	 *
 	 * Filter callback for 'the_content.'
 	 * Use the form that this class processed.
-	 *
-	 * @param int    $form_id ID of the Gravity Form.
-	 * @param string $content Post content to filter.
-	 * @return string $content Filtered post content markup.
 	 */
-	public function append_form_to_content( $form_id, $content ) {
+	public function append_form_to_content( int $form_id, string $content ): string {
 		/**
 		* Whether to use ajax in the Gravity Form at the bottom of a single post.
 		*
@@ -166,59 +124,4 @@ class EmailForm {
 
 		return $content . gravity_form( $form_id, false, false, false, '', $do_ajax, 1, false );
 	}
-
-	/**
-	 * Filter callback to add a class to the input element.
-	 *
-	 * @action gform_field_content
-	 * @param string  $content Field content.
-	 * @param object  $field For the input tag.
-	 * @param string  $value Initial value of the field.
-	 * @param integer $lead_id Set to $entry_id or 0.
-	 * @param int     $form_id ID of the Gravity Form.
-	 * @return string $content Filtered, and now includes a class in the <input> elements.
-	 */
-	public function set_class_of_input( $content, $field, $value, $lead_id, $form_id ) {
-
-		/**
-		* New class(es) for Gravity Form inputs.
-		*
-		* Add class(es) to input elements of type "text" or "email".
-		*
-		* @param string $class New class(es) of the input, space-separated.
-		* @param int $form_id The id of the Gravity Form.
-		*/
-		$new_class = apply_filters( 'gravity_form_input_class', $this->default_class_of_input, $form_id );
-
-		return preg_replace( '/(<input[^>]*?type=\'(text|email)\'[^>]*?(class=\'))/', '$1' . esc_attr( $new_class ) . ' ', $content );
-	}
-
-	/**
-	 * Get the submit button with added classes.
-	 *
-	 * @param string $button_input Button to filter.
-	 * @param object $form Current Gravity form.
-	 * @return string $filtered_button Markup of button, with new class(es).
-	 */
-	public function submit_button( $button_input, $form ) {
-
-		/**
-		* New class(es) for Gravity Form submit buttons.
-		*
-		* @param string $class New class(es) of the input, space-separated.
-		* @param object $form The current form.
-		*/
-		$new_classes = apply_filters( 'aga_submit_button_classes', $this->default_submit_button_classes, $form );
-
-		$class_attribute = 'class="';
-		if ( false !== strpos( $button_input, $class_attribute ) ) {
-			$class_attribute_with_new_classes = $class_attribute . esc_attr( $new_classes ) . ' ';
-			return str_replace( $class_attribute, $class_attribute_with_new_classes, $button_input );
-		} else {
-			$opening_input          = '<input';
-			$input_with_new_classes = $opening_input . ' class="' . esc_attr( $new_classes ) . '"';
-			return str_replace( $opening_input, $input_with_new_classes, $button_input );
-		}
-	}
-
 }
