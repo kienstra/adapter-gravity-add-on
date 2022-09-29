@@ -8,8 +8,6 @@
 namespace AdapterGravityAddOn;
 
 use GFAddOn;
-use GFAPI;
-use GFFormsModel;
 
 // phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
 
@@ -17,7 +15,7 @@ use GFFormsModel;
  * Add-on class.
  *
  * Mainly follows the add-on conventions from the Gravity Forms documentation.
- * The properties in this override those defined in \GFAddOn.
+ * The properties in this override those defined in GFAddOn.
  * So their names are predetermined.
  *
  * @see https://www.gravityhelp.com/documentation/article/gfaddon
