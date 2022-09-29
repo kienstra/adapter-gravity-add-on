@@ -12,7 +12,7 @@ namespace AdapterGravityAddOn;
  *
  * @package AdapterGravityAddOn
  */
-class Test_Plugin extends Test_Adapter_Gravity_Add_On {
+class PluginTest extends Test_Adapter_Gravity_Add_On {
 
 	/**
 	 * Instance of Plugin.
@@ -47,7 +47,7 @@ class Test_Plugin extends Test_Adapter_Gravity_Add_On {
 	 * @see Plugin::__construct().
 	 */
 	public function test_construct() {
-		$this->assertEquals( 5, has_action( 'gform_loaded', array( $this->instance, 'register' ) ) );
+		$this->assertEquals( 5, has_action( 'gform_loaded', [ $this->instance, 'register' ] ) );
 		$this->assertEquals( '1.9', $this->instance->_min_gravityforms_version );
 	}
 

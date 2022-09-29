@@ -33,14 +33,16 @@ class Test_Adapter_Gravity_Add_On extends \WP_UnitTestCase {
 		$dependency_name = __( 'Gravity Forms', 'adapter-gravity-add-on' );
 
 		if ( ! file_exists( $dependency_file ) ) {
-			$this->markTestSkipped( sprintf(
+			$this->markTestSkipped(
+				sprintf(
 				/* translators: %s: dependency name */
-				__( 'Cannot test the Adapter Gravity Add On because the %s dependency is not present.', 'adapter-gravity-add-on' ),
-				$dependency_name
-			) );
+					__( 'Cannot test the Adapter Gravity Add On because the %s dependency is not present.', 'adapter-gravity-add-on' ),
+					$dependency_name
+				)
+			);
 			return;
 		} else {
-			include_once( $dependency_file );
+			include_once $dependency_file;
 		}
 
 		$this->instance = Plugin::get_instance();

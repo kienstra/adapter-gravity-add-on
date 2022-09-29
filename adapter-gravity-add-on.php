@@ -15,8 +15,7 @@ Description: Add-on for Gravity Forms, with options for inline display, and show
 Version: 1.0.2
 Author: Ryan Kienstra
 Author URI: http://ryankienstra.com
-License: GPL2
+License: GPL2+
 */
 
-require_once dirname( __FILE__ ) . '/php/class-plugin.php';
-Plugin::get_instance();
+( new Plugin() )->init();

@@ -23,28 +23,13 @@ class Plugin {
 	 *
 	 * @var string
 	 */
-	public $_min_gravityforms_version = '1.9';
-
-	/**
-	 * Get the instance of this plugin
-	 *
-	 * @return object $instance Plugin instance.
-	 */
-	public static function get_instance() {
-		static $instance;
-
-		if ( ! $instance instanceof Plugin ) {
-			$instance = new Plugin();
-		}
-
-		return $instance;
-	}
+	private string $min_gravityforms_version = '1.9';
 
 	/**
 	 * Load this add-on with the Gravity Forms add-on hook.
 	 */
-	private function __construct() {
-		add_action( 'gform_loaded', array( $this, 'register' ), 5 );
+	public function init() {
+		add_action( 'gform_loaded', [ $this, 'register' ], 5 );
 	}
 
 	/**
@@ -57,9 +42,10 @@ class Plugin {
 	 */
 	public function register() {
 		if ( ! method_exists( 'GFForms', 'include_addon_framework' ) ) {
-			add_action( 'admin_notices', array( $this, 'gravity_not_installed' ) );
+			add_action( 'admin_notices', [ $this, 'gravity_not_installed' ] );
 			return;
 		}
+
 		\GFForms::include_addon_framework();
 		require_once dirname( __FILE__ ) . '/class-adapter-add-on.php';
 		\GFAddOn::register( __NAMESPACE__ . '\Adapter_Add_On' );
@@ -70,13 +56,12 @@ class Plugin {
 	 *
 	 * @return void
 	 */
-	function gravity_not_installed() {
+	public function gravity_not_installed() {
 		?>
 		<div class="error">
 			<?php /* translators: %s: minimum Gravity Forms version */ ?>
-			<p><?php printf( esc_html__( 'In order to use the Adapter Gravity Add-On plugin, please install and activate Gravity Forms %s or higher.', 'adapter-gravity-add-on' ), esc_html( $this->_min_gravityforms_version ) ); ?></p>
+			<p><?php printf( esc_html__( 'In order to use the Adapter Gravity Add-On plugin, please install and activate Gravity Forms %s or higher.', 'adapter-gravity-add-on' ), esc_html( $this->min_gravityforms_version ) ); ?></p>
 		</div>
 		<?php
 	}
-
 }

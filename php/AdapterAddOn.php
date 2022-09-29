@@ -7,6 +7,8 @@
 
 namespace AdapterGravityAddOn;
 
+// phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
+
 /**
  * Add-on class.
  *
@@ -16,7 +18,7 @@ namespace AdapterGravityAddOn;
  *
  * @see https://www.gravityhelp.com/documentation/article/gfaddon
  */
-class Adapter_Add_On extends \GFAddOn {
+class AdapterAddOn extends \GFAddOn {
 
 	/**
 	 * Plugin version.
@@ -79,7 +81,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 *
 	 * @var array
 	 */
-	public $components = array();
+	public $components = [];
 
 	/**
 	 * Statically get the instance of this add-on.
@@ -103,8 +105,8 @@ class Adapter_Add_On extends \GFAddOn {
 	 */
 	public function pre_init() {
 		parent::pre_init();
-		$this->_path = $this->_slug . '/php/class-adapter-add-on.php';
-		$this->_title = __( 'Adapter Gravity Add On', 'adapter-gravity-add-on' );
+		$this->_path        = $this->_slug . '/php/class-adapter-add-on.php';
+		$this->_title       = __( 'Adapter Gravity Add On', 'adapter-gravity-add-on' );
 		$this->_short_title = __( 'Adapter Add On', 'adapter-gravity-add-on' );
 	}
 
@@ -115,30 +117,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 */
 	public function init() {
 		parent::init();
-		$this->load_add_on_files();
 		$this->instantiate_classes();
-		add_action( 'init', array( $this, 'textdomain' ) );
-	}
-
-	/**
-	 * Load the textdomain for the add-on, enabling translation.
-	 *
-	 * @action init
-	 * @return void
-	 */
-	public function textdomain() {
-		load_plugin_textdomain( $this->_slug );
-	}
-
-	/**
-	 * Load the add-on files.
-	 *
-	 * @return void
-	 */
-	public function load_add_on_files() {
-		require_once __DIR__ . '/class-email-setting.php';
-		require_once __DIR__ . '/class-email-form.php';
-		require_once __DIR__ . '/class-layout-setting.php';
 	}
 
 	/**
@@ -148,7 +127,7 @@ class Adapter_Add_On extends \GFAddOn {
 	 */
 	public function instantiate_classes() {
 		$this->components['email_setting'] = new Email_Setting( $this );
-		$this->components['email_form'] = new Email_Form( $this );
+		$this->components['email_form']    = new Email_Form( $this );
 		$this->components['email_setting']->init();
 		$this->components['email_form']->init();
 	}
@@ -162,16 +141,16 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return array $styles The stylesheets to enqueue..
 	 */
 	public function styles() {
-		$styles = array(
-			array(
+		$styles = [
+			[
 				'handle'  => $this->_slug . '-gravity-style',
 				'src'     => plugins_url( $this->_slug . '/css/aga-gravity.css' ),
 				'version' => $this->_version,
-				'enqueue' => array(
-					array( $this, 'do_enqueue' ),
-				),
-			),
-		);
+				'enqueue' => [
+					[ $this, 'do_enqueue' ],
+				],
+			],
+		];
 
 		return array_merge( parent::styles(), $styles );
 	}
@@ -182,14 +161,12 @@ class Adapter_Add_On extends \GFAddOn {
 	 * @return boolean $do_enqueue Whether to enqueue this addon's styling.
 	 */
 	public function do_enqueue() {
-
 		/**
 		 * Filter whether to enqueue this add-on's styling.
 		 *
 		 * @param boolean $do_enqueue Whether to enqueue styling.
 		 */
-		$do_enqueue = apply_filters( 'aga_do_enqueue_css', $this->do_enqueue_add_on_styling_by_default );
-		return ( $do_enqueue && ( ! is_admin() ) );
+		return apply_filters( 'aga_do_enqueue_css', ! is_admin() );
 	}
 
 }

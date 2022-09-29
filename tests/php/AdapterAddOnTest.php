@@ -8,14 +8,14 @@
 namespace AdapterGravityAddOn;
 
 // Include test class in order to load dependency file in Test_Adapter_Gravity_Add_On::setUp().
-include_once( dirname( __FILE__ ) . '/../test-adapter-gravity-add-on.php' );
+require_once dirname( __FILE__ ) . '/../AdapterGravityAddOnTest.php';
 
 /**
  * Tests for class Adapter_Add_On.
  *
  * @package AdapterGravityAddOn
  */
-class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
+class AdapterAddOnTest extends AdapterGravityAddOnTest {
 
 	/**
 	 * Setup.
@@ -63,7 +63,7 @@ class Test_Class_Adapter_Add_On extends Test_Adapter_Gravity_Add_On {
 	 */
 	public function test_textdomain() {
 		$this->instance->init();
-		$this->assertEquals( 10, has_action( 'init', array( $this->instance, 'textdomain' ) ) );
+		$this->assertEquals( 10, has_action( 'init', [ $this->instance, 'textdomain' ] ) );
 	}
 
 	/**

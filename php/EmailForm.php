@@ -13,7 +13,7 @@ namespace AdapterGravityAddOn;
  * Based on the settings, displays a form at the end of posts, and/or horizontally.
  * Also, adds classes to <input> elements of type 'text,' 'email,' and 'submit.'
  */
-class Email_Form {
+class EmailForm {
 
 	/**
 	 * Instance of this add-on.
@@ -72,10 +72,10 @@ class Email_Form {
 	 * @return void
 	 */
 	public function init() {
-		add_filter( 'gform_pre_render', array( $this, 'conditionally_display_form_horizontally' ) );
-		add_filter( 'the_content', array( $this, 'conditionally_append_form' ), 100 );
-		add_filter( 'gform_field_content', array( $this, 'set_class_of_input' ), 12, 5 );
-		add_filter( 'gform_submit_button', array( $this, 'submit_button' ), 10, 2 );
+		add_filter( 'gform_pre_render', [ $this, 'conditionally_display_form_horizontally' ] );
+		add_filter( 'the_content', [ $this, 'conditionally_append_form' ], 100 );
+		add_filter( 'gform_field_content', [ $this, 'set_class_of_input' ], 12, 5 );
+		add_filter( 'gform_submit_button', [ $this, 'submit_button' ], 10, 2 );
 	}
 
 	/**
@@ -219,7 +219,7 @@ class Email_Form {
 			$class_attribute_with_new_classes = $class_attribute . esc_attr( $new_classes ) . ' ';
 			return str_replace( $class_attribute, $class_attribute_with_new_classes, $button_input );
 		} else {
-			$opening_input = '<input';
+			$opening_input          = '<input';
 			$input_with_new_classes = $opening_input . ' class="' . esc_attr( $new_classes ) . '"';
 			return str_replace( $opening_input, $input_with_new_classes, $button_input );
 		}

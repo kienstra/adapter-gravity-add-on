@@ -8,14 +8,14 @@
 namespace AdapterGravityAddOn;
 
 // Include test class in order to load dependency file in Test_Adapter_Gravity_Add_On::setUp().
-include_once( dirname( __FILE__ ) . '/../test-adapter-gravity-add-on.php' );
+require_once dirname( __FILE__ ) . '/../AdapterGravityAddOnTest.php';
 
 /**
  * Tests for class Adapter_Add_Onn.
  *
  * @package AdapterGravityAddOn
  */
-class Test_Class_Email_Setting extends Test_Adapter_Gravity_Add_On {
+class EmailSettingTest extends Test_Adapter_Gravity_Add_On {
 
 	/**
 	 * Instance of plugin.
@@ -38,7 +38,7 @@ class Test_Class_Email_Setting extends Test_Adapter_Gravity_Add_On {
 	 */
 	public function setUp() {
 		parent::setUp();
-		$this->add_on = Adapter_Add_On::get_instance();
+		$this->add_on   = Adapter_Add_On::get_instance();
 		$this->instance = $this->add_on->components['email_setting'];
 	}
 
@@ -59,9 +59,9 @@ class Test_Class_Email_Setting extends Test_Adapter_Gravity_Add_On {
 		$this->instance->init();
 		$this->assertEquals( 'aga_bottom_of_post', $this->instance->bottom_of_post );
 		$this->assertEquals( 'aga_horizontal_display', $this->instance->horizontal_display );
-		$this->assertEquals( 10, has_filter( 'gform_form_settings', array( $this->instance, 'get_bottom_of_post_setting' ) ) );
-		$this->assertEquals( 10, has_filter( 'gform_form_settings', array( $this->instance, 'get_horizontal_setting' ) ) );
-		$this->assertEquals( 10, has_filter( 'gform_pre_form_settings_save', array( $this->instance, 'save_settings' ) ) );
+		$this->assertEquals( 10, has_filter( 'gform_form_settings', [ $this->instance, 'get_bottom_of_post_setting' ] ) );
+		$this->assertEquals( 10, has_filter( 'gform_form_settings', [ $this->instance, 'get_horizontal_setting' ] ) );
+		$this->assertEquals( 10, has_filter( 'gform_pre_form_settings_save', [ $this->instance, 'save_settings' ] ) );
 	}
 
 	/**
@@ -70,25 +70,25 @@ class Test_Class_Email_Setting extends Test_Adapter_Gravity_Add_On {
 	 * @see Email_Setting::get_bottom_of_post_setting().
 	 */
 	public function test_get_bottom_of_post_setting() {
-		$layout_key = 'Form Layout';
-		$initial_settings = array(
-			$layout_key => array(),
-		);
-		$form = array(
+		$layout_key       = 'Form Layout';
+		$initial_settings = [
+			$layout_key => [],
+		];
+		$form             = [
 			$this->instance->bottom_of_post => '1',
-		);
-		$actual_settings = $this->instance->get_bottom_of_post_setting( $initial_settings, $form );
-		$markup = $actual_settings[ $layout_key ][ $this->instance->bottom_of_post ];
+		];
+		$actual_settings  = $this->instance->get_bottom_of_post_setting( $initial_settings, $form );
+		$markup           = $actual_settings[ $layout_key ][ $this->instance->bottom_of_post ];
 
 		$this->assertContains( $this->instance->bottom_of_post, $markup );
 		$this->assertContains( 'Display at the bottom of every single-post page', $markup );
 		$this->assertContains( 'checked=\'checked\'', $markup );
 
-		$form_not_checked = array(
+		$form_not_checked            = [
 			$this->instance->bottom_of_post => '',
-		);
+		];
 		$actual_settings_not_checked = $this->instance->get_bottom_of_post_setting( $initial_settings, $form_not_checked );
-		$markup_not_checked = $actual_settings_not_checked[ $layout_key ][ $this->instance->bottom_of_post ];
+		$markup_not_checked          = $actual_settings_not_checked[ $layout_key ][ $this->instance->bottom_of_post ];
 		$this->assertNotContains( 'checked=\'checked\'', $markup_not_checked );
 	}
 
@@ -98,25 +98,25 @@ class Test_Class_Email_Setting extends Test_Adapter_Gravity_Add_On {
 	 * @see Email_Setting::get_get_horizontal_setting().
 	 */
 	public function test_get_horizontal_setting() {
-		$layout_key = 'Form Layout';
-		$initial_settings = array(
-			$layout_key => array(),
-		);
-		$form = array(
+		$layout_key       = 'Form Layout';
+		$initial_settings = [
+			$layout_key => [],
+		];
+		$form             = [
 			$this->instance->horizontal_display => '1',
-		);
-		$actual_settings = $this->instance->get_horizontal_setting( $initial_settings, $form );
-		$markup = $actual_settings[ $layout_key ][ $this->instance->horizontal_display ];
+		];
+		$actual_settings  = $this->instance->get_horizontal_setting( $initial_settings, $form );
+		$markup           = $actual_settings[ $layout_key ][ $this->instance->horizontal_display ];
 
 		$this->assertContains( $this->instance->horizontal_display, $markup );
 		$this->assertContains( 'Display form horizontally', $markup );
 		$this->assertContains( 'checked=\'checked\'', $markup );
 
-		$form_not_checked = array(
+		$form_not_checked            = [
 			$this->instance->horizontal_display => '',
-		);
+		];
 		$actual_settings_not_checked = $this->instance->get_bottom_of_post_setting( $initial_settings, $form_not_checked );
-		$markup_not_checked = $actual_settings_not_checked[ $layout_key ][ $this->instance->bottom_of_post ];
+		$markup_not_checked          = $actual_settings_not_checked[ $layout_key ][ $this->instance->bottom_of_post ];
 		$this->assertNotContains( 'checked=\'checked\'', $markup_not_checked );
 	}
 
@@ -126,22 +126,22 @@ class Test_Class_Email_Setting extends Test_Adapter_Gravity_Add_On {
 	 * @see Email_Setting::save_settings().
 	 */
 	public function test_save_settings() {
-		$form = array();
-		$bottom_of_post = '1';
-		$horizontal_display = '';
+		$form                                     = [];
+		$bottom_of_post                           = '1';
+		$horizontal_display                       = '';
 		$_POST[ $this->instance->bottom_of_post ] = $bottom_of_post;
 		$_POST[ $this->instance->horizontal_display ] = $horizontal_display;
-		$actual_form = $this->instance->save_settings( $form );
+		$actual_form                                  = $this->instance->save_settings( $form );
 		$this->assertEquals( $bottom_of_post, $actual_form[ $this->instance->bottom_of_post ] );
 		$this->assertEquals( $horizontal_display, $actual_form[ $this->instance->horizontal_display ] );
 
 		// If the values aren't in $_POST, they should be '' in the returned form.
-		$_POST = array();
+		$_POST                 = [];
 		$actual_form_no_values = $this->instance->save_settings( $form );
 		$this->assertEquals( '', $actual_form_no_values[ $this->instance->bottom_of_post ] );
 		$this->assertEquals( '', $actual_form_no_values[ $this->instance->horizontal_display ] );
 
-		$form_non_array = new \stdClass();
+		$form_non_array        = new \stdClass();
 		$actual_form_non_array = $this->instance->save_settings( $form_non_array );
 		$this->assertEquals( 'stdClass', get_class( $actual_form_non_array ) );
 		$this->assertEquals( $form_non_array, $actual_form_non_array );
