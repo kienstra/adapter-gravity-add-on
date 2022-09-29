@@ -47,8 +47,7 @@ class Plugin {
 		}
 
 		\GFForms::include_addon_framework();
-		require_once dirname( __FILE__ ) . '/class-adapter-add-on.php';
-		\GFAddOn::register( __NAMESPACE__ . '\Adapter_Add_On' );
+		\GFAddOn::register( __NAMESPACE__ . '\AdapterAddOn' );
 	}
 
 	/**

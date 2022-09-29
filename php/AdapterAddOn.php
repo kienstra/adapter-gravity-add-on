@@ -84,30 +84,16 @@ class AdapterAddOn extends \GFAddOn {
 	public $components = [];
 
 	/**
-	 * Statically get the instance of this add-on.
-	 *
-	 * @return object $instance Plugin instance.
-	 */
-	public static function get_instance() {
-		static $instance;
-
-		if ( ! $instance instanceof Adapter_Add_On ) {
-			$instance = new Adapter_Add_On();
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * Assign add-on properties.
 	 *
 	 * @return void
 	 */
-	public function pre_init() {
-		parent::pre_init();
-		$this->_path        = $this->_slug . '/php/class-adapter-add-on.php';
+	public function __construct() {
+		$this->_path        = $this->_slug . '/php/AdapterAddOn.php';
 		$this->_title       = __( 'Adapter Gravity Add On', 'adapter-gravity-add-on' );
 		$this->_short_title = __( 'Adapter Add On', 'adapter-gravity-add-on' );
+
+		parent::__construct();
 	}
 
 	/**
@@ -126,8 +112,8 @@ class AdapterAddOn extends \GFAddOn {
 	 * @return void
 	 */
 	public function instantiate_classes() {
-		$this->components['email_setting'] = new Email_Setting( $this );
-		$this->components['email_form']    = new Email_Form( $this );
+		$this->components['email_setting'] = new EmailSetting( $this );
+		$this->components['email_form']    = new EmailForm( $this );
 		$this->components['email_setting']->init();
 		$this->components['email_form']->init();
 	}

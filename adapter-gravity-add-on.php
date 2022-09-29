@@ -18,4 +18,6 @@ Author URI: http://ryankienstra.com
 License: GPL2+
 */
 
+require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+
 ( new Plugin() )->init();
