@@ -9,7 +9,7 @@ namespace AdapterGravityAddOn;
 
 use GFAPI;
 use GFFormsModel;
-use gravity_form;
+use function gravity_form;
 
 /**
  * Handles the front-end display of the email form.
