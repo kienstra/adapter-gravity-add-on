@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  php-lint:
+    docker:
+      - image: cimg/php:8.0
+    steps:
+      - checkout
+      - run:
+          name: Linting PHP
+          command: |
+            composer i
+            composer lint
+
+workflows:
+  test-flow:
+    jobs:
+      - php-lint
