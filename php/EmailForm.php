@@ -7,6 +7,9 @@
 
 namespace AdapterGravityAddOn;
 
+use JetBrains\PhpStorm\Pure;
+use RGFormsModel;
+
 /**
  * Handles the front-end display of the email form.
  *
@@ -80,25 +83,18 @@ class EmailForm {
 
 	/**
 	 * Conditionally append a form to the post content.
-	 *
-	 * @param array $form Gravity form.
-	 * @return array $form Gravity form, possibly with altered content.
 	 */
-	public function conditionally_display_form_horizontally( $form ) {
+	public function conditionally_display_form_horizontally( array $form ): array {
 		$horizontal_setting = $this->email_setting->horizontal_display;
-		if ( isset( $form[ $horizontal_setting ] ) && ( '1' === $form[ $horizontal_setting ] ) ) {
-			return $this->add_horizontal_display( $form );
-		}
-		return $form;
+		return isset( $form[ $horizontal_setting ] ) && '1' === $form[ $horizontal_setting ]
+			? $this->add_horizontal_display( $form )
+			: $form;
 	}
 
 	/**
 	 * Add a class to display the form horizontally.
-	 *
-	 * @param array $form Gravity form.
-	 * @return array $form Possibly with altered properties.
 	 */
-	public function add_horizontal_display( $form ) {
+	public function add_horizontal_display( array $form ): array {
 		$setting = 'cssClass';
 		if ( ! isset( $form[ $this->css_class_setting ] ) ) {
 			return $form;
@@ -120,7 +116,7 @@ class EmailForm {
 	 * @return string $content Post content, possibly filtered.
 	 */
 	public function conditionally_append_form( $content ) {
-		$forms = \RGFormsModel::get_forms( null, 'title' );
+		$forms = RGFormsModel::get_forms();
 		foreach ( $forms as $form ) {
 			if ( isset( $form->id ) && $this->do_append_form_to_content( \GFAPI::get_form( $form->id ) ) ) {
 				return $this->append_form_to_content( $form->id, $content );
