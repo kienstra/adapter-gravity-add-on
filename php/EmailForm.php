@@ -7,7 +7,6 @@
 
 namespace AdapterGravityAddOn;
 
-use JetBrains\PhpStorm\Pure;
 use RGFormsModel;
 
 /**
@@ -45,33 +44,7 @@ class EmailForm {
 	 * Add the filters for the class.
 	 */
 	public function init() {
-		add_filter( 'gform_pre_render', [ $this, 'conditionally_display_form_horizontally' ] );
 		add_filter( 'the_content', [ $this, 'conditionally_append_form' ], 100 );
-	}
-
-	/**
-	 * Conditionally append a form to the post content.
-	 */
-	public function conditionally_display_form_horizontally( array $form ): array {
-		$horizontal_setting = $this->email_setting->horizontal_display;
-		return isset( $form[ $horizontal_setting ] ) && '1' === $form[ $horizontal_setting ]
-			? $this->add_horizontal_display( $form )
-			: $form;
-	}
-
-	/**
-	 * Add a class to display the form horizontally.
-	 */
-	public function add_horizontal_display( array $form ): array {
-		$setting = 'cssClass';
-		if ( ! isset( $form[ $this->css_class_setting ] ) ) {
-			return $form;
-		} elseif ( '' === $form[ $this->css_class_setting ] ) {
-			$form[ $this->css_class_setting ] = $this->horizontal_class;
-		} elseif ( false === strpos( $form[ $setting ], $this->horizontal_class ) ) {
-			$form[ $this->css_class_setting ] = $form[ $this->css_class_setting ] . ' ' . $this->horizontal_class;
-		}
-		return $form;
 	}
 
 	/**
