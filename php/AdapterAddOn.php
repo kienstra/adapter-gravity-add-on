@@ -7,6 +7,8 @@
 
 namespace AdapterGravityAddOn;
 
+use GFAddOn;
+
 // phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
 
 /**
@@ -18,7 +20,7 @@ namespace AdapterGravityAddOn;
  *
  * @see https://www.gravityhelp.com/documentation/article/gfaddon
  */
-class AdapterAddOn extends \GFAddOn {
+class AdapterAddOn extends GFAddOn {
 
 	/**
 	 * Plugin version.
@@ -97,13 +99,28 @@ class AdapterAddOn extends \GFAddOn {
 	}
 
 	/**
+	 * Statically get the instance of this add-on.
+	 *
+	 * @return object $instance Plugin instance.
+	 */
+	public static function get_instance() {
+		static $instance;
+
+		if ( ! $instance instanceof AdapterAddOn ) {
+			$instance = new AdapterAddOn();
+		}
+
+		return $instance;
+	}
+
+	/**
 	 * Call the parent init method, and add the plugin actions.
 	 *
 	 * @return void
 	 */
 	public function init() {
-		parent::init();
 		$this->instantiate_classes();
+		parent::init();
 	}
 
 	/**
@@ -112,10 +129,11 @@ class AdapterAddOn extends \GFAddOn {
 	 * @return void
 	 */
 	public function instantiate_classes() {
-		$this->components['email_setting'] = new EmailSetting( $this );
-		$this->components['email_form']    = new EmailForm( $this );
-		$this->components['email_setting']->init();
-		$this->components['email_form']->init();
+		$email_setting = new EmailSetting();
+		$email_form    = new EmailForm( $email_setting );
+
+		$email_setting->init();
+		$email_form->init();
 	}
 
 	/**

@@ -20,7 +20,7 @@ class EmailForm {
 	 *
 	 * @var object
 	 */
-	public $add_on;
+	public $email_setting;
 
 	/**
 	 * Class that causes a horizontal display.
@@ -60,10 +60,10 @@ class EmailForm {
 	/**
 	 * Construct the class.
 	 *
-	 * @param object $add_on Instance of Plugin.
+	 * @param EmailSetting $email_setting The email setting.
 	 */
-	public function __construct( $add_on ) {
-		$this->add_on = $add_on;
+	public function __construct( EmailSetting $email_setting ) {
+		$this->email_setting = $email_setting;
 	}
 
 	/**
@@ -85,7 +85,7 @@ class EmailForm {
 	 * @return array $form Gravity form, possibly with altered content.
 	 */
 	public function conditionally_display_form_horizontally( $form ) {
-		$horizontal_setting = $this->add_on->components['email_setting']->horizontal_display;
+		$horizontal_setting = $this->email_setting->horizontal_display;
 		if ( isset( $form[ $horizontal_setting ] ) && ( '1' === $form[ $horizontal_setting ] ) ) {
 			return $this->add_horizontal_display( $form );
 		}
@@ -137,9 +137,9 @@ class EmailForm {
 	 */
 	public function do_append_form_to_content( $form ) {
 		return (
-			isset( $form[ $this->add_on->components['email_setting']->bottom_of_post ] )
+			isset( $form[ $this->email_setting->bottom_of_post ] )
 			&&
-			( '1' === $form[ $this->add_on->components['email_setting']->bottom_of_post ] )
+			( '1' === $form[ $this->email_setting->bottom_of_post ] )
 			&&
 			is_single()
 			&&

@@ -7,6 +7,9 @@
 
 namespace AdapterGravityAddOn;
 
+use GFForms;
+use GFAddOn;
+
 /**
  * Registers this add-on via the Gravity Forms add-on framework.
  *
@@ -46,7 +49,7 @@ class Plugin {
 			return;
 		}
 
-		\GFForms::include_addon_framework();
+		GFForms::include_addon_framework();
 		\GFAddOn::register( __NAMESPACE__ . '\AdapterAddOn' );
 	}
 

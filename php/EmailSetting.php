@@ -37,15 +37,6 @@ class EmailSetting {
 	public $horizontal_display = 'aga_horizontal_display';
 
 	/**
-	 * Instantiate the add-on.
-	 *
-	 * @param object $add_on Instance of the add-on.
-	 */
-	public function __construct( $add_on ) {
-		$this->add_on = $add_on;
-	}
-
-	/**
 	 * Add the filters for the class.
 	 *
 	 * @return void
