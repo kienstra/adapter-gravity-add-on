@@ -8,6 +8,8 @@
 namespace AdapterGravityAddOn;
 
 use GFAPI;
+use phpDocumentor\Reflection\PseudoTypes\CallableString;
+use phpDocumentor\Reflection\Types\Callable_;
 use RGFormsModel;
 
 /**
@@ -17,21 +19,17 @@ use RGFormsModel;
  * Also, adds classes to <input> elements of type 'text,' 'email,' and 'submit.'
  */
 class EmailForm {
-
-	/**
-	 * Instance of EmailSetting.
-	 *
-	 * @var EmailSetting
-	 */
-	public $email_setting;
+	private $email_setting;
+	private $forms;
+	private $get_form;
 
 	/**
 	 * Construct the class.
-	 *
-	 * @param EmailSetting $email_setting The email setting.
 	 */
-	public function __construct( EmailSetting $email_setting ) {
+	public function __construct( $email_setting, $forms, $get_form ) {
 		$this->email_setting = $email_setting;
+		$this->forms         = $forms;
+		$this->get_form      = $get_form;
 	}
 
 	/**
@@ -48,9 +46,8 @@ class EmailForm {
 	 * So it's not possible to simply pass $form to $this->do_append_form_to_content().
 	 */
 	public function conditionally_append_form( string $content ): string {
-		$forms = RGFormsModel::get_forms();
-		foreach ( $forms as $form ) {
-			if ( isset( $form->id ) && $this->do_append_form_to_content( GFAPI::get_form( $form->id ) ) ) {
+		foreach ( $this->forms as $form ) {
+			if ( isset( $form->id ) && $this->do_append_form_to_content( call_user_func( $this->get_form, $form->id ) ) ) {
 				return $this->append_form_to_content( $form->id, $content );
 			}
 		}

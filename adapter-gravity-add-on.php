@@ -7,6 +7,9 @@
 
 namespace AdapterGravityAddOn;
 
+use GFForms;
+use GFAddOn;
+
 /*
 Plugin Name: Adapter Gravity Add-On
 Plugin URI: http://ryankienstra.com/adapter-gravity-add-on
@@ -20,4 +23,11 @@ License: GPL2+
 
 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
-( new Plugin() )->init();
+( new Plugin(
+	function() {
+		GFForms::include_addon_framework();
+	},
+	function( $add_on ) {
+		GFAddOn::register( $add_on );
+	}
+) )->init();

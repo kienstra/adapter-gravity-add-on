@@ -8,6 +8,8 @@
 namespace AdapterGravityAddOn;
 
 use GFAddOn;
+use GFAPI;
+use GFFormsModel;
 
 // phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
 
@@ -68,8 +70,8 @@ class AdapterAddOn extends GFAddOn {
 -	 * Instantiate the add-on classes.
 -	 */
 	public function instantiate_classes() {
-		$email_setting = new EmailSetting();
-		$email_form    = new EmailForm( $email_setting );
+		$email_setting = EmailSettingFactory::create();
+		$email_form    = EmailFormFactory::create( $email_setting );
 
 		$email_setting->init();
 		$email_form->init();
@@ -103,12 +105,6 @@ class AdapterAddOn extends GFAddOn {
 	 * @return boolean $do_enqueue Whether to enqueue this addon's styling.
 	 */
 	public function do_enqueue(): bool {
-		/**
-		 * Filter whether to enqueue this add-on's styling.
-		 *
-		 * @param boolean $do_enqueue Whether to enqueue styling.
-		 */
-		return apply_filters( 'aga_do_enqueue_css', ! is_admin() );
+		return ! is_admin();
 	}
-
 }

@@ -1,0 +1,15 @@
+<phpunit
+  bootstrap="tests/bootstrap.php"
+  backupGlobals="false"
+  colors="true"
+  convertErrorsToExceptions="true"
+  convertNoticesToExceptions="true"
+  convertWarningsToExceptions="true"
+>
+  <testsuites>
+    <testsuite name="adapter-gravity-add-on">
+      <directory suffix=".php">./tests/</directory>
+      <exclude>./tests/TestCase.php</exclude>
+    </testsuite>
+  </testsuites>
+</phpunit>

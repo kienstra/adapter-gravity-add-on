@@ -7,9 +7,6 @@
 
 namespace AdapterGravityAddOn;
 
-use GFForms;
-use GFAddOn;
-
 /**
  * Registers this add-on via the Gravity Forms add-on framework.
  *
@@ -21,12 +18,16 @@ use GFAddOn;
  */
 class Plugin {
 
+	private $include_framework;
+	private $register_add_on;
+
 	/**
-	 * Minimum version of Gravity Forms allowed.
-	 *
-	 * @var string
+	 * Plugin constructor.
 	 */
-	private string $min_gravityforms_version = '1.9';
+	public function __construct( $include_framework, $register_add_on ) {
+		$this->include_framework = $include_framework;
+		$this->register_add_on   = $register_add_on;
+	}
 
 	/**
 	 * Load this add-on with the Gravity Forms add-on hook.
@@ -42,24 +43,7 @@ class Plugin {
 	 * Otherwise, require and register the main add-on file.
 	 */
 	public function register() {
-		if ( ! method_exists( 'GFForms', 'include_addon_framework' ) ) {
-			add_action( 'admin_notices', [ $this, 'gravity_not_installed' ] );
-			return;
-		}
-
-		GFForms::include_addon_framework();
-		GFAddOn::register( __NAMESPACE__ . '\AdapterAddOn' );
-	}
-
-	/**
-	 * Admin error message if Gravity Forms does not appear to be installed.
-	 */
-	public function gravity_not_installed() {
-		?>
-		<div class="error">
-			<?php /* translators: %s: minimum Gravity Forms version */ ?>
-			<p><?php printf( esc_html__( 'In order to use the Adapter Gravity Add-On plugin, please install and activate Gravity Forms %s or higher.', 'adapter-gravity-add-on' ), esc_html( $this->min_gravityforms_version ) ); ?></p>
-		</div>
-		<?php
+		call_user_func( $this->include_framework );
+		call_user_func( $this->register_add_on, __NAMESPACE__ . '\AdapterAddOn' );
 	}
 }
