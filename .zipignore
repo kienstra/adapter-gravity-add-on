@@ -1,0 +1,12 @@
+*.git*
+*.DS_Store*
+*.idea*
+*README.md*
+*phpcs*
+*phpunit*
+*composer.json*
+*composer.lock*
+*.circleci*
+*vendor*
+*tests*
+*assets*

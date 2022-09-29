@@ -29,6 +29,11 @@
   "scripts": {
     "lint": "phpcs" ,
     "lint-fix": "phpcbf" ,
-    "test": "phpunit --do-not-cache-result"
+    "test": "phpunit --do-not-cache-result",
+    "zip": [
+      "composer install --no-dev",
+      "if [ -f adapter-gravity-add-on.zip ]; then rm -f adapter-gravity-add-on.zip; fi",
+      "zip -x@.zipignore -r adapter-gravity-add-on.zip ."
+    ]
   }
 }
