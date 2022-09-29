@@ -15,7 +15,7 @@ namespace AdapterGravityAddOn;
  */
 class EmailSetting {
 
-	public string $bottom_of_post = 'aga_bottom_of_post';
+	public string $bottom_of_post     = 'aga_bottom_of_post';
 	public string $horizontal_display = 'aga_horizontal_display';
 
 	/**
