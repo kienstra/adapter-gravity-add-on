@@ -1,9 +1,10 @@
 === Adapter Gravity Add-On ===
 Contributors: ryankienstra
 Donate link: http://jdrf.org/get-involved/ways-to-donate/
-Tags: forms, styling, gravity 
+Tags: forms, styling, gravity
 Requires at least: 3.8
-Tested up to: 4.9-alpha
+Requires PHP: 8.0
+Tested up to: 6.0
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +36,7 @@ Easy email opt-ins with Gravity Forms. Display them horizontally, at the end of 
 = What does this require? =
 
 Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
- 
+
 == Screenshots ==
 
 1. A horizontal email opt-in form.

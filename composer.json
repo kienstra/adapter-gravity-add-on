@@ -5,7 +5,7 @@
   "homepage": "https://github.com/kienstra/adapter-gravity-add-on" ,
   "license": "GPL-2.0-or-later" ,
   "require": {
-    "php": "^5.6 || ^7 || ^8"
+    "php": "^8"
   } ,
   "require-dev": {
     "brain/monkey": "^2" ,
@@ -24,11 +24,6 @@
   "autoload": {
     "psr-4": {
       "AdapterGravityAddOn\\": "php/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "AdapterGravityAddOn\\": "tests/"
     }
   },
   "scripts": {
