@@ -31,7 +31,7 @@ class EmailSettingTest extends TestCase {
 						[
 							'name'  => 'aga_bottom_of_post',
 							'type'  => 'toggle',
-							'label' => 'Display at the bottom of every single-post page',
+							'label' => 'Display at the bottom of every post',
 						],
 					],
 				],

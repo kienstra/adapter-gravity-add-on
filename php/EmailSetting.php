@@ -22,7 +22,6 @@ class EmailSetting {
 	 */
 	public function init() {
 		add_filter( 'gform_form_settings_fields', [ $this, 'get_bottom_of_post_setting' ] );
-		add_filter( 'gform_form_settings_fields', [ $this, 'get_horizontal_setting' ] );
 	}
 
 	/**
@@ -35,7 +34,7 @@ class EmailSetting {
 		$fields['form_options']['fields'][] = [
 			'name'  => $this->bottom_of_post,
 			'type'  => 'toggle',
-			'label' => __( 'Display at the bottom of every single-post page', 'adapter-gravity-add-on' ),
+			'label' => __( 'Display at the bottom of every post', 'adapter-gravity-add-on' ),
 		];
 
 		return $fields;
