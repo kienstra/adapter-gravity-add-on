@@ -40,25 +40,4 @@ class EmailSettingTest extends TestCase {
 			) )->get_bottom_of_post_setting( [] )
 		);
 	}
-
-	public function test_get_horizontal_setting() {
-		Functions\expect( '__' )
-			->andReturnFirstArg();
-
-		$this->assertEquals(
-			[
-				'form_options' => [
-					'fields' => [
-						[
-							'name'  => 'aga_horizontal_display',
-							'type'  => 'toggle',
-							'label' => 'Display form horizontally',
-						],
-					],
-				],
-			],
-			( new EmailSetting(
-			) )->get_horizontal_setting( [] )
-		);
-	}
 }

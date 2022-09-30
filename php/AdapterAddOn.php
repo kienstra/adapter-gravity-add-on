@@ -27,7 +27,6 @@ class AdapterAddOn extends GFAddOn {
 	public $_slug                     = 'adapter-gravity-add-on';
 	public $_full_path                = __FILE__;
 
-	public bool $do_enqueue_add_on_styling_by_default = true;
 	public EmailForm $email_form;
 	public EmailSetting $email_setting;
 
