@@ -16,7 +16,6 @@ Easy email opt-ins with Gravity Forms. Display them horizontally, at the end of 
 * Makes email opt-in forms horizontal, and small enough to put anywhere.
 * Set an opt-in form to show at the end of every post.
 * Must have the Gravity Forms plugin.
-* Show the labels as placeholders. This makes the form smaller and more mobile-friendly.
 
 == Installation ==
 

@@ -75,34 +75,4 @@ class AdapterAddOn extends GFAddOn {
 		$email_setting->init();
 		$email_form->init();
 	}
-
-	/**
-	 * Get the stylesheet to enqueue.
-	 *
-	 * Follows the convention for add-ons in the Gravity Forms documentation.
-	 */
-	public function styles(): array {
-		return array_merge(
-			parent::styles(),
-			[
-				[
-					'handle'  => $this->_slug . '-gravity-style',
-					'src'     => plugins_url( $this->_slug . '/css/aga-gravity.css' ),
-					'version' => $this->_version,
-					'enqueue' => [
-						[ $this, 'do_enqueue' ],
-					],
-				],
-			]
-		);
-	}
-
-	/**
-	 * Whether to enqueue this add-on's styling.
-	 *
-	 * @return boolean $do_enqueue Whether to enqueue this addon's styling.
-	 */
-	public function do_enqueue(): bool {
-		return ! is_admin();
-	}
 }
