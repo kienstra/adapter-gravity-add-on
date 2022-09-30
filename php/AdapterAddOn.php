@@ -22,10 +22,11 @@ use GFAddOn;
  */
 class AdapterAddOn extends GFAddOn {
 
-	public string $_version                           = '1.0.2';
-	public string $_min_gravityforms_version          = '1.9';
-	public string $_slug                              = 'adapter-gravity-add-on';
-	public string $_full_path                         = __FILE__;
+	public $_version                           = '1.0.2';
+	public $_min_gravityforms_version          = '1.9';
+	public $_slug                              = 'adapter-gravity-add-on';
+	public $_full_path                         = __FILE__;
+
 	public bool $do_enqueue_add_on_styling_by_default = true;
 	public EmailForm $email_form;
 	public EmailSetting $email_setting;

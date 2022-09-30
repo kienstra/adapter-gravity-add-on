@@ -26,7 +26,7 @@ class EmailFormFactory {
 				return GFAPI::get_form( $form_id );
 			},
 			static function( ...$args ) {
-				gravity_form( ...$args );
+				return gravity_form( ...$args );
 			}
 		);
 	}
