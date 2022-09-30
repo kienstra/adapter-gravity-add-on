@@ -1,0 +1,41 @@
+version: 2.1
+
+jobs:
+  php-lint:
+    docker:
+      - image: cimg/php:8.0
+    steps:
+      - checkout
+      - run:
+          name: Linting PHP
+          command: |
+            composer i
+            composer lint
+  php-test:
+    docker:
+      - image: cimg/php:8.1
+    steps:
+      - checkout
+      - run:
+          name: Linting PHP
+          command: |
+            composer i
+            composer test
+  zip:
+    docker:
+      - image: cimg/php:8.0
+    steps:
+      - checkout
+      - run:
+          name: Zipping plugin
+          command: |
+            composer zip
+      - store_artifacts:
+            path: adapter-gravity-add-on.zip
+
+workflows:
+  test-flow:
+    jobs:
+      - php-lint
+      - php-test
+      - zip

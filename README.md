@@ -7,7 +7,7 @@ Easy email opt-ins with Gravity Forms. Display them horizontally, at the end of 
 **Tags:** [forms](https://wordpress.org/plugins/tags/forms), [styling](https://wordpress.org/plugins/tags/styling), [gravity](https://wordpress.org/plugins/tags/gravity)  
 **Requires at least:** 3.8  
 **Tested up to:** 4.9-alpha  
-**Stable tag:** 1.0.2  
+**Stable tag:** 1.0.3
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 **Donate link:** http://jdrf.org/get-involved/ways-to-donate/  
 

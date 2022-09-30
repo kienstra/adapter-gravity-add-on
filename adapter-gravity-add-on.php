@@ -7,16 +7,26 @@
 
 namespace AdapterGravityAddOn;
 
+use GFAddOn;
+use GFForms;
+
 /*
 Plugin Name: Adapter Gravity Add-On
-Plugin URI: http://ryankienstra.com/adapter-gravity-add-on
-Description: Add-on for Gravity Forms, with options for inline display, and showing at the end of every post. To use, click "Forms" in the left menu of your admin screen. Scroll over one of your forms, and click "Form Settings." Scroll down to "Form Layout." You'll see options to "Display at the bottom of every single-post page" and "Display form horizontally."
-
-Version: 1.0.2
+Plugin URI: https://github.com/kienstra/adapter-gravity-add-on
+Description: Add-on for Gravity Forms, with an option to show a form at the end of every post. To use, click "Forms" in the left menu of your admin screen. Scroll over one of your forms, and click "Settings." Scroll down to "Form Options." You'll see a toggle "Display at the bottom of every post."
+Version: 1.0.3
 Author: Ryan Kienstra
-Author URI: http://ryankienstra.com
-License: GPL2
+Author URI: https://getlocalci.com
+License: GPL2+
 */
 
-require_once dirname( __FILE__ ) . '/php/class-plugin.php';
-Plugin::get_instance();
+require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+
+( new Plugin(
+	function() {
+		GFForms::include_addon_framework();
+	},
+	function( $add_on ) {
+		GFAddOn::register( $add_on );
+	}
+) )->init();

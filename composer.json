@@ -1,0 +1,39 @@
+{
+  "name": "kienstra/adapter-gravity-add-on" ,
+  "type": "wordpress-plugin" ,
+  "description": "Easy email opt-ins with ." ,
+  "homepage": "https://github.com/kienstra/adapter-gravity-add-on" ,
+  "license": "GPL-2.0-or-later" ,
+  "require": {
+    "php": "^8"
+  } ,
+  "require-dev": {
+    "brain/monkey": "^2" ,
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2" ,
+    "mockery/mockery": "^1" ,
+    "phpcompatibility/phpcompatibility-wp": "^2.1.3" ,
+    "phpunit/phpunit": "^5.7 || ^7 || ^9",
+    "squizlabs/php_codesniffer": "^3.5.3" ,
+    "wp-coding-standards/wpcs": "^2.3.0"
+  } ,
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  } ,
+  "autoload": {
+    "psr-4": {
+      "AdapterGravityAddOn\\": "php/"
+    }
+  },
+  "scripts": {
+    "lint": "phpcs" ,
+    "lint-fix": "phpcbf" ,
+    "test": "phpunit --do-not-cache-result",
+    "zip": [
+      "composer install --no-dev",
+      "if [ -f adapter-gravity-add-on.zip ]; then rm -f adapter-gravity-add-on.zip; fi",
+      "zip -x@.zipignore -r adapter-gravity-add-on.zip ."
+    ]
+  }
+}
