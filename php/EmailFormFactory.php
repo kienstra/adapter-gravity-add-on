@@ -1,6 +1,6 @@
 <?php
 /**
- * Email form, to optionally place at the end of a post.
+ * Email form factory.
  *
  * @package AdapterGravityAddOn
  */
@@ -12,10 +12,7 @@ use GFFormsModel;
 use function gravity_form;
 
 /**
- * Handles the front-end display of the email form.
- *
- * Based on the settings, displays a form at the end of posts, and/or horizontally.
- * Also, adds classes to <input> elements of type 'text,' 'email,' and 'submit.'
+ * Creates an email form class.
  */
 class EmailFormFactory {
 	public static function create( EmailSetting $email_setting ): EmailForm {
