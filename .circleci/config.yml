@@ -1,41 +1,22 @@
 version: 2.1
-
+orbs:
+  continuation: circleci/continuation@0.3
+  node: circleci/node@5.0
+setup: true
 jobs:
-  php-lint:
-    docker:
-      - image: cimg/php:8.0
+  generate-config:
+    executor: node/default
     steps:
       - checkout
+      - node/install-packages:
+          app-dir: .circleci/dynamic
       - run:
-          name: Linting PHP
-          command: |
-            composer i
-            composer lint
-  php-test:
-    docker:
-      - image: cimg/php:8.1
-    steps:
-      - checkout
-      - run:
-          name: Linting PHP
-          command: |
-            composer i
-            composer test
-  zip:
-    docker:
-      - image: cimg/php:8.0
-    steps:
-      - checkout
-      - run:
-          name: Zipping plugin
-          command: |
-            composer zip
-      - store_artifacts:
-            path: adapter-gravity-add-on.zip
-
+          name: Generate config
+          command: npm start
+          working_directory: .circleci/dynamic
+      - continuation/continue:
+          configuration_path: .circleci/dynamic/dynamicConfig.yml
 workflows:
-  test-flow:
+  dynamic-workflow:
     jobs:
-      - php-lint
-      - php-test
-      - zip
+      - generate-config
