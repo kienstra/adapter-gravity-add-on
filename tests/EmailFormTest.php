@@ -53,8 +53,6 @@ class EmailFormTest extends TestCase {
 	}
 
 	public function test_conditionally_append_form_correct_form() {
-		Functions\expect( 'is_single' )
-			->andReturn( true );
 		Functions\expect( 'get_post_type' )
 			->andReturn( 'post' );
 

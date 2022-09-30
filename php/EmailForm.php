@@ -61,8 +61,6 @@ class EmailForm {
 			&&
 			( '1' === $form[ $this->email_setting->bottom_of_post ] )
 			&&
-			is_single()
-			&&
 			( 'post' === get_post_type() )
 		);
 	}
