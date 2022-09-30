@@ -21,7 +21,6 @@ use GFAddOn;
  * @see https://www.gravityhelp.com/documentation/article/gfaddon
  */
 class AdapterAddOn extends GFAddOn {
-
 	public $_version                  = '1.0.2';
 	public $_min_gravityforms_version = '1.9';
 	public $_slug                     = 'adapter-gravity-add-on';

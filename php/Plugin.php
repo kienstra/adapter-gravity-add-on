@@ -17,7 +17,6 @@ namespace AdapterGravityAddOn;
  * @see https://docs.gravityforms.com/gfaddon/
  */
 class Plugin {
-
 	private $include_framework;
 	private $register_add_on;
 
