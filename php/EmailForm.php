@@ -18,6 +18,7 @@ class EmailForm {
 	private $forms;
 	private $get_form;
 	private $gravity_form;
+	private static $tab_index = 0;
 
 	/**
 	 * Construct the class.
@@ -72,6 +73,7 @@ class EmailForm {
 	 * Use the form that this class processed.
 	 */
 	public function append_form_to_content( int $form_id, string $content ): string {
-		return $content . call_user_func( $this->gravity_form, $form_id, false, false, false, '', true, 1, false );
+		self::$tab_index = self::$tab_index + 2;
+		return $content . call_user_func( $this->gravity_form, $form_id, false, false, false, '', true, self::$tab_index, false );
 	}
 }
