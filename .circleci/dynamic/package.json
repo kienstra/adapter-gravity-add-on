@@ -5,6 +5,18 @@
   "author": "Ryan Kienstra",
   "main": "index.ts",
   "type": "module",
+  "keywords": [
+    "cicd",
+    "config"
+  ],
+  "homepage": "https://getlocalci.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getlocalci/create-config"
+  },
+  "bugs": {
+    "url": "https://github.com/getlocalci/create-config/issues"
+  },
   "scripts": {
     "lint": "prettier --check index.ts",
     "lint:fix": "prettier --write index.ts",
