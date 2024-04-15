@@ -5,5 +5,7 @@ phpcs.xml
 phpunit.xml
 composer.json
 composer.lock
+vendor
+bin
 .circleci
 tests

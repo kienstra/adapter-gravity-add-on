@@ -14,7 +14,7 @@ namespace AdapterGravityAddOn;
  * And adds checkboxes to display the form at the bottom of the page.
  */
 class EmailSetting {
-	public string $bottom_of_post = 'aga_bottom_of_post';
+	public $bottom_of_post = 'aga_bottom_of_post';
 
 	/**
 	 * Add the filters for the class.

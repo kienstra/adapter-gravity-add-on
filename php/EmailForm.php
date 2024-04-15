@@ -60,9 +60,9 @@ class EmailForm {
 		return (
 			isset( $form[ $this->email_setting->bottom_of_post ] )
 			&&
-			( '1' === $form[ $this->email_setting->bottom_of_post ] )
+			'1' === $form[ $this->email_setting->bottom_of_post ]
 			&&
-			( 'post' === get_post_type() )
+			'post' === get_post_type()
 		);
 	}
 

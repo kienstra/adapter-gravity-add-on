@@ -36,8 +36,7 @@ class EmailSettingTest extends TestCase {
 					],
 				],
 			],
-			( new EmailSetting(
-			) )->get_bottom_of_post_setting( [] )
+			( new EmailSetting() )->get_bottom_of_post_setting( [] )
 		);
 	}
 }

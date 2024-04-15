@@ -21,18 +21,13 @@ use GFAddOn;
  * @see https://www.gravityhelp.com/documentation/article/gfaddon
  */
 class AdapterAddOn extends GFAddOn {
-	public $_version                  = '1.0.2';
+	public $_version                  = '1.0.3';
 	public $_min_gravityforms_version = '1.9';
 	public $_slug                     = 'adapter-gravity-add-on';
 	public $_full_path                = __FILE__;
 
-	public EmailForm $email_form;
-	public EmailSetting $email_setting;
-
 	/**
 	 * Assigns the add-on properties.
-	 *
-	 * @return void
 	 */
 	public function __construct() {
 		$this->_path        = $this->_slug . '/php/AdapterAddOn.php';
@@ -56,21 +51,14 @@ class AdapterAddOn extends GFAddOn {
 	}
 
 	/**
-	 * Call the parent init method, and add the plugin actions.
+	 * Adds the plugin actions.
 	 */
 	public function init() {
-		$this->instantiate_classes();
+		$email_setting = EmailSettingFactory::create();
+		$email_setting->init();
+		( EmailFormFactory::create( $email_setting ) )->init();
+
 		parent::init();
 	}
 
-	/**
--	 * Instantiate the add-on classes.
--	 */
-	public function instantiate_classes() {
-		$email_setting = EmailSettingFactory::create();
-		$email_form    = EmailFormFactory::create( $email_setting );
-
-		$email_setting->init();
-		$email_form->init();
-	}
 }
