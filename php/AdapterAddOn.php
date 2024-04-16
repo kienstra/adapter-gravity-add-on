@@ -1,6 +1,6 @@
 <?php
 /**
- * Class file for Adapter_Add_On
+ * Main add-on file
  *
  * @package AdapterGravityAddOn
  */
@@ -18,7 +18,7 @@ use GFAddOn;
  * The properties in this override those defined in GFAddOn.
  * So their names are predetermined.
  *
- * @see https://www.gravityhelp.com/documentation/article/gfaddon
+ * @see https://docs.gravityforms.com/gfaddon
  */
 class AdapterAddOn extends GFAddOn {
 	public $_version                  = '1.0.3';
@@ -43,7 +43,7 @@ class AdapterAddOn extends GFAddOn {
 	public static function get_instance(): AdapterAddOn {
 		static $instance;
 
-		if ( ! $instance instanceof AdapterAddOn ) {
+		if ( ! $instance ) {
 			$instance = new AdapterAddOn();
 		}
 
@@ -53,12 +53,11 @@ class AdapterAddOn extends GFAddOn {
 	/**
 	 * Adds the plugin actions.
 	 */
-	public function init() {
+	public function init(): void {
 		$email_setting = EmailSettingFactory::create();
 		$email_setting->init();
 		( EmailFormFactory::create( $email_setting ) )->init();
 
 		parent::init();
 	}
-
 }

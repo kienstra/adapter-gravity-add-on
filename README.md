@@ -1,6 +1,6 @@
 # Adapter Gravity Add-On
 Contributors: ryankienstra
-Donate link: http://jdrf.org/get-involved/ways-to-donate/
+Donate link: https://cure.org/donate
 Tags: forms, styling, gravity
 Tested up to: 6.5
 Stable tag: 1.0.3
@@ -18,14 +18,14 @@ Easy email opt-ins with Gravity Forms. Display them horizontally, at the end of 
 ## Installation
 
 1. Ensure that you've installed and activated Gravity Forms.
-1. Upload the adapter-gravity-add-on directory to your /wp-content/plugins directory.
-1. In the "Plugins" menu, find "Adapter Gravity Add On," and click "Activate."
-1. In the left of your Admin screen, click "Forms."
-1. Scroll over one of your forms, and click "Form Settings."
-1. Scroll down to "Form Layout."
-1. You'll see options to "Display at the bottom of every single-post page" and "Display form horizontally."
-1. Select one or both of these.
-1. If you selected "Display form horizontally," follow the setup video below.
+2. Upload the adapter-gravity-add-on directory to your /wp-content/plugins directory.
+3. In the "Plugins" menu, find "Adapter Gravity Add On," and click "Activate."
+4. In the left of your Admin screen, click "Forms."
+5. Scroll over one of your forms, and click "Form Settings."
+6. Scroll down to "Form Layout."
+7. You'll see options to "Display at the bottom of every single-post page" and "Display form horizontally."
+8. Select one or both of these.
+9. If you selected "Display form horizontally," follow the setup video below.
 
 ## Frequently Asked Questions
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Email setting factory.
+ * Email setting factory
  *
  * @package AdapterGravityAddOn
  */

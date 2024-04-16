@@ -17,7 +17,7 @@ class EmailFormFactory {
 		return new EmailForm(
 			$email_setting,
 			GFFormsModel::get_forms(),
-			[ 'GFAPI', 'get_form'],
+			[ 'GFAPI', 'get_form' ],
 			'gravity_form'
 		);
 	}

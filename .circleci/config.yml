@@ -1,21 +1,71 @@
 version: 2.1
+
 orbs:
-  node: circleci/node@5.2
+  php: circleci/php@1.1
   wp-svn: studiopress/wp-svn@0.2
+
 jobs:
-  generate-config:
-    executor: node/default
+  lint-test:
+    parameters:
+      php-version:
+        type: string
+    docker:
+      - image: cimg/php:<< parameters.php-version >>
     steps:
       - checkout
-      - node/install-packages:
-          app-dir: .circleci/dynamic
       - run:
-          name: Generate config
-          command: npm start
-          working_directory: .circleci/dynamic
-      - continuation/continue:
-          configuration_path: .circleci/dynamic/dynamicConfig.yml
+          name: Testing and linting
+          command: |
+            composer update
+            composer test
+            composer lint
+  svn-deploy:
+    docker:
+      - image: cimg/php:8.3
+    steps:
+      - checkout
+      - run:
+          name: "Building"
+          command: composer install -o --no-dev
+      - wp-svn/deploy-plugin
+
 workflows:
-  dynamic-workflow:
+  version: 2
+  test-deploy:
     jobs:
-      - generate-config
+      - lint-test:
+          filters:
+            tags:
+              only: /.*/
+          matrix:
+            parameters:
+              php-version: [ '8.0', '8.1', '8.2', '8.3' ]
+      - wp-svn/check-versions:
+          filters:
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+            branches:
+              only: /^release.*/
+      - svn-deploy:
+          context: kienstra-svn
+          requires:
+            - lint-test
+            - wp-svn/check-versions
+          filters:
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
+      - approval-for-deploy-tested-up-to-bump:
+          type: approval
+          requires:
+            - lint-test
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: /^bump-tested-up-to.*/
+      - wp-svn/deploy-tested-up-to-bump:
+          context: kienstra-svn
+          requires:
+            - approval-for-deploy-tested-up-to-bump

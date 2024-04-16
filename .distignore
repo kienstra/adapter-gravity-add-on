@@ -5,7 +5,7 @@ phpcs.xml
 phpunit.xml
 composer.json
 composer.lock
-vendor
+wporg
 bin
 .circleci
 tests

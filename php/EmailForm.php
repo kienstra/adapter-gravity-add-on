@@ -14,31 +14,31 @@ namespace AdapterGravityAddOn;
  * Also, adds classes to <input> elements of type 'text,' 'email,' and 'submit.'
  */
 class EmailForm {
-	private $email_setting;
-	private $forms;
+	private EmailSetting $email_setting;
+	private array $forms;
 	private $get_form;
 	private $gravity_form;
-	private static $tab_index = 0;
+	private static int $tab_index = 0;
 
-	/**
-	 * Construct the class.
-	 */
-	public function __construct( $email_setting, $forms, $get_form, $gravity_form ) {
+	public function __construct(
+		EmailSetting $email_setting,
+		array $forms,
+		callable $get_form,
+		callable $gravity_form
+	) {
 		$this->email_setting = $email_setting;
 		$this->forms         = $forms;
 		$this->get_form      = $get_form;
 		$this->gravity_form  = $gravity_form;
 	}
 
-	/**
-	 * Add the filters for the class.
-	 */
-	public function init() {
+	/** Adds the filters for the class. */
+	public function init(): void {
 		add_filter( 'the_content', [ $this, 'conditionally_append_form' ], 100 );
 	}
 
 	/**
-	 * Conditionally append a form to the post content.
+	 * Conditionally appends a form to the post content.
 	 *
 	 * The form returned from GFAPI::get_form( $form->id ) has more metadata.
 	 * So it's not possible to simply pass $form to $this->do_append_form_to_content().

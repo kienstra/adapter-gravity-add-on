@@ -9,7 +9,8 @@
  * Description: Add-on for Gravity Forms, with an option to show a form at the end of every post. To use, click "Forms" in the left menu of your admin screen. Scroll over one of your forms, and click "Settings." Scroll down to "Form Options." You'll see a toggle "Display at the bottom of every post."
  * Version: 1.0.3
  * Requires at least: 6.4
- * Requires PHP: 8.1
+ * Tested up to: 6.5
+ * Requires PHP: 8.0
  * Author: Ryan Kienstra
  * Author URI: https://ryankienstra.com
  * Requires Plugins: gravityforms
@@ -21,7 +22,7 @@
 
 namespace AdapterGravityAddOn;
 
-require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 ( new Plugin(
 	[ 'GFForms', 'include_addon_framework' ],

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards for Adapter Gravity Add On">
+<ruleset name="WordPress Coding Standards">
 
 	<rule ref="WordPress-Core">
-		<exclude name="Generic.Arrays.DisallowShortArraySyntax" />
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax" />
 		<exclude name="WordPress.Files.FileName" />
-		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
 		<exclude name="Squiz.Commenting.VariableComment.Missing" />
 		<exclude name="Squiz.Commenting.FunctionComment.Missing" />
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
 	</rule>
 
 	<rule ref="WordPress-Docs" />
@@ -36,7 +36,5 @@
 	<arg name="extensions" value="php"/>
 
 	<file>.</file>
-	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern>*/package/*</exclude-pattern>
 </ruleset>
