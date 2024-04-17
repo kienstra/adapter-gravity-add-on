@@ -4,7 +4,7 @@ Donate link: https://cure.org/donate
 Tags: forms, email, gravity
 Tested up to: 6.5
 Requires at least: 6.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,9 @@ Gravity Forms 2.8.0 or higher.
 2. In /wp-admin, go the form > Form Settings > Form Options > "Display at the bottom of every post"
 
 ## Changelog
+
+### 2.0.1
+* Fixed: Remove the 'Requires Plugins' header value.
 
 ### 2.0.0
 * Fixed: This plugin now works with the latest Gravity Forms plugin. It didn't work before.
