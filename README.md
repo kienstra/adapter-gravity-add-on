@@ -16,10 +16,10 @@ Easy email opt-ins with Gravity Forms. Display them at the end of every post.
 
 ## Installation
 
-1. Install and activate Gravity Forms.
-2. Upload and activate this plugin via wp-admin/plugin-install.php.
-3. In the left of your Admin screen, click "Forms."
-4. Scroll over one of your forms, and click "Form Settings."
+1. Install and activate Gravity Forms
+2. Upload and activate this plugin via wp-admin/plugin-install.php
+3. In the left of your Admin screen, click "Forms"
+4. Scroll over one of your forms, and click "Form Settings"
 5. Scroll down to Form Options
 6. Select "Display at the bottom of every post"
 
@@ -31,8 +31,8 @@ Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
 
 ## Screenshots
 
-1. Add a form to the end of a post.
-2. In /wp-admin, go the form > Form Settings > Form Options > "Display at the bottom of every post".
+1. Add a form to the end of a post
+2. In /wp-admin, go the form > Form Settings > Form Options > "Display at the bottom of every post"
 
 ## Changelog
 
