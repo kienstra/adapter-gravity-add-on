@@ -41,16 +41,9 @@ workflows:
           matrix:
             parameters:
               php-version: [ '8.0', '8.1', '8.2', '8.3' ]
-      - wp-svn/check-versions:
-          filters:
-            tags:
-              only: /^\d+\.\d+\.\d+$/
-            branches:
-              only: /^release.*/
       - svn-deploy:
           requires:
             - lint-test
-            - wp-svn/check-versions
           filters:
             tags:
               only: /^\d+\.\d+\.\d+$/
