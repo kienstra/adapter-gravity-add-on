@@ -1,9 +1,11 @@
 # Adapter Gravity Add-On
 Contributors: ryankienstra
 Donate link: https://cure.org/donate
-Tags: forms, styling, gravity
+Tags: forms, email, gravity
 Tested up to: 6.5
-Stable tag: 1.0.3
+Requires at least: 6.4
+Stable tag: 2.0.0
+Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +38,9 @@ Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
 
 ## Changelog
 
+### 2.0.0
+* Fixed: This plugin now works with the latest Gravity Forms plugin. It didn't work before.
+
 ### 1.0.2
 * Improved compatibility with Gravity Forms version 1.9 and above. Removes support for placeholders, as Gravity Forms now supports them. And fixing styling issues for horizontal forms.
 
@@ -46,6 +51,9 @@ Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
 * First version
 
 ## Upgrade Notice
+
+### 2.0.0
+Please upgrade so this plugin will work with the latest versions of Gravity Forms.
 
 ### 1.0.2
 Please upgrade if you have Gravity Forms 1.9 or above. If you've used this to display a form horizontally or output a placeholder, please follow the instructions in this [setup video](https://youtu.be/xPHsKf5rUNg).
