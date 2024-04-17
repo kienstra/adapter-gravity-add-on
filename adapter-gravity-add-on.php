@@ -7,7 +7,7 @@
  * Plugin Name: Adapter Gravity Add-On
  * Plugin URI: https://github.com/kienstra/adapter-gravity-add-on
  * Description: Add-on for Gravity Forms, with an option to show a form at the end of every post. To use, click "Forms" in the left menu of your admin screen. Scroll over one of your forms, and click "Settings." Scroll down to "Form Options." You'll see a toggle "Display at the bottom of every post."
- * Version: 1.0.3
+ * Version: 2.0.0
  * Requires at least: 6.4
  * Tested up to: 6.5
  * Requires PHP: 8.0

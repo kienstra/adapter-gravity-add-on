@@ -3,7 +3,7 @@ Contributors: ryankienstra
 Donate link: https://cure.org/donate
 Tags: forms, styling, gravity
 Tested up to: 6.5
-Stable tag: 1.0.3
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,9 @@ Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
 2. In /wp-admin, go the form > Form Settings > Form Options > "Display at the bottom of every post"
 
 ## Changelog
+
+### 2.0.0
+* Make this plugin work with the latest Gravity Forms plugin. It didn't work before.
 
 ### 1.0.2
 * Improved compatibility with Gravity Forms version 1.9 and above. Removes support for placeholders, as Gravity Forms now supports them. And fixing styling issues for horizontal forms.
