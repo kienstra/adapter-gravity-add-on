@@ -39,7 +39,7 @@ Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
 ## Changelog
 
 ### 2.0.0
-* Make this plugin work with the latest Gravity Forms plugin. It didn't work before.
+* Fixed: This plugin now works with the latest Gravity Forms plugin. It didn't work before.
 
 ### 1.0.2
 * Improved compatibility with Gravity Forms version 1.9 and above. Removes support for placeholders, as Gravity Forms now supports them. And fixing styling issues for horizontal forms.
