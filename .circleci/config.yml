@@ -48,7 +48,6 @@ workflows:
             branches:
               only: /^release.*/
       - svn-deploy:
-          context: kienstra-svn
           requires:
             - lint-test
             - wp-svn/check-versions
