@@ -29,7 +29,7 @@ Easy email opt-ins with Gravity Forms. Display them at the end of every post.
 
 ### What does this require?
 
-Gravity Forms 1.9 or higher. This is tested up to Gravity Forms 2.2.5.
+Gravity Forms 2.8.0 or higher.
 
 ## Screenshots
 
