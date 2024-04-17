@@ -16,7 +16,7 @@ namespace AdapterGravityAddOn;
 class EmailSetting {
 	public $bottom_of_post = 'aga_bottom_of_post';
 
-	/** Add the filters for the class. */
+	/** Adds the filters for the class. */
 	public function init(): void {
 		add_filter( 'gform_form_settings_fields', [ $this, 'add_bottom_of_post_setting' ] );
 	}
