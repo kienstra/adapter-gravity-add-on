@@ -8,7 +8,6 @@
 	<testsuites>
 		<testsuite name="adapter-gravity-add-on">
 			<directory suffix=".php">./tests/</directory>
-			<exclude>./tests/AgaTestCase.php</exclude>
 		</testsuite>
 	</testsuites>
 </phpunit>

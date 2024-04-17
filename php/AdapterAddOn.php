@@ -26,9 +26,6 @@ class AdapterAddOn extends GFAddOn {
 	public $_slug                     = 'adapter-gravity-add-on';
 	public $_full_path                = __FILE__;
 
-	/**
-	 * Assigns the add-on properties.
-	 */
 	public function __construct() {
 		$this->_path        = $this->_slug . '/php/AdapterAddOn.php';
 		$this->_title       = __( 'Adapter Gravity Add On', 'adapter-gravity-add-on' );
@@ -37,9 +34,6 @@ class AdapterAddOn extends GFAddOn {
 		parent::__construct();
 	}
 
-	/**
-	 * Statically gets the instance of this add-on.
-	 */
 	public static function get_instance(): AdapterAddOn {
 		static $instance;
 
@@ -50,9 +44,6 @@ class AdapterAddOn extends GFAddOn {
 		return $instance;
 	}
 
-	/**
-	 * Adds the plugin actions.
-	 */
 	public function init(): void {
 		$email_setting = EmailSettingFactory::create();
 		$email_setting->init();

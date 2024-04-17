@@ -22,7 +22,6 @@ class EmailFormTest extends TestCase {
 
 	private EmailSetting $email_setting;
 
-	/** Sets up the tests. */
 	public function setUp(): void {
 		parent::setUp();
 		$this->email_setting = new EmailSetting();

@@ -53,9 +53,7 @@ class EmailForm {
 		return $content;
 	}
 
-	/**
-	 * Whether to append a form to the content.
-	 */
+	/** Whether to append a form to the content. */
 	public function do_append_form_to_content( array $form ): bool {
 		return (
 			isset( $form[ $this->email_setting->bottom_of_post ] )
