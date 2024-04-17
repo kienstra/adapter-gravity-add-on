@@ -27,7 +27,8 @@ jobs:
       - run:
           name: "Building"
           command: composer install -o --no-dev
-      - wp-svn/deploy-plugin
+      - wp-svn/deploy-plugin:
+          wporg-assets-directory: wporg
 
 workflows:
   version: 2

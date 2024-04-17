@@ -16,9 +16,6 @@ class Plugin {
 	private array $include_framework;
 	private array $register_add_on;
 
-	/**
-	 * Plugin constructor.
-	 */
 	public function __construct( array $include_framework, array $register_add_on ) {
 		$this->include_framework = $include_framework;
 		$this->register_add_on   = $register_add_on;
