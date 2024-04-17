@@ -1,0 +1,11 @@
+.git
+.DS_Store
+.idea
+phpcs.xml
+phpunit.xml
+composer.json
+composer.lock
+wporg
+bin
+.circleci
+tests

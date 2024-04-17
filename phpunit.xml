@@ -1,14 +1,14 @@
 <phpunit
-  backupGlobals="false"
-  colors="true"
-  convertErrorsToExceptions="true"
-  convertNoticesToExceptions="true"
-  convertWarningsToExceptions="true"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
 >
-  <testsuites>
-    <testsuite name="adapter-gravity-add-on">
-      <directory suffix=".php">./tests/</directory>
-      <exclude>./tests/AgaTestCase.php</exclude>
-    </testsuite>
-  </testsuites>
+	<testsuites>
+		<testsuite name="adapter-gravity-add-on">
+			<directory suffix=".php">./tests/</directory>
+			<exclude>./tests/AgaTestCase.php</exclude>
+		</testsuite>
+	</testsuites>
 </phpunit>

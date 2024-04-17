@@ -14,22 +14,22 @@ namespace AdapterGravityAddOn;
  * And adds checkboxes to display the form at the bottom of the page.
  */
 class EmailSetting {
-	public string $bottom_of_post = 'aga_bottom_of_post';
+	public $bottom_of_post = 'aga_bottom_of_post';
 
-	/**
-	 * Add the filters for the class.
-	 */
-	public function init() {
-		add_filter( 'gform_form_settings_fields', [ $this, 'get_bottom_of_post_setting' ] );
+	/** Add the filters for the class. */
+	public function init(): void {
+		add_filter( 'gform_form_settings_fields', [ $this, 'add_bottom_of_post_setting' ] );
 	}
 
 	/**
-	 * Add a setting to display the form at the bottom of posts.
+	 * Adds a setting to display the form at the bottom of posts.
 	 *
 	 * In the 'Form Layout' section of the 'Form Settings' page.
 	 * If this checkbox is checked, the form will display at the bottom of every post.
+	 *
+	 * @param array $fields The fields to add the setting to.
 	 */
-	public function get_bottom_of_post_setting( array $fields ): array {
+	public function add_bottom_of_post_setting( array $fields ): array {
 		$fields['form_options']['fields'][] = [
 			'name'  => $this->bottom_of_post,
 			'type'  => 'toggle',

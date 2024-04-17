@@ -7,7 +7,6 @@
 
 namespace AdapterGravityAddOn;
 
-use Mockery;
 use Brain\Monkey\Functions;
 use PHPUnit\Framework\TestCase;
 
@@ -17,10 +16,7 @@ use PHPUnit\Framework\TestCase;
  * @package AdapterGravityAddOn
  */
 class EmailSettingTest extends TestCase {
-
-	use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-
-	public function test_get_bottom_of_post_setting() {
+	public function test_add_bottom_of_post_setting() {
 		Functions\expect( '__' )
 			->andReturnFirstArg();
 
@@ -36,8 +32,7 @@ class EmailSettingTest extends TestCase {
 					],
 				],
 			],
-			( new EmailSetting(
-			) )->get_bottom_of_post_setting( [] )
+			( new EmailSetting() )->add_bottom_of_post_setting( [] )
 		);
 	}
 }

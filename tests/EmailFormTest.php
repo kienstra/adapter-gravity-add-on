@@ -7,10 +7,10 @@
 
 namespace AdapterGravityAddOn;
 
-use PHPUnit\Framework\TestCase;
-use stdClass;
 use Brain\Monkey\Functions;
 use Mockery;
+use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * Test for EmailForm.
@@ -18,14 +18,14 @@ use Mockery;
  * @package AdapterGravityAddOn
  */
 class EmailFormTest extends TestCase {
-
 	use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
-	private stdClass $email_setting;
+	private EmailSetting $email_setting;
 
+	/** Sets up the tests. */
 	public function setUp(): void {
 		parent::setUp();
-		$this->email_setting = new stdClass();
+		$this->email_setting = new EmailSetting();
 	}
 
 	public function test_init() {
@@ -33,7 +33,7 @@ class EmailFormTest extends TestCase {
 			->once();
 
 		( new EmailForm(
-			$this->email_setting,
+			new EmailSetting(),
 			[],
 			function () {},
 			function () {}
@@ -44,10 +44,10 @@ class EmailFormTest extends TestCase {
 		$this->assertEquals(
 			'Example post content',
 			( new EmailForm(
-				$this->email_setting,
+				new EmailSetting(),
 				[],
-				function() {},
-				function() {}
+				function () {},
+				function () {}
 			) )->conditionally_append_form( 'Example post content' )
 		);
 	}
@@ -64,10 +64,10 @@ class EmailFormTest extends TestCase {
 			( new EmailForm(
 				$this->email_setting,
 				[ $form ],
-				function() {
+				function () {
 					return [ $this->email_setting->bottom_of_post => '1' ];
 				},
-				function() {
+				function () {
 					return ' This is the form';
 				}
 			) )->conditionally_append_form( 'Example post content' )
