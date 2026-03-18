@@ -32,8 +32,8 @@
     }
   },
   "scripts": {
-    "lint": "phpcs" ,
-    "lint-fix": "phpcbf" ,
+    "lint": "phpcs",
+    "lint-fix": "phpcbf",
     "test": "phpunit --do-not-cache-result",
     "zip": "./bin/zip.sh"
   }
