@@ -57,7 +57,7 @@ class EmailFormTest extends TestCase {
 			( new EmailForm(
 				$email_setting,
 				[ $form ],
-				function () use( $email_setting ) {
+				function () use ( $email_setting ) {
 					return [ $email_setting->bottom_of_post => '1' ];
 				},
 				function () {
