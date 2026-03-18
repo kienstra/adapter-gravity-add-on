@@ -3,6 +3,7 @@
 .idea
 .distignore
 .gitignore
+.phpunit.result.cache
 phpcs.xml
 phpunit.xml
 composer.json
