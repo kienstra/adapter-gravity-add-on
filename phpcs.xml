@@ -27,7 +27,7 @@
 		<include-pattern>php/*</include-pattern>
 	</rule>
 
-	<config name="testVersion" value="8.0-"/>
+	<config name="testVersion" value="8.0-8.5"/>
 	<rule ref="PHPCompatibilityWP">
 		<exclude-pattern>bin/*</exclude-pattern>
 	</rule>
