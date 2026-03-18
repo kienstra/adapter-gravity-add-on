@@ -59,7 +59,7 @@ Gravity Forms 2.8.0 or higher.
 Please upgrade so this plugin will work with the latest versions of Gravity Forms.
 
 ### 1.0.2
-Please upgrade if you have Gravity Forms 1.9 or above. If you've used this to display a form horizontally or output a placeholder, please follow the instructions in this [setup video](https://youtu.be/xPHsKf5rUNg).
+Please upgrade if you have Gravity Forms 1.9 or above.
 
 ### 1.0.1
 Please upgrade for the security improvements.
