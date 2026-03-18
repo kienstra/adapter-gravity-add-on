@@ -20,13 +20,6 @@ use stdClass;
 class EmailFormTest extends TestCase {
 	use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
-	private EmailSetting $email_setting;
-
-	public function setUp(): void {
-		parent::setUp();
-		$this->email_setting = new EmailSetting();
-	}
-
 	public function test_init() {
 		Functions\expect( 'add_filter' )
 			->once();
@@ -55,16 +48,17 @@ class EmailFormTest extends TestCase {
 		Functions\expect( 'get_post_type' )
 			->andReturn( 'post' );
 
-		$form                                = new stdClass();
-		$form->id                            = '35';
-		$this->email_setting->bottom_of_post = 'aga_bottom_of_post';
+		$email_setting                 = new EmailSetting();
+		$form                          = new stdClass();
+		$form->id                      = '35';
+		$email_setting->bottom_of_post = 'aga_bottom_of_post';
 		$this->assertEquals(
 			'Example post content This is the form',
 			( new EmailForm(
-				$this->email_setting,
+				$email_setting,
 				[ $form ],
-				function () {
-					return [ $this->email_setting->bottom_of_post => '1' ];
+				function () use ( $email_setting ) {
+					return [ $email_setting->bottom_of_post => '1' ];
 				},
 				function () {
 					return ' This is the form';
